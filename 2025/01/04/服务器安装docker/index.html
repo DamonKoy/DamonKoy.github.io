@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="服务器安装docker连接服务器：1ssh test@192.168.216.210  安装docker：1sudo yum install docker  安装后设置开机启动：1sudo service docker start  修改docker镜像源：1sudo vi &#x2F;etc&#x2F;docker&#x2F;daemon.json  内容为： 123&#123;   &quot;registry-mirro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器安装docker">
+<meta property="og:url" content="http://example.com/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/index.html">
+<meta property="og:site_name" content="DamonKoy的博客">
+<meta property="og:description" content="服务器安装docker连接服务器：1ssh test@192.168.216.210  安装docker：1sudo yum install docker  安装后设置开机启动：1sudo service docker start  修改docker镜像源：1sudo vi &#x2F;etc&#x2F;docker&#x2F;daemon.json  内容为： 123&#123;   &quot;registry-mirro">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E8%BF%9B%E7%A8%8B.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8Blog.png">
+<meta property="article:published_time" content="2025-01-04T09:26:37.000Z">
+<meta property="article:modified_time" content="2025-01-06T05:27:58.799Z">
+<meta property="article:author" content="DamonKoy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4.png">
+
+<link rel="canonical" href="http://example.com/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>服务器安装docker | DamonKoy的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">DamonKoy的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DamonKoy">
+      <meta itemprop="description" content="小小博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DamonKoy的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          服务器安装docker
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-01-04 17:26:37" itemprop="dateCreated datePublished" datetime="2025-01-04T17:26:37+08:00">2025-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-01-06 13:27:58" itemprop="dateModified" datetime="2025-01-06T13:27:58+08:00">2025-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="服务器安装docker"><a href="#服务器安装docker" class="headerlink" title="服务器安装docker"></a>服务器安装docker</h2><h4 id="连接服务器："><a href="#连接服务器：" class="headerlink" title="连接服务器："></a>连接服务器：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh test@192.168.216.210</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装docker："><a href="#安装docker：" class="headerlink" title="安装docker："></a>安装docker：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装后设置开机启动："><a href="#安装后设置开机启动：" class="headerlink" title="安装后设置开机启动："></a>安装后设置开机启动：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker start</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改docker镜像源："><a href="#修改docker镜像源：" class="headerlink" title="修改docker镜像源："></a>修改docker镜像源：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<p>内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;registry-mirrors&quot; : [&quot;https://almtd3fa.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启docker："><a href="#重启docker：" class="headerlink" title="重启docker："></a>重启docker：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如："><a href="#在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如：" class="headerlink" title="在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如："></a>在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /var/jenkins_node</span><br><span class="line">sudo chmod 777 /var/jenkins_node</span><br></pre></td></tr></table></figure>
+
+<h4 id="拉取jenkins镜像："><a href="#拉取jenkins镜像：" class="headerlink" title="拉取jenkins镜像："></a>拉取jenkins镜像：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建数据卷，用于持久化Jenkins容器的数据到宿主机"><a href="#创建数据卷，用于持久化Jenkins容器的数据到宿主机" class="headerlink" title="创建数据卷，用于持久化Jenkins容器的数据到宿主机"></a>创建数据卷，用于持久化Jenkins容器的数据到宿主机</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create jenkins_data</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行jenkins-d为后台进行-–name为设置名称"><a href="#运行jenkins-d为后台进行-–name为设置名称" class="headerlink" title="运行jenkins -d为后台进行  –name为设置名称"></a>运行jenkins -d为后台进行  –name为设置名称</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d --name jenkins --restart always -p 5000:5000  -p 8080:8080 -p 50000:50000 -v /home/test/jenkins:/home/test/var/jenkins_home jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4.png" alt="image-20200709190541585"></p>
+<h4 id="查看容器进程："><a href="#查看容器进程：" class="headerlink" title="查看容器进程："></a>查看容器进程：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps -a</span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E8%BF%9B%E7%A8%8B.png" alt="image-20200709190638633"  />
+
+<h4 id="通过查看容器log进行查找jenkins初始密码：（xxxx-容器-为ID）"><a href="#通过查看容器log进行查找jenkins初始密码：（xxxx-容器-为ID）" class="headerlink" title="通过查看容器log进行查找jenkins初始密码：（xxxx 容器 为ID）"></a>通过查看容器log进行查找jenkins初始密码：（xxxx 容器 为ID）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker logs XXXX</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8Blog.png" alt="image-20200709190807940"></p>
+<h4 id="通过内网访问服务器jenkins"><a href="#通过内网访问服务器jenkins" class="headerlink" title="通过内网访问服务器jenkins"></a>通过内网访问服务器jenkins</h4><p><a target="_blank" rel="noopener" href="http://192.168.216.210:8080/">http://192.168.216.210:8080/</a></p>
+<h4 id="删除对应绑定网桥"><a href="#删除对应绑定网桥" class="headerlink" title="删除对应绑定网桥"></a>删除对应绑定网桥</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker network disconnect --force bridge jenkins</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除-jenkins容器，xxxx-容器-为ID"><a href="#删除-jenkins容器，xxxx-容器-为ID" class="headerlink" title="删除 jenkins容器，xxxx 容器 为ID"></a>删除 jenkins容器，xxxx 容器 为ID</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker rm -f XXXX</span><br></pre></td></tr></table></figure>
+
+<h4 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器:"></a>停止容器:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker stop jenkins</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启容器："><a href="#重启容器：" class="headerlink" title="重启容器："></a>重启容器：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart &lt;container_id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="从宿主机客户进入容器"><a href="#从宿主机客户进入容器" class="headerlink" title="从宿主机客户进入容器"></a>从宿主机客户进入容器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it -u root jenkins /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h4 id="进入容器后建立-ssh目录，创建密钥文件私钥id-rsa，公钥id-rsa-pub"><a href="#进入容器后建立-ssh目录，创建密钥文件私钥id-rsa，公钥id-rsa-pub" class="headerlink" title="进入容器后建立.ssh目录，创建密钥文件私钥id_rsa，公钥id_rsa.pub"></a>进入容器后建立.ssh目录，创建密钥文件私钥id_rsa，公钥id_rsa.pub</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.ssh &amp;&amp; cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa		# 一直回车即可</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新容器配置-修改为自动运行或停止自动运行"><a href="#更新容器配置-修改为自动运行或停止自动运行" class="headerlink" title="更新容器配置(修改为自动运行或停止自动运行)"></a>更新容器配置(修改为自动运行或停止自动运行)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker update --restart always &lt;容器ID号或者容器别名&gt;</span><br><span class="line">docker update --restart no &lt;容器ID号或者容器别名&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改容器别名"><a href="#修改容器别名" class="headerlink" title="修改容器别名"></a>修改容器别名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rename &lt;容器原来名&gt; &lt;要改为的名字&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取容器元挂载"><a href="#获取容器元挂载" class="headerlink" title="获取容器元挂载"></a>获取容器元挂载</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker inspect &lt;容器名&gt; | grep Mounts -A 20</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改已存在容器映射"><a href="#修改已存在容器映射" class="headerlink" title="修改已存在容器映射"></a>修改已存在容器映射</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker stop</span><br><span class="line">sudo docker inspect &lt;容器名&gt;</span><br><span class="line"># 查看id的hash值</span><br><span class="line">sudo vi /var/lib/docker/containers/&lt;hash_of_the_container&gt;/hostconfig.json</span><br><span class="line">sudo vi /var/lib/docker/containers/&lt;hash_of_the_container&gt;/config.v2.json</span><br><span class="line"># 在 hostconfig.json 里有 &quot;PortBindings&quot;:&#123;&#125; 这个配置项，可以改成 &quot;PortBindings&quot;:&#123;&quot;80/tcp&quot;:[&#123;&quot;HostIp&quot;:&quot;&quot;,&quot;HostPort&quot;:&quot;8080&quot;&#125;]&#125; 这里 80 是容器端口， 8080 是本地端口， 然后在 config.v2.json 里面添加一个配置项 &quot;ExposedPorts&quot;:&#123;&quot;80/tcp&quot;:&#123;&#125;&#125; , 将这个配置项添加到 &quot;Tty&quot;: true, 前面，我不知道添加到别的地方会不会有影响，因为经过对比正常的端口映射配置项是在这个位置，这个就是将容器内部端口暴露出来，如果不加这一句端口映射不会成功的，最后重启 docker的守护进程 service docker restart</span><br><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看映射端口"><a href="#查看映射端口" class="headerlink" title="查看映射端口"></a>查看映射端口</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker port CONTAINER_ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看容器的IP地址"><a href="#查看容器的IP地址" class="headerlink" title="查看容器的IP地址"></a>查看容器的IP地址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker inspect --format=&#x27;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&#x27; ID/NAMES</span><br></pre></td></tr></table></figure>
+
+<h4 id="提交镜像（提交时会导致docker进程阻塞）"><a href="#提交镜像（提交时会导致docker进程阻塞）" class="headerlink" title="提交镜像（提交时会导致docker进程阻塞）"></a>提交镜像（提交时会导致docker进程阻塞）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker commit -a &#x27;zhiquan.feng&#x27; -m &#x27;提交融合QA平台和接口自动化的jenkins项目&#x27; 87e71042d3b8 chuman/jenkins:v1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="安装vim"><a href="#安装vim" class="headerlink" title="### 安装vim"></a>### 安装vim</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="安装pipenv，因为网络的问题，要使用国内的镜像源来加速-全局安装，要不pipenv"><a href="#安装pipenv，因为网络的问题，要使用国内的镜像源来加速-全局安装，要不pipenv" class="headerlink" title="安装pipenv，因为网络的问题，要使用国内的镜像源来加速(全局安装，要不pipenv)"></a>安装pipenv，因为网络的问题，要使用国内的镜像源来加速(全局安装，要不pipenv)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -H pip3 install -U pipenv -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name pipenv</span><br></pre></td></tr></table></figure>
+
+<p>创造软连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /var/jenkins_home/python3/bin/pipenv /usr/bin/pipenv</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解决pip加载慢"><a href="#解决pip加载慢" class="headerlink" title="解决pip加载慢"></a>解决pip加载慢</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解决allure安装问题"><a href="#解决allure安装问题" class="headerlink" title="解决allure安装问题"></a>解决allure安装问题</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wget https://nodejs.org/dist/v12.13.0/node-v12.13.0-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">export NODE_HOME=/&lt;nodejs路径&gt;</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$NODE_HOME/bin </span><br><span class="line"></span><br><span class="line">export NODE_PATH=$NODE_HOME/lib/node_modules</span><br><span class="line"></span><br><span class="line">npm install -g allure-commandline --save-dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解决系统时间不同步的问题"><a href="#解决系统时间不同步的问题" class="headerlink" title="解决系统时间不同步的问题"></a>解决系统时间不同步的问题</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 进入docker对应容器，删除/etc/localtime</span><br><span class="line">sudo docker exec -it -u root jenkins /bin/bash</span><br><span class="line">rm -rf /etc/localtime</span><br><span class="line">// 回到宿主机，复制本地系统时间文件夹到对应docker容器/etc/localtime中</span><br><span class="line">sudo docker cp /usr/share/zoneinfo/Asia/Shanghai &lt;CONTAINER_ID&gt;:/etc/localtime</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="同步docker两个容器的mysql数据"><a href="#同步docker两个容器的mysql数据" class="headerlink" title="同步docker两个容器的mysql数据"></a>同步docker两个容器的mysql数据</h3><h4 id="在宿主机安装crontab"><a href="#在宿主机安装crontab" class="headerlink" title="在宿主机安装crontab"></a>在宿主机安装crontab</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install vixie-cron crontabs</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看定时任务列表"><a href="#查看定时任务列表" class="headerlink" title="查看定时任务列表"></a>查看定时任务列表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
+
+<h4 id="新建定时任务命令"><a href="#新建定时任务命令" class="headerlink" title="新建定时任务命令"></a>新建定时任务命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+
+<h4 id="宿主机执行定时任务"><a href="#宿主机执行定时任务" class="headerlink" title="宿主机执行定时任务"></a>宿主机执行定时任务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">30 7 * * * bash /home/test/mysql-backup.sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="定时设置解释"><a href="#定时设置解释" class="headerlink" title="定时设置解释"></a>定时设置解释</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*    *    *    *    *</span><br><span class="line">-    -    -    -    -</span><br><span class="line">|    |    |    |    |</span><br><span class="line">|    |    |    |    +----- 星期中星期几 (0 - 7) (星期天 为0)</span><br><span class="line">|    |    |    +---------- 月份 (1 - 12) </span><br><span class="line">|    |    +--------------- 一个月中的第几天 (1 - 31)</span><br><span class="line">|    +-------------------- 小时 (0 - 23)</span><br><span class="line">+------------------------- 分钟 (0 - 59)</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动定时crond服务"><a href="#启动定时crond服务" class="headerlink" title="启动定时crond服务"></a>启动定时crond服务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service crond start</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看crond服务状态"><a href="#查看crond服务状态" class="headerlink" title="查看crond服务状态"></a>查看crond服务状态</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service crond status</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有定时任务命令"><a href="#删除所有定时任务命令" class="headerlink" title="删除所有定时任务命令"></a>删除所有定时任务命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -r</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据库备份与更新脚本-mysql-backup-sh"><a href="#数据库备份与更新脚本-mysql-backup-sh" class="headerlink" title="数据库备份与更新脚本 mysql-backup.sh"></a>数据库备份与更新脚本 mysql-backup.sh</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 设置mysql的登录用户名和密码(根据实际情况填写)</span><br><span class="line">mysql_user=&quot;root&quot;</span><br><span class="line">mysql_password=&quot;1z2x3c4v5b6n7m&quot;</span><br><span class="line">mysql_prod_id=&quot;51ea579affb7&quot;</span><br><span class="line">mysql_dev_id=&quot;34aa0aed191e&quot;</span><br><span class="line"></span><br><span class="line"># 设置需要备份的数据库</span><br><span class="line">db_chuman_qa_platform=&quot;chuman_qa_platform&quot;</span><br><span class="line">db_chuman523=&quot;chumanAndroid523&quot;</span><br><span class="line">db_chuman530=&quot;chumanAndroid530&quot;</span><br><span class="line">db_chuman542=&quot;chumanAndroid542&quot;</span><br><span class="line">db_chuman550=&quot;chumanAndroid550&quot;</span><br><span class="line"></span><br><span class="line"># 备份文件存放宿主机路径(根据实际情况填写)</span><br><span class="line">backup_location=/home/test/mysql-backup</span><br><span class="line"></span><br><span class="line">#如果文件夹不存在则创建</span><br><span class="line">if [ ! -d $backup_location ]; </span><br><span class="line">then </span><br><span class="line"> mkdir -p $backup_location; </span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 是否删除过期数据</span><br><span class="line">expire_backup_delete=&quot;ON&quot;</span><br><span class="line">expire_days=30</span><br><span class="line">backup_time=`date +%Y%m%d%H%M`</span><br><span class="line">backup_dir=$backup_location</span><br><span class="line">welcome_msg=&quot;Welcome to use MySQL backup tools!&quot;</span><br><span class="line"></span><br><span class="line"># 备份mysql-prod库中的chuman_qa_platform表数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_prod_id mysqldump -u$mysql_user -p$mysql_password $db_chuman_qa_platform device_transfer_record devices &gt; $backup_dir/$database-$backup_time.sql</span><br><span class="line"># 备份mysql-dev库中的chmanAndroid相关库数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman523 &gt; $backup_dir/$db_chuman523-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman530 &gt; $backup_dir/$db_chuman530-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman542 &gt; $backup_dir/$db_chuman542-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman550 &gt; $backup_dir/$db_chuman550-$backup_time.sql</span><br><span class="line">echo &quot;mysqldump success ok !&quot;</span><br><span class="line"></span><br><span class="line"># 更新导入数据到mysql-dev中</span><br><span class="line">sudo docker exec -i $mysql_dev_id mysql -u$mysql_user -p$mysql_password $db_chuman_qa_platform &lt; $backup_dir/$database-$backup_time.sql;</span><br><span class="line">echo &quot;update dev success ok !&quot;</span><br><span class="line"># 更新导入数据到mysql-prod中</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman523 &lt; $backup_dir/$db_chuman523-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman530 &lt; $backup_dir/$db_chuman530-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman542 &lt; $backup_dir/$db_chuman542-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman550 &lt; $backup_dir/$db_chuman550-$backup_time.sql;</span><br><span class="line">echo &quot;update prod success ok !&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/01/04/Docker%E5%9F%BA%E7%A1%80%E6%95%99%E5%AD%A6/" rel="prev" title="Docker基础教学">
+      <i class="fa fa-chevron-left"></i> Docker基础教学
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/01/06/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker"><span class="nav-number">1.</span> <span class="nav-text">服务器安装docker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A"><span class="nav-number">1.0.1.</span> <span class="nav-text">连接服务器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker%EF%BC%9A"><span class="nav-number">1.0.2.</span> <span class="nav-text">安装docker：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%8E%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%EF%BC%9A"><span class="nav-number">1.0.3.</span> <span class="nav-text">安装后设置开机启动：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9docker%E9%95%9C%E5%83%8F%E6%BA%90%EF%BC%9A"><span class="nav-number">1.0.4.</span> <span class="nav-text">修改docker镜像源：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%90%AFdocker%EF%BC%9A"><span class="nav-number">1.0.5.</span> <span class="nav-text">重启docker：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E4%B8%BB%E6%9C%BA%E4%B8%8A%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%B9%B6%E6%B7%BB%E5%8A%A0%E8%AF%BB%E5%86%99%E6%9D%83%E9%99%90%E4%BB%A5%E4%BE%BFjenkins%E5%BA%94%E7%94%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6%EF%BC%8C%E5%A6%82%EF%BC%9A"><span class="nav-number">1.0.6.</span> <span class="nav-text">在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E5%8F%96jenkins%E9%95%9C%E5%83%8F%EF%BC%9A"><span class="nav-number">1.0.7.</span> <span class="nav-text">拉取jenkins镜像：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%8D%B7%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%8C%81%E4%B9%85%E5%8C%96Jenkins%E5%AE%B9%E5%99%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%B0%E5%AE%BF%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.0.8.</span> <span class="nav-text">创建数据卷，用于持久化Jenkins容器的数据到宿主机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Cjenkins-d%E4%B8%BA%E5%90%8E%E5%8F%B0%E8%BF%9B%E8%A1%8C-%E2%80%93name%E4%B8%BA%E8%AE%BE%E7%BD%AE%E5%90%8D%E7%A7%B0"><span class="nav-number">1.0.9.</span> <span class="nav-text">运行jenkins -d为后台进行  –name为设置名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E8%BF%9B%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.0.10.</span> <span class="nav-text">查看容器进程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8log%E8%BF%9B%E8%A1%8C%E6%9F%A5%E6%89%BEjenkins%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81%EF%BC%9A%EF%BC%88xxxx-%E5%AE%B9%E5%99%A8-%E4%B8%BAID%EF%BC%89"><span class="nav-number">1.0.11.</span> <span class="nav-text">通过查看容器log进行查找jenkins初始密码：（xxxx 容器 为ID）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%86%85%E7%BD%91%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%E5%99%A8jenkins"><span class="nav-number">1.0.12.</span> <span class="nav-text">通过内网访问服务器jenkins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AF%B9%E5%BA%94%E7%BB%91%E5%AE%9A%E7%BD%91%E6%A1%A5"><span class="nav-number">1.0.13.</span> <span class="nav-text">删除对应绑定网桥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4-jenkins%E5%AE%B9%E5%99%A8%EF%BC%8Cxxxx-%E5%AE%B9%E5%99%A8-%E4%B8%BAID"><span class="nav-number">1.0.14.</span> <span class="nav-text">删除 jenkins容器，xxxx 容器 为ID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8"><span class="nav-number">1.0.15.</span> <span class="nav-text">停止容器:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%EF%BC%9A"><span class="nav-number">1.0.16.</span> <span class="nav-text">重启容器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%AE%A2%E6%88%B7%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="nav-number">1.0.17.</span> <span class="nav-text">从宿主机客户进入容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8%E5%90%8E%E5%BB%BA%E7%AB%8B-ssh%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%88%9B%E5%BB%BA%E5%AF%86%E9%92%A5%E6%96%87%E4%BB%B6%E7%A7%81%E9%92%A5id-rsa%EF%BC%8C%E5%85%AC%E9%92%A5id-rsa-pub"><span class="nav-number">1.0.18.</span> <span class="nav-text">进入容器后建立.ssh目录，创建密钥文件私钥id_rsa，公钥id_rsa.pub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E4%BF%AE%E6%94%B9%E4%B8%BA%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C%E6%88%96%E5%81%9C%E6%AD%A2%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C"><span class="nav-number">1.0.19.</span> <span class="nav-text">更新容器配置(修改为自动运行或停止自动运行)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AE%B9%E5%99%A8%E5%88%AB%E5%90%8D"><span class="nav-number">1.0.20.</span> <span class="nav-text">修改容器别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AE%B9%E5%99%A8%E5%85%83%E6%8C%82%E8%BD%BD"><span class="nav-number">1.0.21.</span> <span class="nav-text">获取容器元挂载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%B7%B2%E5%AD%98%E5%9C%A8%E5%AE%B9%E5%99%A8%E6%98%A0%E5%B0%84"><span class="nav-number">1.0.22.</span> <span class="nav-text">修改已存在容器映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%A0%E5%B0%84%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.0.23.</span> <span class="nav-text">查看映射端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%9A%84IP%E5%9C%B0%E5%9D%80"><span class="nav-number">1.0.24.</span> <span class="nav-text">查看容器的IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E9%95%9C%E5%83%8F%EF%BC%88%E6%8F%90%E4%BA%A4%E6%97%B6%E4%BC%9A%E5%AF%BC%E8%87%B4docker%E8%BF%9B%E7%A8%8B%E9%98%BB%E5%A1%9E%EF%BC%89"><span class="nav-number">1.0.25.</span> <span class="nav-text">提交镜像（提交时会导致docker进程阻塞）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85vim"><span class="nav-number">1.0.26.</span> <span class="nav-text">### 安装vim</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85pipenv%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E8%A6%81%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E7%9A%84%E9%95%9C%E5%83%8F%E6%BA%90%E6%9D%A5%E5%8A%A0%E9%80%9F-%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%EF%BC%8C%E8%A6%81%E4%B8%8Dpipenv"><span class="nav-number">1.1.</span> <span class="nav-text">安装pipenv，因为网络的问题，要使用国内的镜像源来加速(全局安装，要不pipenv)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3pip%E5%8A%A0%E8%BD%BD%E6%85%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">解决pip加载慢</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3allure%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">解决allure安装问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E4%B8%8D%E5%90%8C%E6%AD%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.3.</span> <span class="nav-text">解决系统时间不同步的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5docker%E4%B8%A4%E4%B8%AA%E5%AE%B9%E5%99%A8%E7%9A%84mysql%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">同步docker两个容器的mysql数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%AE%BF%E4%B8%BB%E6%9C%BA%E5%AE%89%E8%A3%85crontab"><span class="nav-number">1.2.1.</span> <span class="nav-text">在宿主机安装crontab</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">查看定时任务列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.3.</span> <span class="nav-text">新建定时任务命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%BF%E4%B8%BB%E6%9C%BA%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.2.4.</span> <span class="nav-text">宿主机执行定时任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E8%AE%BE%E7%BD%AE%E8%A7%A3%E9%87%8A"><span class="nav-number">1.2.5.</span> <span class="nav-text">定时设置解释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%9A%E6%97%B6crond%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.2.6.</span> <span class="nav-text">启动定时crond服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bcrond%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81"><span class="nav-number">1.2.7.</span> <span class="nav-text">查看crond服务状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.8.</span> <span class="nav-text">删除所有定时任务命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%9B%B4%E6%96%B0%E8%84%9A%E6%9C%AC-mysql-backup-sh"><span class="nav-number">1.2.9.</span> <span class="nav-text">数据库备份与更新脚本 mysql-backup.sh</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DamonKoy</p>
+  <div class="site-description" itemprop="description">小小博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DamonKoy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>
