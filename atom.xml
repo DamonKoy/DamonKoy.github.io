@@ -6,7 +6,7 @@
   <link href="https://damonkoy.github.io/atom.xml" rel="self"/>
   
   <link href="https://damonkoy.github.io/"/>
-  <updated>2025-01-06T08:18:20.845Z</updated>
+  <updated>2025-01-07T05:48:00.550Z</updated>
   <id>https://damonkoy.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://damonkoy.github.io/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/"/>
+    <id>https://damonkoy.github.io/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</id>
+    <published>2025-01-06T08:18:39.395Z</published>
+    <updated>2025-01-07T05:48:00.550Z</updated>
+    
+    <content type="html"><![CDATA[<p>建页面 配置后页面点击分类后会显示 Can not get &#x2F;tags&#x2F; （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p><p>此时根目录的 &#x2F;source 目录下会分别出现两个文件夹 categories 和 tags ，里面都有一个 index.md 文件，点击进入后为其添加 type ：<br>title: categories<br>date: 2023-08-11 16:22:41<br>type: categories # 填写对应的页面类型</p><p>此时重新编译运行即可。</p><p>七、添加搜索功能<br>1、安装 hexo-generator-searchdb 插件<br>css 代码解读复制代码$ npm install hexo-generator-searchdb –save</p><p>2、打开 站点配置文件 找到Extensions在下面添加<br>yaml 代码解读复制代码# 搜索<br>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p><p>3、打开 主题配置文件 找到Local search，将enable设置为true</p><ol start="7"><li>图片点击放大预览</li></ol><h1 id="找到文件-themes-next-config-yml"><a href="#找到文件-themes-next-config-yml" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="修改以下代码"><a href="#修改以下代码" class="headerlink" title="修改以下代码"></a>修改以下代码</h1><p>fancybox: true</p><ol start="8"><li>图片懒加载</li></ol><h1 id="找到文件-themes-next-config-yml-1"><a href="#找到文件-themes-next-config-yml-1" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码"><a href="#增加以下代码" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>lazyload: true</p><ol start="11"><li>添加字数统计及阅读时长</li></ol><h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;建页面 配置后页面点击分类后会显示 Can not get &amp;#x2F;tags&amp;#x2F; （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：&lt;br&gt;hexo new page “categories”&lt;br&gt;hexo new p</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>hexo框架搭建个人博客</title>

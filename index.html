@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"damonkoy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"damonkoy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="小小博客">
@@ -183,6 +183,88 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://damonkoy.github.io/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DamonKoy">
+      <meta itemprop="description" content="小小博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DamonKoy | 追赶着">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-01-06 16:18:39" itemprop="dateCreated datePublished" datetime="2025-01-06T16:18:39+08:00">2025-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-01-07 13:48:00" itemprop="dateModified" datetime="2025-01-07T13:48:00+08:00">2025-01-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>建页面 配置后页面点击分类后会显示 Can not get &#x2F;tags&#x2F; （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
+<p>此时根目录的 &#x2F;source 目录下会分别出现两个文件夹 categories 和 tags ，里面都有一个 index.md 文件，点击进入后为其添加 type ：<br>title: categories<br>date: 2023-08-11 16:22:41<br>type: categories # 填写对应的页面类型</p>
+<p>此时重新编译运行即可。</p>
+<p>七、添加搜索功能<br>1、安装 hexo-generator-searchdb 插件<br>css 代码解读复制代码$ npm install hexo-generator-searchdb –save</p>
+<p>2、打开 站点配置文件 找到Extensions在下面添加<br>yaml 代码解读复制代码# 搜索<br>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p>
+<p>3、打开 主题配置文件 找到Local search，将enable设置为true</p>
+<ol start="7">
+<li>图片点击放大预览</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml"><a href="#找到文件-themes-next-config-yml" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="修改以下代码"><a href="#修改以下代码" class="headerlink" title="修改以下代码"></a>修改以下代码</h1><p>fancybox: true</p>
+<ol start="8">
+<li>图片懒加载</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml-1"><a href="#找到文件-themes-next-config-yml-1" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码"><a href="#增加以下代码" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>lazyload: true</p>
+<ol start="11">
+<li>添加字数统计及阅读时长</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -893,7 +975,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
