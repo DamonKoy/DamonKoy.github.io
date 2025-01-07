@@ -233,6 +233,11 @@
 ]]></content>
   </entry>
   <entry>
+    <title>hexo框架搭建个人博客</title>
+    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title></title>
     <url>/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
     <content><![CDATA[<p>建页面 配置后页面点击分类后会显示 Can not get &#x2F;tags&#x2F; （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
@@ -256,8 +261,8 @@
 ]]></content>
   </entry>
   <entry>
-    <title>hexo框架搭建个人博客</title>
-    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <title>【高效防控】从零构建高效稳定的监控体系</title>
+    <url>/2025/01/04/%E3%80%90%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7%E3%80%91%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
@@ -373,10 +378,5 @@
 <h4 id="数据库备份与更新脚本-mysql-backup-sh"><a href="#数据库备份与更新脚本-mysql-backup-sh" class="headerlink" title="数据库备份与更新脚本 mysql-backup.sh"></a>数据库备份与更新脚本 mysql-backup.sh</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 设置mysql的登录用户名和密码(根据实际情况填写)</span><br><span class="line">mysql_user=&quot;root&quot;</span><br><span class="line">mysql_password=&quot;1z2x3c4v5b6n7m&quot;</span><br><span class="line">mysql_prod_id=&quot;51ea579affb7&quot;</span><br><span class="line">mysql_dev_id=&quot;34aa0aed191e&quot;</span><br><span class="line"></span><br><span class="line"># 设置需要备份的数据库</span><br><span class="line">db_chuman_qa_platform=&quot;chuman_qa_platform&quot;</span><br><span class="line">db_chuman523=&quot;chumanAndroid523&quot;</span><br><span class="line">db_chuman530=&quot;chumanAndroid530&quot;</span><br><span class="line">db_chuman542=&quot;chumanAndroid542&quot;</span><br><span class="line">db_chuman550=&quot;chumanAndroid550&quot;</span><br><span class="line"></span><br><span class="line"># 备份文件存放宿主机路径(根据实际情况填写)</span><br><span class="line">backup_location=/home/test/mysql-backup</span><br><span class="line"></span><br><span class="line">#如果文件夹不存在则创建</span><br><span class="line">if [ ! -d $backup_location ]; </span><br><span class="line">then </span><br><span class="line"> mkdir -p $backup_location; </span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 是否删除过期数据</span><br><span class="line">expire_backup_delete=&quot;ON&quot;</span><br><span class="line">expire_days=30</span><br><span class="line">backup_time=`date +%Y%m%d%H%M`</span><br><span class="line">backup_dir=$backup_location</span><br><span class="line">welcome_msg=&quot;Welcome to use MySQL backup tools!&quot;</span><br><span class="line"></span><br><span class="line"># 备份mysql-prod库中的chuman_qa_platform表数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_prod_id mysqldump -u$mysql_user -p$mysql_password $db_chuman_qa_platform device_transfer_record devices &gt; $backup_dir/$database-$backup_time.sql</span><br><span class="line"># 备份mysql-dev库中的chmanAndroid相关库数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman523 &gt; $backup_dir/$db_chuman523-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman530 &gt; $backup_dir/$db_chuman530-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman542 &gt; $backup_dir/$db_chuman542-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman550 &gt; $backup_dir/$db_chuman550-$backup_time.sql</span><br><span class="line">echo &quot;mysqldump success ok !&quot;</span><br><span class="line"></span><br><span class="line"># 更新导入数据到mysql-dev中</span><br><span class="line">sudo docker exec -i $mysql_dev_id mysql -u$mysql_user -p$mysql_password $db_chuman_qa_platform &lt; $backup_dir/$database-$backup_time.sql;</span><br><span class="line">echo &quot;update dev success ok !&quot;</span><br><span class="line"># 更新导入数据到mysql-prod中</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman523 &lt; $backup_dir/$db_chuman523-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman530 &lt; $backup_dir/$db_chuman530-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman542 &lt; $backup_dir/$db_chuman542-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman550 &lt; $backup_dir/$db_chuman550-$backup_time.sql;</span><br><span class="line">echo &quot;update prod success ok !&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
-  </entry>
-  <entry>
-    <title>【高效防控】从零构建高效稳定的监控体系</title>
-    <url>/2025/01/04/%E3%80%90%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7%E3%80%91%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB/</url>
-    <content><![CDATA[]]></content>
   </entry>
 </search>
