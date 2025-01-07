@@ -218,7 +218,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-01-07 13:48:00" itemprop="dateModified" datetime="2025-01-07T13:48:00+08:00">2025-01-07</time>
+                <time title="Modified: 2025-01-07 14:10:04" itemprop="dateModified" datetime="2025-01-07T14:10:04+08:00">2025-01-07</time>
               </span>
 
           
@@ -250,6 +250,11 @@
 <li>添加字数统计及阅读时长</li>
 </ol>
 <h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>
+<ol start="12">
+<li>置顶文章<br>使用文章的top属性<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用—包裹的部分）中添加top属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</li>
+</ol>
+<p>title: 置顶文章标题<br>date: 2025-01-07 12:00:00<br>top: 100</p>
+<p>更新文章显示顺序：完成文章top属性的设置后，重启 Hexo 服务器或者重新生成静态页面，Next 7 主题会根据文章的top属性值对文章进行排序，具有较高top值的文章将显示在页面的较上方位置，实现置顶效果。</p>
 
       
     </div>
@@ -798,7 +803,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-01-06 13:27:58" itemprop="dateModified" datetime="2025-01-06T13:27:58+08:00">2025-01-06</time>
+                <time title="Modified: 2025-01-07 14:10:46" itemprop="dateModified" datetime="2025-01-07T14:10:46+08:00">2025-01-07</time>
               </span>
 
           
@@ -978,6 +983,12 @@
           <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>

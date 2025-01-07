@@ -233,11 +233,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>hexo框架搭建个人博客</title>
-    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title></title>
     <url>/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
     <content><![CDATA[<p>建页面 配置后页面点击分类后会显示 Can not get &#x2F;tags&#x2F; （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
@@ -258,12 +253,25 @@
 <li>添加字数统计及阅读时长</li>
 </ol>
 <h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>
+<ol start="12">
+<li>置顶文章<br>使用文章的top属性<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用—包裹的部分）中添加top属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</li>
+</ol>
+<p>title: 置顶文章标题<br>date: 2025-01-07 12:00:00<br>top: 100</p>
+<p>更新文章显示顺序：完成文章top属性的设置后，重启 Hexo 服务器或者重新生成静态页面，Next 7 主题会根据文章的top属性值对文章进行排序，具有较高top值的文章将显示在页面的较上方位置，实现置顶效果。</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>hexo框架搭建个人博客</title>
+    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>【高效防控】从零构建高效稳定的监控体系</title>
     <url>/2025/01/04/%E3%80%90%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7%E3%80%91%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB/</url>
     <content><![CDATA[]]></content>
+      <tags>
+        <tag>监控体系</tag>
+      </tags>
   </entry>
   <entry>
     <title>服务器安装docker</title>
