@@ -46,8 +46,8 @@
       </tags>
   </entry>
   <entry>
-    <title>解决github pages 无法访问gitee图床</title>
-    <url>/2025/01/08/%E8%A7%A3%E5%86%B3github-pages-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AEgitee%E5%9B%BE%E5%BA%8A/</url>
+    <title>gitee与github仓库数据同步</title>
+    <url>/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</url>
     <content><![CDATA[<p>发现是防盗链限制的问题，需要解决referrer</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;40310014&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;invalid Referer header&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 

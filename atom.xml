@@ -6,7 +6,7 @@
   <link href="https://damonkoy.github.io/atom.xml" rel="self"/>
   
   <link href="https://damonkoy.github.io/"/>
-  <updated>2025-01-08T08:56:10.012Z</updated>
+  <updated>2025-01-08T09:00:56.079Z</updated>
   <id>https://damonkoy.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>解决github pages 无法访问gitee图床</title>
-    <link href="https://damonkoy.github.io/2025/01/08/%E8%A7%A3%E5%86%B3github-pages-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AEgitee%E5%9B%BE%E5%BA%8A/"/>
-    <id>https://damonkoy.github.io/2025/01/08/%E8%A7%A3%E5%86%B3github-pages-%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AEgitee%E5%9B%BE%E5%BA%8A/</id>
+    <title>gitee与github仓库数据同步</title>
+    <link href="https://damonkoy.github.io/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/"/>
+    <id>https://damonkoy.github.io/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</id>
     <published>2025-01-08T06:24:19.000Z</published>
-    <updated>2025-01-08T08:56:10.012Z</updated>
+    <updated>2025-01-08T09:00:56.079Z</updated>
     
     <content type="html"><![CDATA[<p>发现是防盗链限制的问题，需要解决referrer</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;40310014&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;invalid Referer header&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用gitee迁移github的方法</p><p>你可以通过以下方式申请 GitHub 私人令牌：</p><ol><li><p>登录与 Gitee 绑定的 GitHub 帐号；</p></li><li><p>通过路径「用户头像」→「Settings」进入「Developer setting」；</p></li><li><p>选择「Personal access tokens」选项后点击「Generate new token」；</p></li><li><p>「Note」字段可以随意填写；例如，Gitee_Mirror；</p></li><li><p>「Select scopes」字段请根据你的需求进行勾选；<br> repo 字段为必选字段，请您直接勾选；<br> admin:repo_hook 字段为可选字段，用于自动生成 webhook；<br> 当您需要 Gitee 自动从 GitHub 同步仓库时，建议您勾选。</p></li><li><p>点击「Generate token」生成私人令牌；</p></li></ol><p>7.复制私人令牌并妥善保管。</p><p>私人令牌</p>]]></content>
     
