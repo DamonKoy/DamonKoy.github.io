@@ -6,7 +6,7 @@
   <link href="https://damonkoy.github.io/atom.xml" rel="self"/>
   
   <link href="https://damonkoy.github.io/"/>
-  <updated>2025-01-08T09:04:10.454Z</updated>
+  <updated>2025-01-09T09:59:14.048Z</updated>
   <id>https://damonkoy.github.io/</id>
   
   <author>
@@ -15,6 +15,19 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo插件汇集</title>
+    <link href="https://damonkoy.github.io/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/"/>
+    <id>https://damonkoy.github.io/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/</id>
+    <published>2025-01-09T09:59:14.000Z</published>
+    <updated>2025-01-09T09:59:14.048Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>gitee与github仓库数据同步</title>

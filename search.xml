@@ -46,6 +46,11 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo插件汇集</title>
+    <url>/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>gitee与github仓库数据同步</title>
     <url>/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</url>
     <content><![CDATA[<p>发现是防盗链限制的问题，需要解决referrer</p>
