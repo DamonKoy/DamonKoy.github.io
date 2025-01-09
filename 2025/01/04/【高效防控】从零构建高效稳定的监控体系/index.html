@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"damonkoy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="背景    随着业务的不断拓展，开平对接的外部渠道越来越多，服务间的交互逻辑也变得更加复杂。但目前开平还没有一套有效的线上监控机制。为了确保业务能够顺利开展，我们需要构建一套监控体系，该体系能够快速定位问题根源，并在故障刚出现时就迅速做出响应，从而将线上问题的影响降至最低。 监控架构概述   为了满足从复杂业务环境中获取监控信息的有效性，我们采用了多维度监控矩阵全面覆盖，最终达成业务精准监控。这一">
+  <meta name="description" content="背景 随着业务的不断拓展，开平对接的外部渠道越来越多，服务间的交互逻辑也变得更加复杂。但目前开平还没有一套有效的线上监控机制。为了确保业务能够顺利开展，我们需要构建一套监控体系，该体系能够快速定位问题根源，并在故障刚出现时就迅速做出响应，从而将线上问题的影响降至最低。  监控架构概述 为了满足从复杂业务环境中获取监控信息的有效性，我们采用了多维度监控矩阵全面覆盖，最终达成业务精准监控。这一设计矩阵">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【高效防控】从零构建高效稳定的监控体系">
 <meta property="og:url" content="https://damonkoy.github.io/2025/01/04/%E3%80%90%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7%E3%80%91%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB/index.html">
 <meta property="og:site_name" content="DamonKoy | 追赶着">
-<meta property="og:description" content="背景    随着业务的不断拓展，开平对接的外部渠道越来越多，服务间的交互逻辑也变得更加复杂。但目前开平还没有一套有效的线上监控机制。为了确保业务能够顺利开展，我们需要构建一套监控体系，该体系能够快速定位问题根源，并在故障刚出现时就迅速做出响应，从而将线上问题的影响降至最低。 监控架构概述   为了满足从复杂业务环境中获取监控信息的有效性，我们采用了多维度监控矩阵全面覆盖，最终达成业务精准监控。这一">
+<meta property="og:description" content="背景 随着业务的不断拓展，开平对接的外部渠道越来越多，服务间的交互逻辑也变得更加复杂。但目前开平还没有一套有效的线上监控机制。为了确保业务能够顺利开展，我们需要构建一套监控体系，该体系能够快速定位问题根源，并在故障刚出现时就迅速做出响应，从而将线上问题的影响降至最低。  监控架构概述 为了满足从复杂业务环境中获取监控信息的有效性，我们采用了多维度监控矩阵全面覆盖，最终达成业务精准监控。这一设计矩阵">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%9E%B6%E6%9E%84%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E6%8C%87%E6%A0%87%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5.png">

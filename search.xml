@@ -114,7 +114,25 @@
   <entry>
     <title>hexo框架搭建个人博客</title>
     <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/docs/">hexo食用指南</a></p>
+<p>轻量、便携、静态、一键部署</p>
+<p>安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo框架</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化博客</span></span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">npm依赖安装</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hexo</span></span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+
+
+<p>基本操作：</p>
+<p> _config.yml 文件下进行修改hexo基本配置</p>
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE" alt="image-20250109144054648"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建文章，运行后在 <span class="built_in">source</span>/_posts/ 下生成 &#123;文章标题&#125;.md 文档</span></span><br><span class="line">hexo new &#x27;文章标题&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E9%85%8D%E7%BD%AE%E6%96%B0%E5%A2%9E%E4%BF%A1%E6%81%AF" alt="image-20250109144418134"></p>
+<p>部署：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理缓存、生产静态页面、远程部署</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
   </entry>
   <entry>
     <title>服务器安装docker</title>
