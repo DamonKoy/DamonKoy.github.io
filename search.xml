@@ -206,7 +206,16 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-generator-seo-friendly-sitemap --save</span><br></pre></td></tr></tbody></table></figure>
 
 <p>配置：修改根目录的 _config.yml 文件</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sitemap:</span><br><span class="line">    path: sitemap.xml</span><br><span class="line">    tag: false</span><br><span class="line">    category: false</span><br></pre></td></tr></tbody></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sitemap:</span><br><span class="line">    path: sitemap.xml</span><br><span class="line">    tag: false</span><br><span class="line">    category: false</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="屏蔽文章修改时间"><a href="#屏蔽文章修改时间" class="headerlink" title="屏蔽文章修改时间"></a>屏蔽文章修改时间</h2><p>修改文档：/hexo 根目录 /themes/next/layout/_macro/post.swig</p>
+<p>用最便捷且简单的方法进行修改，方便需要时切换回去（删除红框内容即可）</p>
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B1%8F%E8%94%BD%E6%96%87%E7%AB%A0%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4%E7%9A%84%E5%B1%95%E7%A4%BA%E9%80%BB%E8%BE%91.png" alt="image-20250110151240652"></p>
+<p>效果如下：</p>
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%88%A0%E9%99%A4%E6%96%87%E7%AB%A0%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4%E6%95%88%E6%9E%9C%E5%9B%BE.png" alt="image-20250110151553760"></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>博客搭建</category>
       </categories>
@@ -332,8 +341,8 @@
         <category>编程笔记</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>jenkins</tag>
+        <tag>docker</tag>
         <tag>服务器</tag>
         <tag>容器</tag>
       </tags>
@@ -427,7 +436,7 @@
 </ul>
 <h4 id="代理人"><a href="#代理人" class="headerlink" title="代理人"></a>代理人</h4><p>Docker Desktop 从 macOS 中检测 HTTP / HTTPS 代理设置，并将其自动传播到 Docker。例如，如果将代理设置设置为 <code>http://proxy.example.com</code>，则 Docker 在提取容器时会使用此代理。</p>
 <p>但是，您的代理设置不会传播到您启动的容器中。如果要为容器设置代理设置，则需要为其定义环境变量，就像在 Linux 上一样，例如：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env</span><br><span class="line"></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=b7edf988b2b5</span><br><span class="line">TERM=xterm</span><br><span class="line">HOME=/root</span><br><span class="line">HTTP_PROXY=http://proxy.example.com:3128</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine <span class="built_in">env</span></span></span><br><span class="line"></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=b7edf988b2b5</span><br><span class="line">TERM=xterm</span><br><span class="line">HOME=/root</span><br><span class="line">HTTP_PROXY=http://proxy.example.com:3128</span><br></pre></td></tr></tbody></table></figure>
 
 <p>有关设置用于运行容器的环境变量的更多信息，请参见<a href="https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file">设置环境变量</a>。</p>
 <h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>您可以配置 Docker 桌面网络以在虚拟专用网络（VPN）上工作。指定网络地址转换（NAT）前缀和子网掩码以启用 Internet 连接。</p>
@@ -447,7 +456,7 @@
 
 <h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3><p>Docker Desktop 包含一个可在 Mac 上运行的独立 Kubernetes 服务器，因此您可以测试在 Kubernetes 上部署 Docker 工作负载。</p>
 <p>Kubernetes 客户端命令 <code>kubectl</code> 包括在内，并配置为连接到本地 Kubernetes 服务器。如果您 <code>kubectl</code> 已经安装并指向其他环境，例如 <code>minikube</code> 或 GKE 集群，请确保更改上下文，以便 <code>kubectl</code> 指向 <code>docker-desktop</code>：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ kubectl config get-contexts</span><br><span class="line">$ kubectl config use-context docker-desktop</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl config get-contexts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl config use-context docker-desktop</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>如果您是 <code>kubectl</code> 用 Homebrew 或通过其他方法安装的，并且遇到冲突，请删除 <code>/usr/local/bin/kubectl</code>。</p>
 <ul>
