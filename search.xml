@@ -41,14 +41,25 @@
 <h3 id="错误码分析"><a href="#错误码分析" class="headerlink" title="错误码分析"></a>错误码分析</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;​将错误码划分成 “通用错误码”、“已出现错误码” 和 “未知错误码” 三大类进行相关处理，然后进行分析治理，判断问题有效性，进而推动治理、记录观察。<br>错误码整体处理流程如下：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B.png"><br>本部分通过柱状图展示了不同渠道的错误码数据，具体包括以下错误类型及其占比：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%90%84%E6%B8%A0%E9%81%93%E9%94%99%E8%AF%AF%E7%A0%81%E6%95%B0%E6%8D%AE.png"><br>通过问题类型和根因进行归类，方便后续进行排期优化：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%A0%B9%E5%9B%A0%E5%BD%92%E7%B1%BB.png"></p>
 <h2 id="总结与规划"><a href="#总结与规划" class="headerlink" title="总结与规划"></a>总结与规划</h2><p>&nbsp; &nbsp; 目前，开平服务的监控系统已取得一定成果，有效告警 180 个，有效率达 80.36%，发现 71 个问题，保障了系统正常运行。然而，当前监控系统侧重于系统功能监测，在业务指标监控等方面存在不足。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%96%B0%E8%90%BD%E5%9C%B0%E6%88%90%E6%9E%9C.png"><br>我们正朝着更加完善的方向稳步迈进，其最终目标是打造一个全方位、高效且智能化的监控体系，保障业务能够稳定、持续地发展为业务的优化和拓展提供有力的数据支持和决策依据。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A7%84%E5%88%92.png"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>防控体系</category>
+      </categories>
       <tags>
-        <tag>监控体系</tag>
+        <tag>监控</tag>
+        <tag>防控</tag>
       </tags>
   </entry>
   <entry>
     <title>hexo 插件汇集</title>
     <url>/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/</url>
     <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
   </entry>
   <entry>
     <title>gitee 与 github 仓库数据同步</title>
@@ -77,11 +88,53 @@
 <p>7. 复制私人令牌并妥善保管。</p>
 <p>私人令牌</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>gitee</tag>
+        <tag>github</tag>
+      </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
-    <content><![CDATA[<p>建页面 配置后页面点击分类后会显示 Can not get /tags/ （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
+    <title>hexo 框架搭建个人博客</title>
+    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/docs/">hexo 食用指南</a></p>
+<p>轻量、便携、静态、一键部署</p>
+<p>安装：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo框架</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化博客</span></span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">npm依赖安装</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hexo</span></span><br><span class="line">hexo server</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>基本操作：</p>
+<p> _config.yml 文件下进行修改 hexo 基本配置</p>
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE" alt="image-20250109144054648"></p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建文章，运行后在 <span class="built_in">source</span>/_posts/ 下生成 {文章标题}.md 文档</span></span><br><span class="line">hexo new '文章标题'</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E9%85%8D%E7%BD%AE%E6%96%B0%E5%A2%9E%E4%BF%A1%E6%81%AF" alt="image-20250109144418134"></p>
+<p>部署：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理缓存、生产静态页面、远程部署</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo 主题及样式调整</title>
+    <url>/2025/01/04/hexo%E4%B8%BB%E9%A2%98%E5%8F%8A%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
+    <content><![CDATA[<p>主题推荐</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">1.Sakura 非常炫，缺点加载慢 https://github.com/honjun/hexo-theme-sakura</span><br><span class="line">2.Matery 预加载，强推 https://github.com/blinkfox/hexo-theme-matery</span><br><span class="line">3.3-hexo 三段式，适合博文多的 https://github.com/yelog/hexo-theme-3-hexo</span><br><span class="line">4.Butterfly 也是个好看的 https://github.com/jerryc127/hexo-theme-butterfly/tree/dev</span><br><span class="line">5.Next 功能集成多，简洁 https://github.com/theme-next/hexo-theme-next</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>建页面 配置后页面点击分类后会显示 Can not get /tags/ （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
 <p>此时根目录的 /source 目录下会分别出现两个文件夹 categories 和 tags ，里面都有一个 index.md 文件，点击进入后为其添加 type ：<br>title: categories<br>date: 2023-08-11 16:22:41<br>type: categories # 填写对应的页面类型</p>
 <p>此时重新编译运行即可。</p>
 <p>七、添加搜索功能<br>1、安装&nbsp;hexo-generator-searchdb&nbsp;插件<br>css 代码解读复制代码 $ npm install hexo-generator-searchdb –save</p>
@@ -102,7 +155,10 @@
 <ol start="12">
 <li>置顶文章<br>使用文章的 top 属性</li>
 </ol>
-<p>使用插件<br>安装插件：在 Hexo 项目根目录下，通过命令行执行 npm install hexo-generator-index-pin-top –save 命令，安装 hexo-generator-index-pin-top 插件，该插件可以帮助实现文章置顶功能。<br>配置插件：安装完成后，在 Hexo 的站点配置文件_config.yml 中添加插件的配置信息。例如：<br>yaml<br>index_generator:<br>  path: ‘’<br>  per_page: 10<br>  order_by: ‘-date’<br>pin_top:<br>  order_by: ‘top’<br>  layout: ‘post’<br>这里配置了 pin_top 相关的排序规则，按照文章的 top 属性进行排序。<br>3. 设置文章置顶：在需要置顶的文章的 Front Matter 中添加 top 属性，如 top: 100。然后执行 hexo clean &amp;&amp; hexo g 命令，重新生成静态页面，插件会根据配置和文章的 top 属性将文章置顶显示。<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用 — 包裹的部分）中添加 top 属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</p>
+<p>使用插件<br>安装插件：在 Hexo 项目根目录下，通过命令行执行 npm install hexo-generator-index-pin-top –save 命令，安装 hexo-generator-index-pin-top 插件，该插件可以帮助实现文章置顶功能。<br>配置插件：安装完成后，在 Hexo 的站点配置文件_config.yml 中添加插件的配置信息。例如：<br>yaml<br>index_generator:<br>  path: ‘’<br>  per_page: 10<br>  order_by: ‘-date’<br>pin_top:<br>  order_by: ‘top’<br>  layout: ‘post’<br>这里配置了 pin_top 相关的排序规则，按照文章的 top 属性进行排序。</p>
+<ol start="3">
+<li>设置文章置顶：在需要置顶的文章的 Front Matter 中添加 top 属性，如 top: 100。然后执行 hexo clean &amp;&amp; hexo g 命令，重新生成静态页面，插件会根据配置和文章的 top 属性将文章置顶显示。<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用 — 包裹的部分）中添加 top 属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</li>
+</ol>
 <p>title: 置顶文章标题<br>date: 2025-01-07 12:00:00<br>top: 100</p>
 <ol start="13">
 <li>统计文章字数与阅读时长</li>
@@ -151,29 +207,13 @@
 
 <p>配置：修改根目录的 _config.yml 文件</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sitemap:</span><br><span class="line">    path: sitemap.xml</span><br><span class="line">    tag: false</span><br><span class="line">    category: false</span><br></pre></td></tr></tbody></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-  </entry>
-  <entry>
-    <title>hexo 框架搭建个人博客</title>
-    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/docs/">hexo 食用指南</a></p>
-<p>轻量、便携、静态、一键部署</p>
-<p>安装：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo框架</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化博客</span></span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">npm依赖安装</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hexo</span></span><br><span class="line">hexo server</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p>基本操作：</p>
-<p> _config.yml 文件下进行修改 hexo 基本配置</p>
-<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE" alt="image-20250109144054648"></p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建文章，运行后在 <span class="built_in">source</span>/_posts/ 下生成 {文章标题}.md 文档</span></span><br><span class="line">hexo new '文章标题'</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E9%85%8D%E7%BD%AE%E6%96%B0%E5%A2%9E%E4%BF%A1%E6%81%AF" alt="image-20250109144418134"></p>
-<p>部署：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理缓存、生产静态页面、远程部署</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
   </entry>
   <entry>
     <title>服务器安装 docker</title>
@@ -288,6 +328,15 @@
 <h4 id="数据库备份与更新脚本-mysql-backup-sh"><a href="#数据库备份与更新脚本-mysql-backup-sh" class="headerlink" title="数据库备份与更新脚本 mysql-backup.sh"></a>数据库备份与更新脚本 mysql-backup.sh</h4><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 设置mysql的登录用户名和密码(根据实际情况填写)</span><br><span class="line">mysql_user="root"</span><br><span class="line">mysql_password="1z2x3c4v5b6n7m"</span><br><span class="line">mysql_prod_id="51ea579affb7"</span><br><span class="line">mysql_dev_id="34aa0aed191e"</span><br><span class="line"></span><br><span class="line"># 设置需要备份的数据库</span><br><span class="line">db_chuman_qa_platform="chuman_qa_platform"</span><br><span class="line">db_chuman523="chumanAndroid523"</span><br><span class="line">db_chuman530="chumanAndroid530"</span><br><span class="line">db_chuman542="chumanAndroid542"</span><br><span class="line">db_chuman550="chumanAndroid550"</span><br><span class="line"></span><br><span class="line"># 备份文件存放宿主机路径(根据实际情况填写)</span><br><span class="line">backup_location=/home/test/mysql-backup</span><br><span class="line"></span><br><span class="line">#如果文件夹不存在则创建</span><br><span class="line">if [ ! -d $backup_location ]; </span><br><span class="line">then </span><br><span class="line"> mkdir -p $backup_location; </span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 是否删除过期数据</span><br><span class="line">expire_backup_delete="ON"</span><br><span class="line">expire_days=30</span><br><span class="line">backup_time=`date +%Y%m%d%H%M`</span><br><span class="line">backup_dir=$backup_location</span><br><span class="line">welcome_msg="Welcome to use MySQL backup tools!"</span><br><span class="line"></span><br><span class="line"># 备份mysql-prod库中的chuman_qa_platform表数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_prod_id mysqldump -u$mysql_user -p$mysql_password $db_chuman_qa_platform device_transfer_record devices &gt; $backup_dir/$database-$backup_time.sql</span><br><span class="line"># 备份mysql-dev库中的chmanAndroid相关库数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman523 &gt; $backup_dir/$db_chuman523-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman530 &gt; $backup_dir/$db_chuman530-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman542 &gt; $backup_dir/$db_chuman542-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman550 &gt; $backup_dir/$db_chuman550-$backup_time.sql</span><br><span class="line">echo "mysqldump success ok !"</span><br><span class="line"></span><br><span class="line"># 更新导入数据到mysql-dev中</span><br><span class="line">sudo docker exec -i $mysql_dev_id mysql -u$mysql_user -p$mysql_password $db_chuman_qa_platform &lt; $backup_dir/$database-$backup_time.sql;</span><br><span class="line">echo "update dev success ok !"</span><br><span class="line"># 更新导入数据到mysql-prod中</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman523 &lt; $backup_dir/$db_chuman523-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman530 &lt; $backup_dir/$db_chuman530-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman542 &lt; $backup_dir/$db_chuman542-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman550 &lt; $backup_dir/$db_chuman550-$backup_time.sql;</span><br><span class="line">echo "update prod success ok !"</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>jenkins</tag>
+        <tag>服务器</tag>
+        <tag>容器</tag>
+      </tags>
   </entry>
   <entry>
     <title>Docker 基础教学</title>
@@ -497,6 +546,13 @@
 <p>没有该文件则自行创建</p>
 </blockquote>
 <h3 id="最后重启docker服务"><a href="#最后重启docker服务" class="headerlink" title="最后重启docker服务"></a>最后重启 docker 服务</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>教学</tag>
+      </tags>
   </entry>
   <entry>
     <title>Jenkins 项目配置</title>
@@ -520,5 +576,12 @@
 <p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA1.png" alt="image-20201014154819459"></p>
 <p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA2.png" alt="image-20201014154846581"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>jenkins</tag>
+        <tag>pytest</tag>
+      </tags>
   </entry>
 </search>
