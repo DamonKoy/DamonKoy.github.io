@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"damonkoy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="简介Docker是一个平台，任何一台装有Docker的机器上你都可以建立、发布、运行你的应用程序。 为什么要使用？">
+  <meta name="description" content="简介Docker 是一个平台，任何一台装有 Docker 的机器上你都可以建立、发布、运行你的应用程序。 为什么要使用？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker基础教学">
+<meta property="og:title" content="Docker 基础教学">
 <meta property="og:url" content="https://damonkoy.github.io/2025/01/04/Docker%E5%9F%BA%E7%A1%80%E6%95%99%E5%AD%A6/index.html">
 <meta property="og:site_name" content="DamonKoy | 追赶着">
-<meta property="og:description" content="简介Docker是一个平台，任何一台装有Docker的机器上你都可以建立、发布、运行你的应用程序。 为什么要使用？">
+<meta property="og:description" content="简介Docker 是一个平台，任何一台装有 Docker 的机器上你都可以建立、发布、运行你的应用程序。 为什么要使用？">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://damonkoy.github.io/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/image-20200709140904550.png">
 <meta property="og:image" content="https://docs.docker.com/docker-for-mac/images/whale-x.png">
@@ -54,7 +54,7 @@
   };
 </script>
 
-  <title>Docker基础教学 | DamonKoy | 追赶着</title>
+  <title>Docker 基础教学 | DamonKoy | 追赶着</title>
   
 
 
@@ -212,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Docker基础教学
+          Docker 基础教学
         </h1>
 
         <div class="post-meta">
@@ -257,211 +257,211 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Docker是一个平台，任何一台装有Docker的机器上你都可以建立、发布、运行你的应用程序。</p>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Docker 是一个平台，任何一台装有 Docker 的机器上你都可以建立、发布、运行你的应用程序。</p>
 <h3 id="为什么要使用？"><a href="#为什么要使用？" class="headerlink" title="为什么要使用？"></a>为什么要使用？</h3><ul>
-<li>最关键的一句话：使用Docker可以省事、省时、省钱。</li>
+<li>最关键的一句话：使用 Docker 可以省事、省时、省钱。</li>
 <li>用来取代虚拟机；</li>
-<li>Docker可以在几毫秒内为您提供一个沙盒环境。</li>
-<li>Docker有助于将一个复杂系统分解为一系列可组合的部分，这使您能够以一种更加离散的方式对服务进行推理。</li>
-<li>Docker在一台机器上起成百上千个独立的容器，有助于模拟网络，使网络建模成为一件轻而易举的事情。</li>
-<li>由于你可以将所有系统打包进你的Docker容器，所以可以移动工作，甚至脱网离线工作。</li>
+<li>Docker 可以在几毫秒内为您提供一个沙盒环境。</li>
+<li>Docker 有助于将一个复杂系统分解为一系列可组合的部分，这使您能够以一种更加离散的方式对服务进行推理。</li>
+<li>Docker 在一台机器上起成百上千个独立的容器，有助于模拟网络，使网络建模成为一件轻而易举的事情。</li>
+<li>由于你可以将所有系统打包进你的 Docker 容器，所以可以移动工作，甚至脱网离线工作。</li>
 <li>减少调试开销</li>
-<li>Docker强迫你记录软件依赖，方便你其他地方布局或者安装软件。</li>
+<li> Docker 强迫你记录软件依赖，方便你其他地方布局或者安装软件。</li>
 <li>实现持续交付</li>
 </ul>
-<h3 id="Docker的核心概念"><a href="#Docker的核心概念" class="headerlink" title="Docker的核心概念"></a>Docker的核心概念</h3><p>容器：一个镜像的运行实例就是一个容器。</p>
-<h3 id="Docker的架构"><a href="#Docker的架构" class="headerlink" title="Docker的架构"></a>Docker的架构</h3><p>熟悉Docker的结构是理解并使用好它的关键。Docker 使用客户端-服务器 (C&#x2F;S) 架构模式，使用远程API来管理和创建Docker容器。Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。</p>
+<h3 id="Docker的核心概念"><a href="#Docker的核心概念" class="headerlink" title="Docker的核心概念"></a>Docker 的核心概念</h3><p>容器：一个镜像的运行实例就是一个容器。</p>
+<h3 id="Docker的架构"><a href="#Docker的架构" class="headerlink" title="Docker的架构"></a>Docker 的架构</h3><p>熟悉 Docker 的结构是理解并使用好它的关键。Docker 使用客户端 - 服务器 (C/S) 架构模式，使用远程 API 来管理和创建 Docker 容器。Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。</p>
 <h3 id="试行"><a href="#试行" class="headerlink" title="试行"></a>试行</h3><ul>
-<li>打开命令行终端，通过运行简单的Docker映像<a target="_blank" rel="noopener" href="https://hub.docker.com/_/hello-world/">hello-world来</a>测试安装是否正常 ：</li>
+<li>打开命令行终端，通过运行简单的 Docker 映像 <a target="_blank" rel="noopener" href="https://hub.docker.com/_/hello-world/">hello-world 来</a>测试安装是否正常 ：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run hello-world</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run hello-world</span></span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>启动Dockerized Web服务器。像<code>hello-world</code>上面的图像一样，如果在本地找不到该图像，Docker将其从Docker Hub中拉出。</li>
+<li>启动 Dockerized Web 服务器。像 <code>hello-world</code> 上面的图像一样，如果在本地找不到该图像，Docker 将其从 Docker Hub 中拉出。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --detach --publish=80:80 --name=webserver nginx</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --detach --publish=80:80 --name=webserver nginx</span></span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>在Web浏览器中，转到<code>http://localhost/</code>以查看nginx主页。由于我们指定了默认的HTTP端口，因此无需<code>:80</code>在URL末尾附加 。</li>
+<li>在 Web 浏览器中，转到 <code>http://localhost/</code> 以查看 nginx 主页。由于我们指定了默认的 HTTP 端口，因此无需<code>:80</code> 在 URL 末尾附加 。</li>
 </ul>
 <p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/image-20200709140904550.png" alt="image-20200709140904550"></p>
 <ul>
-<li>在Web服务器运行时（使用<code>docker container ls</code>或<code>docker ps</code>）查看容器上的详细信息 ：</li>
+<li>在 Web 服务器运行时（使用 <code>docker container ls</code> 或 <code>docker ps</code>）查看容器上的详细信息 ：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line">CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                NAMES</span><br><span class="line">c88fe43672b0        docker/getting-started   &quot;/docker-entrypoint.…&quot;   11 minutes ago      Up 10 minutes       0.0.0.0:80-&gt;80/tcp   interesting_cohen</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line">CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                NAMES</span><br><span class="line">c88fe43672b0        docker/getting-started   "/docker-entrypoint.…"   11 minutes ago      Up 10 minutes       0.0.0.0:80-&gt;80/tcp   interesting_cohen</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
-<li>使用以下命令停止并删除容器和图像。使用“全部”标志（<code>--all</code>或<code>-a</code>）查看停止的容器。</li>
+<li>使用以下命令停止并删除容器和图像。使用 “全部” 标志（<code>--all</code> 或 <code>-a</code>）查看停止的容器。</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container stop webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span> -a</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">rm</span> webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">rm</span> nginx</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container stop webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span> -a</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">rm</span> webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">rm</span> nginx</span></span><br></pre></td></tr></tbody></table></figure>
 
 
 
-<h3 id="首选项"><a href="#首选项" class="headerlink" title="首选项"></a>首选项</h3><p>从菜单栏中选择Docker菜单<img src="https://docs.docker.com/docker-for-mac/images/whale-x.png" alt="鲸鱼菜单">&gt; <strong>Preferences</strong>，然后配置下面描述的运行时选项。</p>
+<h3 id="首选项"><a href="#首选项" class="headerlink" title="首选项"></a>首选项</h3><p>从菜单栏中选择 Docker 菜单<img src="https://docs.docker.com/docker-for-mac/images/whale-x.png" alt="鲸鱼菜单">&gt; <strong>Preferences</strong>，然后配置下面描述的运行时选项。</p>
 <p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs.png" alt="Docker上下文菜单"></p>
 <p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs-general.png" alt="优先"></p>
-<p>在<strong>常规</strong>选项卡上，您可以配置何时启动和更新Docker：</p>
+<p>在<strong>常规</strong>选项卡上，您可以配置何时启动和更新 Docker：</p>
 <ul>
-<li><p><strong>登录时启动Docker Desktop</strong>：打开会话时自动启动Docker Desktop。</p>
+<li><p><strong>登录时启动 Docker Desktop</strong>：打开会话时自动启动 Docker Desktop。</p>
 </li>
-<li><p><strong>自动检查更新</strong>：默认情况下，Docker Desktop自动检查更新并在更新可用时通知您。您可以随时通过从Docker主菜单中选择<strong>检查更新</strong>来手动检查更新。</p>
+<li><p><strong>自动检查更新</strong>：默认情况下，Docker Desktop 自动检查更新并在更新可用时通知您。您可以随时通过从 Docker 主菜单中选择<strong>检查更新</strong>来手动检查更新。</p>
 </li>
-<li><p><strong>在Time Machine备份中包括VM</strong>：选择此选项以备份Docker Desktop虚拟机。默认情况下禁用此选项。</p>
+<li><p><strong>在 Time Machine 备份中包括 VM</strong>：选择此选项以备份 Docker Desktop 虚拟机。默认情况下禁用此选项。</p>
 </li>
-<li><p><strong>将Docker登录名安全地存储在macOS钥匙串中</strong>：默认情况下，Docker Desktop将您的Docker登录凭据存储在macOS钥匙串中。</p>
+<li><p><strong>将 Docker 登录名安全地存储在 macOS 钥匙串中</strong>：默认情况下，Docker Desktop 将您的 Docker 登录凭据存储在 macOS 钥匙串中。</p>
 </li>
-<li><p><strong>发送使用情况统计信息</strong>：Docker Desktop发送诊断，崩溃报告和使用情况数据。此信息可帮助Docker改善应用程序并进行故障排除。清除复选框以选择退出。</p>
-<p>单击“ <strong>切换到Edge版本”</strong>以了解有关Docker Desktop Edge版本的更多信息。</p>
+<li><p><strong>发送使用情况统计信息</strong>：Docker Desktop 发送诊断，崩溃报告和使用情况数据。此信息可帮助 Docker 改善应用程序并进行故障排除。清除复选框以选择退出。</p>
+<p>单击 “ <strong>切换到 Edge 版本”</strong> 以了解有关 Docker Desktop Edge 版本的更多信息。</p>
 </li>
 </ul>
-<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>在<strong>资源</strong>选项卡允许您配置CPU，内存，磁盘，代理，网络和其他资源。</p>
-<p>在“高级”选项卡上，您可以限制可用于Docker的资源。</p>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>在<strong>资源</strong>选项卡允许您配置 CPU，内存，磁盘，代理，网络和其他资源。</p>
+<p>在 “高级” 选项卡上，您可以限制可用于 Docker 的资源。</p>
 <p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs-advanced.png" alt="高级首选项设置-高级"></p>
 <p>高级设置为：</p>
-<p><strong>CPU</strong>：默认情况下，Docker Desktop设置为使用主机上可用处理器数量的一半。要提高处理能力，请将其设置为更大的数字；减少，减少数字。</p>
-<p><strong>内存</strong>：默认情况下，Docker Desktop设置为使用<code>2</code>GB运行时内存，该内存是从Mac上的总可用内存分配的。要增加RAM，请将其设置为更大的数字。要减少它，请降低数字。</p>
-<p><strong>交换</strong>：根据需要配置交换文件的大小。默认值为1 GB。</p>
+<p><strong>CPU</strong>：默认情况下，Docker Desktop 设置为使用主机上可用处理器数量的一半。要提高处理能力，请将其设置为更大的数字；减少，减少数字。</p>
+<p><strong>内存</strong>：默认情况下，Docker Desktop 设置为使用 <code>2</code>GB 运行时内存，该内存是从 Mac 上的总可用内存分配的。要增加 RAM，请将其设置为更大的数字。要减少它，请降低数字。</p>
+<p><strong>交换</strong>：根据需要配置交换文件的大小。默认值为 1 GB。</p>
 <p><strong>磁盘映像大小</strong>：指定<strong>磁盘映像的大小</strong>。</p>
-<p><strong>磁盘映像位置</strong>：指定Linux卷的容器和映像的存储位置。</p>
+<p><strong>磁盘映像位置</strong>：指定 Linux 卷的容器和映像的存储位置。</p>
 <p>您也可以将磁盘映像移动到其他位置。如果尝试将磁盘映像移动到已有的映像，则会出现提示询问您是否要使用现有映像或替换现有映像。</p>
-<h4 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h4><p>使用文件共享可允许Mac上的本地目录与Linux容器共享。这对于在运行和测试容器中的代码时在主机上的IDE中编辑源代码特别有用。默认情况下<code>/Users</code>，<code>/Volume</code>，<code>/private</code>，<code>/tmp</code>和<code>/var/folders</code>目录共享。如果您的项目不在此目录中，则必须将其添加到列表中。否则，你可能会得到<code>Mounts denied</code>或<code>cannot start service</code>在运行时错误。</p>
+<h4 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h4><p>使用文件共享可允许 Mac 上的本地目录与 Linux 容器共享。这对于在运行和测试容器中的代码时在主机上的 IDE 中编辑源代码特别有用。默认情况下 <code>/Users</code>，<code>/Volume</code>，<code>/private</code>，<code>/tmp</code> 和 <code>/var/folders</code> 目录共享。如果您的项目不在此目录中，则必须将其添加到列表中。否则，你可能会得到 <code>Mounts denied</code> 或 <code>cannot start service</code> 在运行时错误。</p>
 <p>文件共享设置为：</p>
 <ul>
-<li><p><strong>添加目录</strong>：单击<code>+</code>并导航到要添加的目录。</p>
+<li><p><strong>添加目录</strong>：单击 <code>+</code> 并导航到要添加的目录。</p>
 </li>
-<li><p><strong>Apply＆Restart</strong>通过Docker的bind mount（<code>-v</code>）功能使目录可用于容器。</p>
+<li><p><strong>Apply＆Restart</strong> 通过 Docker 的 bind mount（<code>-v</code>）功能使目录可用于容器。</p>
 <p>可以共享的目录有一些限制：</p>
 <ul>
-<li>该目录不得在Docker内部存在。</li>
+<li>该目录不得在 Docker 内部存在。</li>
 </ul>
 </li>
 </ul>
 <p>有关更多信息，请参见：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/osxfs/">osxfs文件系统共享</a>主题中的 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/osxfs/#namespaces">命名空间</a>。</li>
-<li><a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">卷挂载要求共享文件<code>/Users</code></a>。）<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">以外的任何项目目录</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/osxfs/">osxfs 文件系统共享</a>主题中的 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/osxfs/#namespaces">命名空间</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">卷挂载要求共享文件 <code>/Users</code></a>。）<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">以外的任何项目目录</a></li>
 </ul>
-<h4 id="代理人"><a href="#代理人" class="headerlink" title="代理人"></a>代理人</h4><p>Docker Desktop从macOS中检测HTTP &#x2F; HTTPS代理设置，并将其自动传播到Docker。例如，如果将代理设置设置为<code>http://proxy.example.com</code>，则Docker在提取容器时会使用此代理。</p>
-<p>但是，您的代理设置不会传播到您启动的容器中。如果要为容器设置代理设置，则需要为其定义环境变量，就像在Linux上一样，例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env</span><br><span class="line"></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=b7edf988b2b5</span><br><span class="line">TERM=xterm</span><br><span class="line">HOME=/root</span><br><span class="line">HTTP_PROXY=http://proxy.example.com:3128</span><br></pre></td></tr></table></figure>
+<h4 id="代理人"><a href="#代理人" class="headerlink" title="代理人"></a>代理人</h4><p>Docker Desktop 从 macOS 中检测 HTTP / HTTPS 代理设置，并将其自动传播到 Docker。例如，如果将代理设置设置为 <code>http://proxy.example.com</code>，则 Docker 在提取容器时会使用此代理。</p>
+<p>但是，您的代理设置不会传播到您启动的容器中。如果要为容器设置代理设置，则需要为其定义环境变量，就像在 Linux 上一样，例如：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env</span><br><span class="line"></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=b7edf988b2b5</span><br><span class="line">TERM=xterm</span><br><span class="line">HOME=/root</span><br><span class="line">HTTP_PROXY=http://proxy.example.com:3128</span><br></pre></td></tr></tbody></table></figure>
 
 <p>有关设置用于运行容器的环境变量的更多信息，请参见<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file">设置环境变量</a>。</p>
-<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>您可以配置Docker桌面网络以在虚拟专用网络（VPN）上工作。指定网络地址转换（NAT）前缀和子网掩码以启用Internet连接。</p>
-<h3 id="Docker引擎"><a href="#Docker引擎" class="headerlink" title="Docker引擎"></a>Docker引擎</h3><p>Docker Engine页面允许您配置Docker守护程序以确定容器的运行方式。</p>
-<p>在框中输入JSON配置文件以配置守护程序设置。有关选项的完整列表，请参阅《 Docker Engine <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/dockerd/">dockerd命令行参考》</a>。</p>
-<p>单击“ <strong>应用并重新启动”</strong>以保存您的设置并重新启动Docker Desktop。</p>
-<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>在“命令行”页面上，您可以指定是否启用实验功能。</p>
-<p>实验功能提供了对未来产品功能的早期访问。这些功能仅用于测试和反馈，因为它们可能在版本之间更改而不会发出警告，或者可以从将来的版本中完全删除。实验功能不得在生产环境中使用。Docker不提供对实验功能的支持。</p>
+<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>您可以配置 Docker 桌面网络以在虚拟专用网络（VPN）上工作。指定网络地址转换（NAT）前缀和子网掩码以启用 Internet 连接。</p>
+<h3 id="Docker引擎"><a href="#Docker引擎" class="headerlink" title="Docker引擎"></a>Docker 引擎</h3><p>Docker Engine 页面允许您配置 Docker 守护程序以确定容器的运行方式。</p>
+<p>在框中输入 JSON 配置文件以配置守护程序设置。有关选项的完整列表，请参阅《 Docker Engine <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/dockerd/">dockerd 命令行参考》</a>。</p>
+<p>单击 “ <strong>应用并重新启动”</strong> 以保存您的设置并重新启动 Docker Desktop。</p>
+<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>在 “命令行” 页面上，您可以指定是否启用实验功能。</p>
+<p>实验功能提供了对未来产品功能的早期访问。这些功能仅用于测试和反馈，因为它们可能在版本之间更改而不会发出警告，或者可以从将来的版本中完全删除。实验功能不得在生产环境中使用。Docker 不提供对实验功能的支持。</p>
 <blockquote>
-<p>要在Docker CLI中启用实验性功能，请编辑<code>config.json</code> 文件并将其设置<code>experimental</code>为enabled。</p>
-<p>要从Docker Desktop菜单启用实验功能，请单击 <strong>设置</strong>（在macOS上为<strong>Preferences</strong>）&gt; <strong>命令行</strong>，然后打开“ <strong>启用实验功能”</strong>开关。单击“ <strong>应用并重新启动”</strong>。</p>
+<p>要在 Docker CLI 中启用实验性功能，请编辑 <code>config.json</code> 文件并将其设置 <code>experimental</code> 为 enabled。</p>
+<p>要从 Docker Desktop 菜单启用实验功能，请单击 <strong>设置</strong>（在 macOS 上为 <strong>Preferences</strong>）&gt; <strong>命令行</strong>，然后打开 “ <strong>启用实验功能”</strong> 开关。单击 “ <strong>应用并重新启动”</strong>。</p>
 </blockquote>
-<p>有关Docker CLI中当前实验功能的列表，请参阅<a target="_blank" rel="noopener" href="https://github.com/docker/cli/blob/master/experimental/README.md">Docker CLI实验功能</a>。</p>
-<p>在Docker Desktop Edge和Stable版本上，您都可以打开和关闭实验功能。如果您关闭实验性功能，则Docker桌面将使用当前普遍可用的Docker Engine版本。</p>
-<p>您可以在命令行上查看是否正在运行实验模式。如果 <code>Experimental</code>为<code>true</code>，则Docker将以实验模式运行，如下所示。（如果<code>false</code>，则实验模式关闭。）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ docker version</span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Version:           19.03.8</span><br><span class="line"> API version:       1.40</span><br><span class="line"> Go version:        go1.12.17</span><br><span class="line"> Git commit:        afacb8b</span><br><span class="line"> Built:             Wed Mar 11 01:21:11 2020</span><br><span class="line"> OS/Arch:           darwin/amd64</span><br><span class="line"> Experimental:      false</span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          19.03.8</span><br><span class="line">  API version:      1.40 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.12.17</span><br><span class="line">  Git commit:       afacb8b</span><br><span class="line">  Built:            Wed Mar 11 01:29:16 2020</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> containerd:</span><br><span class="line">  Version:          v1.2.13</span><br><span class="line">  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.0.0-rc10</span><br><span class="line">  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.18.0</span><br><span class="line">  GitCommit:        fec3683</span><br></pre></td></tr></table></figure>
+<p>有关 Docker CLI 中当前实验功能的列表，请参阅 <a target="_blank" rel="noopener" href="https://github.com/docker/cli/blob/master/experimental/README.md">Docker CLI 实验功能</a>。</p>
+<p>在 Docker Desktop Edge 和 Stable 版本上，您都可以打开和关闭实验功能。如果您关闭实验性功能，则 Docker 桌面将使用当前普遍可用的 Docker Engine 版本。</p>
+<p>您可以在命令行上查看是否正在运行实验模式。如果 <code>Experimental</code> 为 <code>true</code>，则 Docker 将以实验模式运行，如下所示。（如果 <code>false</code>，则实验模式关闭。）</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ docker version</span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Version:           19.03.8</span><br><span class="line"> API version:       1.40</span><br><span class="line"> Go version:        go1.12.17</span><br><span class="line"> Git commit:        afacb8b</span><br><span class="line"> Built:             Wed Mar 11 01:21:11 2020</span><br><span class="line"> OS/Arch:           darwin/amd64</span><br><span class="line"> Experimental:      false</span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          19.03.8</span><br><span class="line">  API version:      1.40 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.12.17</span><br><span class="line">  Git commit:       afacb8b</span><br><span class="line">  Built:            Wed Mar 11 01:29:16 2020</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> containerd:</span><br><span class="line">  Version:          v1.2.13</span><br><span class="line">  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.0.0-rc10</span><br><span class="line">  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.18.0</span><br><span class="line">  GitCommit:        fec3683</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3><p>Docker Desktop包含一个可在Mac上运行的独立Kubernetes服务器，因此您可以测试在Kubernetes上部署Docker工作负载。</p>
-<p>Kubernetes客户端命令<code>kubectl</code>包括在内，并配置为连接到本地Kubernetes服务器。如果您<code>kubectl</code>已经安装并指向其他环境，例如<code>minikube</code>或GKE集群，请确保更改上下文，以便<code>kubectl</code>指向<code>docker-desktop</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl config get-contexts</span><br><span class="line">$ kubectl config use-context docker-desktop</span><br></pre></td></tr></table></figure>
+<h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3><p>Docker Desktop 包含一个可在 Mac 上运行的独立 Kubernetes 服务器，因此您可以测试在 Kubernetes 上部署 Docker 工作负载。</p>
+<p>Kubernetes 客户端命令 <code>kubectl</code> 包括在内，并配置为连接到本地 Kubernetes 服务器。如果您 <code>kubectl</code> 已经安装并指向其他环境，例如 <code>minikube</code> 或 GKE 集群，请确保更改上下文，以便 <code>kubectl</code> 指向 <code>docker-desktop</code>：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl config get-contexts</span><br><span class="line">$ kubectl config use-context docker-desktop</span><br></pre></td></tr></tbody></table></figure>
 
-<p>如果您是<code>kubectl</code>用Homebrew或通过其他方法安装的，并且遇到冲突，请删除<code>/usr/local/bin/kubectl</code>。</p>
+<p>如果您是 <code>kubectl</code> 用 Homebrew 或通过其他方法安装的，并且遇到冲突，请删除 <code>/usr/local/bin/kubectl</code>。</p>
 <ul>
-<li><p>要启用Kubernetes支持并安装作为Docker容器运行的Kubernetes独立实例，请选择<strong>Enable Kubernetes</strong>。要将Kubernetes设置为 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认协调器</a>，请<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认</a>选择将<strong>Docker堆栈部署到Kubernetes</strong>。</p>
-<p>单击“ <strong>应用并重新启动”</strong>以保存设置。这将实例化将Kubernetes服务器作为容器运行所需的映像，并将<code>/usr/local/bin/kubectl</code>命令安装在 Mac上。</p>
+<li><p>要启用 Kubernetes 支持并安装作为 Docker 容器运行的 Kubernetes 独立实例，请选择 <strong>Enable Kubernetes</strong>。要将 Kubernetes 设置为 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认协调器</a>，请<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认</a>选择将 <strong>Docker 堆栈部署到 Kubernetes</strong>。</p>
+<p>单击 “ <strong>应用并重新启动”</strong> 以保存设置。这将实例化将 Kubernetes 服务器作为容器运行所需的映像，并将 <code>/usr/local/bin/kubectl</code> 命令安装在 Mac 上。</p>
 <p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/kube.png" alt="启用Kubernetes"></p>
-<p>启用并运行Kubernetes后，&#96;&#96;Docker桌面设置’’对话框的右下角将显示一个附加状态栏项目。</p>
-<p>Kubernetes的状态显示在Docker菜单中，上下文指向 <code>docker-desktop</code>。</p>
+<p>启用并运行 Kubernetes 后，``Docker 桌面设置’’对话框的右下角将显示一个附加状态栏项目。</p>
+<p>Kubernetes 的状态显示在 Docker 菜单中，上下文指向 <code>docker-desktop</code>。</p>
 <p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/kube-context.png" alt="带有Kubernetes的Docker菜单"></p>
 </li>
-<li><p>默认情况下，Kubernetes容器对诸如之类的命令是隐藏的<code>docker service ls</code>，因为不支持手动管理它们。要使其可见，请选择<strong>显示系统容器（高级）</strong>，然后单击<strong>应用并重新启动</strong>。大多数用户不需要此选项。</p>
+<li><p>默认情况下，Kubernetes 容器对诸如之类的命令是隐藏的 <code>docker service ls</code>，因为不支持手动管理它们。要使其可见，请选择<strong>显示系统容器（高级）</strong>，然后单击<strong>应用并重新启动</strong>。大多数用户不需要此选项。</p>
 </li>
-<li><p>要随时禁用Kubernetes支持，请清除“ <strong>启用Kubernetes”</strong>复选框。Kubernetes容器将停止并删除，并且该 <code>/usr/local/bin/kubectl</code>命令也将删除。</p>
-<p>有关将Kubernetes集成与Docker Desktop结合使用的更多信息，请 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/kubernetes/">参阅在Kubernetes上部署</a>。</p>
+<li><p>要随时禁用 Kubernetes 支持，请清除 “ <strong>启用 Kubernetes”</strong> 复选框。Kubernetes 容器将停止并删除，并且该 <code>/usr/local/bin/kubectl</code> 命令也将删除。</p>
+<p>有关将 Kubernetes 集成与 Docker Desktop 结合使用的更多信息，请 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/kubernetes/">参阅在 Kubernetes 上部署</a>。</p>
 </li>
 </ul>
 <h3 id="重设"><a href="#重设" class="headerlink" title="重设"></a>重设</h3><blockquote>
 <p>重置和重启选项</p>
-<p>在Docker Desktop Mac上，**<code>** **疑难解答&#39;&#39;**菜单中提供了**</code>重启Docker桌面’’<strong>，</strong>&#96;&#96;** **重置为出厂默认值’’**以及其他重置选项。</p>
+<p>在 Docker Desktop Mac 上，**<code>** **疑难解答''**菜单中提供了**</code> 重启 Docker 桌面’’<strong>，</strong>``** ** 重置为出厂默认值’’** 以及其他重置选项。</p>
 </blockquote>
 <p>有关重置选项的信息，请参阅<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/troubleshoot/">日志和故障排除</a>。</p>
-<h2 id="仪表板"><a href="#仪表板" class="headerlink" title="仪表板"></a>仪表板</h2><p>Docker Desktop Dashboard使您可以与容器和应用程序进行交互，并直接从计算机管理应用程序的生命周期。仪表板UI会显示所有正在运行，已停止和已启动的容器及其状态。它提供了一个直观的界面来执行常见的操作，以检查和管理容器以及现有的Docker Compose应用程序。有关更多信息，请参阅<a target="_blank" rel="noopener" href="https://docs.docker.com/desktop/dashboard/">Docker Desktop Dashboard</a>。</p>
-<h2 id="添加TLS证书"><a href="#添加TLS证书" class="headerlink" title="添加TLS证书"></a>添加TLS证书</h2><p>您可以将可信证书颁发机构（CA）（用于验证注册表服务器证书）和客户端证书（用于对注册表进行身份验证）添加到Docker守护程序。</p>
-<h3 id="添加自定义CA证书（服务器端）"><a href="#添加自定义CA证书（服务器端）" class="headerlink" title="添加自定义CA证书（服务器端）"></a>添加自定义CA证书（服务器端）</h3><p>支持所有受信任的CA（根或中间CA）。Docker Desktop根据Mac密钥链创建所有用户信任的CA的证书捆绑包，并将其附加到Moby信任的证书。因此，如果主机上的用户信任企业SSL证书，则Docker Desktop会信任它。</p>
-<p>要手动添加自定义的自签名证书，请先将证书添加到macOS钥匙串中，然后由Docker Desktop获取。这是一个例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt</span><br></pre></td></tr></table></figure>
+<h2 id="仪表板"><a href="#仪表板" class="headerlink" title="仪表板"></a>仪表板</h2><p>Docker Desktop Dashboard 使您可以与容器和应用程序进行交互，并直接从计算机管理应用程序的生命周期。仪表板 UI 会显示所有正在运行，已停止和已启动的容器及其状态。它提供了一个直观的界面来执行常见的操作，以检查和管理容器以及现有的 Docker Compose 应用程序。有关更多信息，请参阅 <a target="_blank" rel="noopener" href="https://docs.docker.com/desktop/dashboard/">Docker Desktop Dashboard</a>。</p>
+<h2 id="添加TLS证书"><a href="#添加TLS证书" class="headerlink" title="添加TLS证书"></a>添加 TLS 证书</h2><p>您可以将可信证书颁发机构（CA）（用于验证注册表服务器证书）和客户端证书（用于对注册表进行身份验证）添加到 Docker 守护程序。</p>
+<h3 id="添加自定义CA证书（服务器端）"><a href="#添加自定义CA证书（服务器端）" class="headerlink" title="添加自定义CA证书（服务器端）"></a>添加自定义 CA 证书（服务器端）</h3><p>支持所有受信任的 CA（根或中间 CA）。Docker Desktop 根据 Mac 密钥链创建所有用户信任的 CA 的证书捆绑包，并将其附加到 Moby 信任的证书。因此，如果主机上的用户信任企业 SSL 证书，则 Docker Desktop 会信任它。</p>
+<p>要手动添加自定义的自签名证书，请先将证书添加到 macOS 钥匙串中，然后由 Docker Desktop 获取。这是一个例子：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt</span><br></pre></td></tr></tbody></table></figure>
 
 <p>或者，如果您只想将证书添加到自己的本地钥匙串中（而不是对所有用户），请运行以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt</span><br></pre></td></tr></tbody></table></figure>
 
 <p>另请参阅<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/#directory-structures-for-certificates">证书的目录结构</a>。</p>
 <blockquote>
-<p><strong>注意</strong>：您需要在对钥匙串或<code>~/.docker/certs.d</code>目录进行任何更改后重新启动Docker Desktop ，以使更改生效。</p>
+<p><strong>注意</strong>：您需要在对钥匙串或 <code>~/.docker/certs.d</code> 目录进行任何更改后重新启动 Docker Desktop ，以使更改生效。</p>
 </blockquote>
-<p>有关如何执行此操作的完整说明，请参阅博客文章“ <a target="_blank" rel="noopener" href="http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/">将自签名注册表证书添加到Docker和Mac的Docker桌面”</a>。</p>
-<h3 id="添加客户端证书"><a href="#添加客户端证书" class="headerlink" title="添加客户端证书"></a>添加客户端证书</h3><p>您可以将客户证书放在 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.cert</code>和中 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.key</code>。</p>
-<p>Docker Desktop应用程序启动时，它将<code>~/.docker/certs.d</code> Mac上的文件夹复制到<code>/etc/docker/certs.d</code>Moby（Docker Desktop <code>xhyve</code>虚拟机）上的目录。</p>
+<p>有关如何执行此操作的完整说明，请参阅博客文章 “ <a target="_blank" rel="noopener" href="http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/">将自签名注册表证书添加到 Docker 和 Mac 的 Docker 桌面”</a>。</p>
+<h3 id="添加客户端证书"><a href="#添加客户端证书" class="headerlink" title="添加客户端证书"></a>添加客户端证书</h3><p>您可以将客户证书放在 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.cert</code> 和中 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.key</code>。</p>
+<p>Docker Desktop 应用程序启动时，它将 <code>~/.docker/certs.d</code> Mac 上的文件夹复制到 <code>/etc/docker/certs.d</code>Moby（Docker Desktop <code>xhyve</code> 虚拟机）上的目录。</p>
 <blockquote>
 <ul>
-<li>您需要在对钥匙串或<code>~/.docker/certs.d</code>目录进行任何更改后重新启动Docker Desktop ，以使更改生效。</li>
-<li>该注册表不能被列为<em>不安全的注册表</em>（请参阅<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/#docker-engine">Docker</a> Engine。Docker Desktop会忽略<em>不安全的注册表</em>下列出的证书，并且不发送客户端证书。<code>docker run</code>此类尝试从注册表中提取的命令会在命令行上生成错误消息，以及在注册表上。</li>
+<li>您需要在对钥匙串或 <code>~/.docker/certs.d</code> 目录进行任何更改后重新启动 Docker Desktop ，以使更改生效。</li>
+<li>该注册表不能被列为<em>不安全的注册表</em>（请参阅 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/#docker-engine">Docker</a> Engine。Docker Desktop 会忽略<em>不安全的注册表</em>下列出的证书，并且不发送客户端证书。<code>docker run</code> 此类尝试从注册表中提取的命令会在命令行上生成错误消息，以及在注册表上。</li>
 </ul>
 </blockquote>
-<h3 id="证书的目录结构"><a href="#证书的目录结构" class="headerlink" title="证书的目录结构"></a>证书的目录结构</h3><p>如果具有此目录结构，则无需手动将CA证书添加到Mac OS系统登录名：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">   ├── ca.crt</span><br><span class="line">   ├── client.cert</span><br><span class="line">   └── client.key</span><br></pre></td></tr></table></figure>
+<h3 id="证书的目录结构"><a href="#证书的目录结构" class="headerlink" title="证书的目录结构"></a>证书的目录结构</h3><p>如果具有此目录结构，则无需手动将 CA 证书添加到 Mac OS 系统登录名：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">   ├── ca.crt</span><br><span class="line">   ├── client.cert</span><br><span class="line">   └── client.key</span><br></pre></td></tr></tbody></table></figure>
 
 <p>以下内容进一步说明和解释了使用自定义证书的配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/etc/docker/certs.d/        &lt;-- Certificate directory</span><br><span class="line">└── localhost:5000          &lt;-- Hostname:port</span><br><span class="line">   ├── client.cert          &lt;-- Client certificate</span><br><span class="line">   ├── client.key           &lt;-- Client key</span><br><span class="line">   └── ca.crt               &lt;-- Certificate authority that signed</span><br><span class="line">                                the registry certificate</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/etc/docker/certs.d/        &lt;-- Certificate directory</span><br><span class="line">└── localhost:5000          &lt;-- Hostname:port</span><br><span class="line">   ├── client.cert          &lt;-- Client certificate</span><br><span class="line">   ├── client.key           &lt;-- Client key</span><br><span class="line">   └── ca.crt               &lt;-- Certificate authority that signed</span><br><span class="line">                                the registry certificate</span><br></pre></td></tr></tbody></table></figure>
 
-<p>只要CA证书也在钥匙串中，您也可以具有此目录结构。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">    ├── client.cert</span><br><span class="line">    └── client.key</span><br></pre></td></tr></table></figure>
+<p>只要 CA 证书也在钥匙串中，您也可以具有此目录结构。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">    ├── client.cert</span><br><span class="line">    └── client.key</span><br></pre></td></tr></tbody></table></figure>
 
-<p>要了解有关如何为注册表安装CA根证书以及如何设置客户端TLS证书进行验证的更多信息，请参阅 Docker Engine主题中的<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/security/certificates/">使用证书验证存储库客户端</a>。</p>
-<h2 id="安装外壳完成"><a href="#安装外壳完成" class="headerlink" title="安装外壳完成"></a>安装外壳完成</h2><p>Docker Desktop随附脚本，用于启用<code>docker</code>和<code>docker-compose</code>命令的完成。补全脚本可以<code>Docker.app</code>在<code>Contents/Resources/etc/</code>目录中的内找到，并且可以安装在Bash和Zsh中。</p>
-<h3 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h3><p>Bash <a target="_blank" rel="noopener" href="https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1">内置了对完成的支持</a>要激活Docker命令的完成，需要将这些文件复制或符号链接到您的<code>bash_completion.d/</code>目录。例如，如果您通过<a target="_blank" rel="noopener" href="http://brew.sh/">Homebrew</a>安装了bash ：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker</span><br><span class="line">ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose</span><br></pre></td></tr></table></figure>
+<p>要了解有关如何为注册表安装 CA 根证书以及如何设置客户端 TLS 证书进行验证的更多信息，请参阅 Docker Engine 主题中的<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/security/certificates/">使用证书验证存储库客户端</a>。</p>
+<h2 id="安装外壳完成"><a href="#安装外壳完成" class="headerlink" title="安装外壳完成"></a>安装外壳完成</h2><p>Docker Desktop 随附脚本，用于启用 <code>docker</code> 和 <code>docker-compose</code> 命令的完成。补全脚本可以 <code>Docker.app</code> 在 <code>Contents/Resources/etc/</code> 目录中的内找到，并且可以安装在 Bash 和 Zsh 中。</p>
+<h3 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h3><p>Bash <a target="_blank" rel="noopener" href="https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1">内置了对完成的支持</a>要激活 Docker 命令的完成，需要将这些文件复制或符号链接到您的 <code>bash_completion.d/</code> 目录。例如，如果您通过 <a target="_blank" rel="noopener" href="http://brew.sh/">Homebrew</a> 安装了 bash ：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker</span><br><span class="line">ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose</span><br></pre></td></tr></tbody></table></figure>
 
-<p>将以下内容添加到您的<code>~/.bash_profile</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ -f /usr/local/etc/bash_completion ] &amp;&amp; . /usr/local/etc/bash_completion</span><br></pre></td></tr></table></figure>
+<p>将以下内容添加到您的 <code>~/.bash_profile</code>：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ -f /usr/local/etc/bash_completion ] &amp;&amp; . /usr/local/etc/bash_completion</span><br></pre></td></tr></tbody></table></figure>
 
 <p>要么</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [ -f $(brew --prefix)/etc/bash_completion ]; then</span><br><span class="line">. $(brew --prefix)/etc/bash_completion</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [ -f $(brew --prefix)/etc/bash_completion ]; then</span><br><span class="line">. $(brew --prefix)/etc/bash_completion</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h3><p>在Zsh中，<a target="_blank" rel="noopener" href="http://zsh.sourceforge.net/Doc/Release/Completion-System.html">完成系统</a>负责处理事务。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到您的Zsh <code>site-functions/</code> 目录。例如，如果您通过<a target="_blank" rel="noopener" href="http://brew.sh/">Homebrew</a>安装了Zsh ：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker</span><br><span class="line">ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose</span><br></pre></td></tr></table></figure>
+<h3 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h3><p>在 Zsh 中，<a target="_blank" rel="noopener" href="http://zsh.sourceforge.net/Doc/Release/Completion-System.html">完成系统</a>负责处理事务。要激活 Docker 命令的完成功能，需要将这些文件复制或符号链接到您的 Zsh <code>site-functions/</code> 目录。例如，如果您通过 <a target="_blank" rel="noopener" href="http://brew.sh/">Homebrew</a> 安装了 Zsh ：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker</span><br><span class="line">ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="Fish-Shell"><a href="#Fish-Shell" class="headerlink" title="Fish-Shell"></a>Fish-Shell</h3><h3 id="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。"><a href="#Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。" class="headerlink" title="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell completions/ 目录。"></a>Fish-Shell还支持制表符<a target="_blank" rel="noopener" href="https://fishshell.com/docs/current/#tab-completion">完成系统</a>。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell <code>completions/</code> 目录。</h3><p>创建<code>completions</code>目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.config/fish/completions</span><br></pre></td></tr></table></figure>
+<h3 id="Fish-Shell"><a href="#Fish-Shell" class="headerlink" title="Fish-Shell"></a>Fish-Shell</h3><h3 id="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。"><a href="#Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。" class="headerlink" title="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell completions/ 目录。"></a>Fish-Shell 还支持制表符<a target="_blank" rel="noopener" href="https://fishshell.com/docs/current/#tab-completion">完成系统</a>。要激活 Docker 命令的完成功能，需要将这些文件复制或符号链接到 Fish-shell <code>completions/</code> 目录。</h3><p>创建 <code>completions</code> 目录：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.config/fish/completions</span><br></pre></td></tr></tbody></table></figure>
 
-<p>现在，从docker添加完成。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish</span><br><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish</span><br></pre></td></tr></table></figure>
+<p>现在，从 docker 添加完成。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish</span><br><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="提供反馈并获得帮助"><a href="#提供反馈并获得帮助" class="headerlink" title="提供反馈并获得帮助"></a>提供反馈并获得帮助</h2><p>要获得社区的帮助，请查看当前用户主题，加入或开始讨论，登录到我们的<a target="_blank" rel="noopener" href="https://forums.docker.com/c/docker-for-mac">Docker Desktop for Mac论坛</a>。</p>
-<p>要报告错误或问题，请<a target="_blank" rel="noopener" href="https://github.com/docker/for-mac/issues">在GitHub上</a>登录Docker Desktop <a target="_blank" rel="noopener" href="https://github.com/docker/for-mac/issues">for Mac问题</a>，您可以在其中查看社区报告的问题并提出新问题。有关更多详细信息，请参见 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/troubleshoot/">日志和故障排除</a>。</p>
-<p>有关提供有关文档反馈或自己进行更新的信息，请参阅“ <a target="_blank" rel="noopener" href="https://docs.docker.com/opensource/">贡献文档”</a>。</p>
-<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>从Docker桌面菜单中选择<strong>登录&#x2F;创建Docker ID</strong>以访问您的<a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker Hub</a>帐户。登录后，您可以直接从Docker Desktop菜单访问Docker Hub存储库和组织。</p>
-<p>有关更多信息，请参考以下<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-hub/">Docker Hub主题</a>：</p>
+<h2 id="提供反馈并获得帮助"><a href="#提供反馈并获得帮助" class="headerlink" title="提供反馈并获得帮助"></a>提供反馈并获得帮助</h2><p>要获得社区的帮助，请查看当前用户主题，加入或开始讨论，登录到我们的 <a target="_blank" rel="noopener" href="https://forums.docker.com/c/docker-for-mac">Docker Desktop for Mac 论坛</a>。</p>
+<p>要报告错误或问题，请<a target="_blank" rel="noopener" href="https://github.com/docker/for-mac/issues">在 GitHub 上</a>登录 Docker Desktop <a target="_blank" rel="noopener" href="https://github.com/docker/for-mac/issues">for Mac 问题</a>，您可以在其中查看社区报告的问题并提出新问题。有关更多详细信息，请参见 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/troubleshoot/">日志和故障排除</a>。</p>
+<p>有关提供有关文档反馈或自己进行更新的信息，请参阅 “ <a target="_blank" rel="noopener" href="https://docs.docker.com/opensource/">贡献文档”</a>。</p>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>从 Docker 桌面菜单中选择<strong>登录 / 创建 Docker ID</strong> 以访问您的 <a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker Hub</a> 帐户。登录后，您可以直接从 Docker Desktop 菜单访问 Docker Hub 存储库和组织。</p>
+<p>有关更多信息，请参考以下 <a target="_blank" rel="noopener" href="https://docs.docker.com/docker-hub/">Docker Hub 主题</a>：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.docker.com/docker-hub/orgs/">Docker Hub中的组织和团队</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.docker.com/docker-hub/orgs/">Docker Hub 中的组织和团队</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.docker.com/docker-hub/builds/">建物</a></li>
 </ul>
-<h3 id="两因素认证"><a href="#两因素认证" class="headerlink" title="两因素认证"></a>两因素认证</h3><p>Docker Desktop使您可以使用两因素身份验证登录Docker Hub。当访问您的Docker Hub帐户时，两要素身份验证提供了额外的安全层。</p>
-<p>您必须先在Docker Hub中启用双重身份验证，然后才能通过Docker Desktop登录到Docker Hub帐户。有关说明，请参阅<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-hub/2fa/">为Docker Hub启用两因素身份验证</a>。</p>
+<h3 id="两因素认证"><a href="#两因素认证" class="headerlink" title="两因素认证"></a>两因素认证</h3><p>Docker Desktop 使您可以使用两因素身份验证登录 Docker Hub。当访问您的 Docker Hub 帐户时，两要素身份验证提供了额外的安全层。</p>
+<p>您必须先在 Docker Hub 中启用双重身份验证，然后才能通过 Docker Desktop 登录到 Docker Hub 帐户。有关说明，请参阅<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-hub/2fa/">为 Docker Hub 启用两因素身份验证</a>。</p>
 <p>启用两因素身份验证后：</p>
 <ol>
-<li>转到Docker Desktop菜单，然后选择<strong>登录&#x2F;创建Docker ID</strong>。</li>
-<li>输入您的Docker ID和密码，然后单击<strong>登录</strong>。</li>
-<li>成功登录后，Docker Desktop会提示您输入身份验证代码。输入手机的六位数代码，然后点击<strong>验证</strong>。</li>
+<li>转到 Docker Desktop 菜单，然后选择<strong>登录 / 创建 Docker ID</strong>。</li>
+<li>输入您的 Docker ID 和密码，然后单击<strong>登录</strong>。</li>
+<li>成功登录后，Docker Desktop 会提示您输入身份验证代码。输入手机的六位数代码，然后点击<strong>验证</strong>。</li>
 </ol>
 <p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/desktop-mac-2fa.png" alt="Docker桌面2FA"></p>
-<p>成功通过身份验证后，您可以直接从Docker Desktop菜单访问您的组织和存储库。</p>
-<h3 id="将docker修改镜像源"><a href="#将docker修改镜像源" class="headerlink" title="将docker修改镜像源"></a>将docker修改镜像源</h3><blockquote>
-<p>在<code>/etc/docker/daemon.json</code>文件中添加下面参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;registry-mirrors&quot; : [&quot;https://almtd3fa.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>成功通过身份验证后，您可以直接从 Docker Desktop 菜单访问您的组织和存储库。</p>
+<h3 id="将docker修改镜像源"><a href="#将docker修改镜像源" class="headerlink" title="将docker修改镜像源"></a>将 docker 修改镜像源</h3><blockquote>
+<p>在 <code>/etc/docker/daemon.json</code> 文件中添加下面参数</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">   "registry-mirrors" : ["https://almtd3fa.mirror.aliyuncs.com"]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>没有该文件则自行创建</p>
 </blockquote>
-<h3 id="最后重启docker服务"><a href="#最后重启docker服务" class="headerlink" title="最后重启docker服务"></a>最后重启docker服务</h3>
+<h3 id="最后重启docker服务"><a href="#最后重启docker服务" class="headerlink" title="最后重启docker服务"></a>最后重启 docker 服务</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     
@@ -480,8 +480,8 @@
       <i class="fa fa-chevron-left"></i> 【高效防控】从零构建高效稳定的监控体系
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/" rel="next" title="服务器安装docker">
-      服务器安装docker <i class="fa fa-chevron-right"></i>
+    <a href="/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/" rel="next" title="服务器安装 docker">
+      服务器安装 docker <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -541,7 +541,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">为什么要使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">Docker的核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">Docker的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E8%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">试行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E9%80%89%E9%A1%B9"><span class="nav-number">6.</span> <span class="nav-text">首选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB"><span class="nav-number">7.1.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E4%BA%BA"><span class="nav-number">7.2.</span> <span class="nav-text">代理人</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">7.3.</span> <span class="nav-text">网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E5%BC%95%E6%93%8E"><span class="nav-number">8.</span> <span class="nav-text">Docker引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">9.</span> <span class="nav-text">命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kubernetes"><span class="nav-number">10.</span> <span class="nav-text">Kubernetes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%AE%BE"><span class="nav-number">11.</span> <span class="nav-text">重设</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%AA%E8%A1%A8%E6%9D%BF"><span class="nav-number"></span> <span class="nav-text">仪表板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0TLS%E8%AF%81%E4%B9%A6"><span class="nav-number"></span> <span class="nav-text">添加TLS证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89CA%E8%AF%81%E4%B9%A6%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">添加自定义CA证书（服务器端）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6"><span class="nav-number">2.</span> <span class="nav-text">添加客户端证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">证书的目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%A4%96%E5%A3%B3%E5%AE%8C%E6%88%90"><span class="nav-number"></span> <span class="nav-text">安装外壳完成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bash"><span class="nav-number">1.</span> <span class="nav-text">Bash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zsh"><span class="nav-number">2.</span> <span class="nav-text">Zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fish-Shell"><span class="nav-number">3.</span> <span class="nav-text">Fish-Shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fish-Shell%E8%BF%98%E6%94%AF%E6%8C%81%E5%88%B6%E8%A1%A8%E7%AC%A6%E5%AE%8C%E6%88%90%E7%B3%BB%E7%BB%9F%E3%80%82%E8%A6%81%E6%BF%80%E6%B4%BBDocker%E5%91%BD%E4%BB%A4%E7%9A%84%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD%EF%BC%8C%E9%9C%80%E8%A6%81%E5%B0%86%E8%BF%99%E4%BA%9B%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E6%88%96%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5%E5%88%B0Fish-shell-completions-%E7%9B%AE%E5%BD%95%E3%80%82"><span class="nav-number">4.</span> <span class="nav-text">Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell completions&#x2F; 目录。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E5%8F%8D%E9%A6%88%E5%B9%B6%E8%8E%B7%E5%BE%97%E5%B8%AE%E5%8A%A9"><span class="nav-number"></span> <span class="nav-text">提供反馈并获得帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker"><span class="nav-number"></span> <span class="nav-text">Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">两因素认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86docker%E4%BF%AE%E6%94%B9%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">2.</span> <span class="nav-text">将docker修改镜像源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E9%87%8D%E5%90%AFdocker%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">最后重启docker服务</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">为什么要使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">Docker 的核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">Docker 的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E8%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">试行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E9%80%89%E9%A1%B9"><span class="nav-number">6.</span> <span class="nav-text">首选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB"><span class="nav-number">7.1.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E4%BA%BA"><span class="nav-number">7.2.</span> <span class="nav-text">代理人</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">7.3.</span> <span class="nav-text">网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E5%BC%95%E6%93%8E"><span class="nav-number">8.</span> <span class="nav-text">Docker 引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">9.</span> <span class="nav-text">命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kubernetes"><span class="nav-number">10.</span> <span class="nav-text">Kubernetes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%AE%BE"><span class="nav-number">11.</span> <span class="nav-text">重设</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%AA%E8%A1%A8%E6%9D%BF"><span class="nav-number"></span> <span class="nav-text">仪表板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0TLS%E8%AF%81%E4%B9%A6"><span class="nav-number"></span> <span class="nav-text">添加 TLS 证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89CA%E8%AF%81%E4%B9%A6%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">添加自定义 CA 证书（服务器端）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6"><span class="nav-number">2.</span> <span class="nav-text">添加客户端证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">证书的目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%A4%96%E5%A3%B3%E5%AE%8C%E6%88%90"><span class="nav-number"></span> <span class="nav-text">安装外壳完成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bash"><span class="nav-number">1.</span> <span class="nav-text">Bash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zsh"><span class="nav-number">2.</span> <span class="nav-text">Zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fish-Shell"><span class="nav-number">3.</span> <span class="nav-text">Fish-Shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fish-Shell%E8%BF%98%E6%94%AF%E6%8C%81%E5%88%B6%E8%A1%A8%E7%AC%A6%E5%AE%8C%E6%88%90%E7%B3%BB%E7%BB%9F%E3%80%82%E8%A6%81%E6%BF%80%E6%B4%BBDocker%E5%91%BD%E4%BB%A4%E7%9A%84%E5%AE%8C%E6%88%90%E5%8A%9F%E8%83%BD%EF%BC%8C%E9%9C%80%E8%A6%81%E5%B0%86%E8%BF%99%E4%BA%9B%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E6%88%96%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5%E5%88%B0Fish-shell-completions-%E7%9B%AE%E5%BD%95%E3%80%82"><span class="nav-number">4.</span> <span class="nav-text">Fish-Shell 还支持制表符完成系统。要激活 Docker 命令的完成功能，需要将这些文件复制或符号链接到 Fish-shell completions&#x2F; 目录。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E5%8F%8D%E9%A6%88%E5%B9%B6%E8%8E%B7%E5%BE%97%E5%B8%AE%E5%8A%A9"><span class="nav-number"></span> <span class="nav-text">提供反馈并获得帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker"><span class="nav-number"></span> <span class="nav-text">Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E5%9B%A0%E7%B4%A0%E8%AE%A4%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">两因素认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86docker%E4%BF%AE%E6%94%B9%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">2.</span> <span class="nav-text">将 docker 修改镜像源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E9%87%8D%E5%90%AFdocker%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">最后重启 docker 服务</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
