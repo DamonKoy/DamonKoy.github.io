@@ -1,6 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【高效防控】从零构建高效稳定的监控体系</title>
+    <url>/2025/01/04/%E3%80%90%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7%E3%80%91%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB/</url>
+    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>    随着业务的不断拓展，开平对接的外部渠道越来越多，服务间的交互逻辑也变得更加复杂。但目前开平还没有一套有效的线上监控机制。为了确保业务能够顺利开展，我们需要构建一套监控体系，该体系能够快速定位问题根源，并在故障刚出现时就迅速做出响应，从而将线上问题的影响降至最低。</p>
+<h2 id="监控架构概述"><a href="#监控架构概述" class="headerlink" title="监控架构概述"></a>监控架构概述</h2><p>   为了满足从复杂业务环境中获取监控信息的有效性，我们采用了多维度监控矩阵全面覆盖，最终达成业务精准监控。这一设计矩阵是我们监控架构的核心，它确保了我们能够全面地处理和分析不同业务模块产生的大量监控数据。<br>监控架构如下图：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%9E%B6%E6%9E%84%E5%9B%BE.png"><br>本方案精心设计了多维度监控架构，旨在高效、全面地处理与分析监控数据。该监控框架主要由以下关键模块构成：监控指标、监控核心、监控目的、告警通知以及监控流程模块。<br><strong>监控指标模块</strong>：监控类型模块是整个架构的基础，负责列举和管理不同类型的监控内容，包括硬件、业务、接口等多方面的监控类型及其具体对象。<br><strong>监控核心与目标</strong>：监控核心模块的核心职责是通过监控目标、指标和核心要素的有机结合，形成监控的枢纽，确保对业务的全面感知。<br><strong>告警通知模块</strong>：告警通知模块对及时处理业务异常至关重要。以飞书和电话为载体，采用阶梯式处理与值班制度，可保障业务在异常时能迅速、准确且有序处理，确保业务稳定运行。<br><strong>监控流程模块</strong>：存储监控数据采集、存储、分析、展示、告警、跟进和治理等操作过程信息，确保整个监控流程的有序进行。</p>
+<h3 id="业务关键指标监控"><a href="#业务关键指标监控" class="headerlink" title="业务关键指标监控"></a>业务关键指标监控</h3><p>    主要涉及以下几个方面：渠道冒泡成功率、抢单成功率、成单量、成单率、GMV（商品交易总额）以及毛利等，这些指标对于评估业务运营状况具有重要意义。
+    </p>
+<h3 id="服务接口关键指标监控"><a href="#服务接口关键指标监控" class="headerlink" title="服务接口关键指标监控"></a>服务接口关键指标监控</h3><p>    针对开平主 询价 -&gt; 创单， 抢单 -&gt; 确认派单， 事件状态同步 -&gt; 支付状态同步 这三个场景进行重点关注，保障系统在各个业务环节的平稳运行，从而筑牢系统稳定的首道防线。</p>
+<h3 id="上下游服务一体化监控"><a href="#上下游服务一体化监控" class="headerlink" title="上下游服务一体化监控"></a>上下游服务一体化监控</h3><p>    开平的上下游涵盖计费、订单、派单和地图等关键业务环节，针对其间接口精细梳理，构建一体化监控体系。实时追踪接口响应时间、吞吐量、错误率等指标。一旦出现异常，能同时触发告警，快速定位问题根源，保障业务流程顺畅，提升系统稳定性，降低协同故障风险。</p>
+<h2 id="基于Prometheus的监控1-0建设"><a href="#基于Prometheus的监控1-0建设" class="headerlink" title="基于Prometheus的监控1.0建设"></a>基于Prometheus的监控1.0建设</h2><h3 id="监控面板配置"><a href="#监控面板配置" class="headerlink" title="监控面板配置"></a>监控面板配置</h3><p><strong>1.关键指标</strong><br>   锁定 “调用量”、“异常率”和“TP99” 三大关键指标。三者协同，精准判接口状态，筑牢系统平稳首道防线。PromQL 是 Prometheus 内置的数据查询语言，常用的语句如下：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E6%8C%87%E6%A0%87%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5.png"><br><strong>2.数据采集调试</strong><br>   对于监控指标，需要收集过去 30 天的数据，去除异常值和错误数据进行评估，根据个人经验进行评估锚定初定的告警阈值和持续时间，试运行期间观察系统的报警情况和实际状态。根据试运行的结果，对阈值进行调整和优化。如果发现报警过于频繁或存在漏报的情况，则需要重新分析数据，调整阈值的设定。<br>    <img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE.png"><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%85%8D%E7%BD%AE.png"><br><strong>3.告警通知</strong><br>     当 Prometheus Server 中的监控规则检测到告警情况时，会将告警信息（push alerts）推送至 AlertManager 中的 Receiver 模块。AlertManager 内部的 Router 模块负责对接收的告警进行处理和路由，随后通过 notify 操作将告警信息发送至飞书等外部通知渠道，实现告警的及时传达。<br>     <img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%80%9A%E7%9F%A5%E9%80%BB%E8%BE%91.png">以下展示了一个告警通知在飞书中呈现的样式：<br>     <img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%A3%9E%E4%B9%A6%E6%A0%B7%E5%BC%8F.png"></p>
+<h3 id="困境突围"><a href="#困境突围" class="headerlink" title="困境突围"></a>困境突围</h3><p>    在监控体系建设中会遇到诸多问题，在此，我将选取以下两个较为典型的案例进行剖析。</p>
+<h4 id="告警降噪"><a href="#告警降噪" class="headerlink" title="告警降噪"></a>告警降噪</h4><p>    监控发现，告警有效率低问题突出。因兼顾夜间低流量，阈值设得过低，正常时段难察异常。如某接口，为适配夜间，告警阈值设为 280 以下、持续 3 - 5 分钟。一旦高峰遇异常，调用量从 9000 + 骤降至 280 才告警，这极易引发 P0 事故。<br>随之而来的是重重隐患：</p>
+<ul>
+<li><strong>告警滞后</strong>：阈值低，告警延迟，错过处理良机，致问题恶化。</li>
+<li><strong>告警沉默</strong>：阈值钝化，告警不触发，隐患悄然滋生。</li>
+<li><strong>损失惨重</strong>：问题持续，客户体验受损、用户流失、经济受损。   </li>
+<li><strong>修复成本剧增</strong>：问题隐匿积累，察觉时修复难度极大。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E8%B0%83%E7%94%A8%E9%87%8F%E6%97%A5%E7%A8%8B%E5%B7%AE%E8%B7%9D.png"><br>  <strong>解决方案</strong>：经系列研究与试验，深入剖析 3 种方案后，发现【高峰期监控】方案最宜初期快速部署监控，收益最大（详见表格）。于是决定将监控策略重心转向关键时段。<img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94.png">PromQL 使用 and on() (hour(timestamp(time())) &gt;&#x3D; 8 and hour(timestamp(time())) &lt; 23) offset -8h  语句进行采集特定时段数据，可根据实际接口需要进行调整。<img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%AB%98%E5%B3%B0%E6%9C%9F%E9%85%8D%E7%BD%AE%E9%9D%A2%E6%9D%BF.png"><br>  <strong>落地成效显著</strong>：误报率大幅下降，从原先的 78.5% 锐减至 12.5%；与此同时，发现问题的能力显著提升，平均每月检出问题数量由 3 个跃升至 11 个以上。</li>
+</ul>
+<h4 id="精配统一告警"><a href="#精配统一告警" class="headerlink" title="精配统一告警"></a>精配统一告警</h4><p>    由于对接渠道较多，同一功能的接口路径截然不同，对接情况也大有不同，进行配置监控面板的告警规则的耗时就因人而异，导致监控配置耗时长，告警规则不统一。<br><strong>1.解决方案</strong>：</p>
+<ul>
+<li><strong>公式化配置</strong>：运用公式统一告警规则，提升配置效率。设定持续时间 2 分钟，增强监控敏感度，遇异常能快速响应，防问题扩大。</li>
+<li><strong>应对不稳定</strong>：当 30 天内最小值处于 0 - 9 区间且常掉 0 时，靠调整 “观察持续时间” 稳定规则。</li>
+<li><strong>动态阈值</strong>：采用阶梯式动态系数设告警阈值，取值更精准。即阈值 &#x3D; 1 分钟调用量 30 天内最小值（剔异常）× 系数，小数点四舍五入，减少误判。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%98%88%E5%80%BC%E5%85%AC%E5%BC%8F%E5%8C%96.png"><br><strong>2. 公式化成效</strong>：配置效率飙升 73.3%，告警规则有效率高达 82%。</li>
+</ul>
+<h2 id="深化监控2-0建设"><a href="#深化监控2-0建设" class="headerlink" title="深化监控2.0建设"></a>深化监控2.0建设</h2><h3 id="阶梯式防控"><a href="#阶梯式防控" class="headerlink" title="阶梯式防控"></a>阶梯式防控</h3><p>    为了提高应急响应速度，缩短事故时间和合理地分配资源，采取阶梯式防控措施。通过划分 P0、P1、P2 阶段防控，能够对问题按照紧急程度和影响程度进行优先级排序。<br><strong>1. 策略方案</strong><br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%98%B6%E6%A2%AF%E5%BC%8F%E9%98%B2%E6%8E%A7%E6%96%B9%E6%A1%88.png"><br><strong>2. 案例成效剖析</strong><br>    有 P1 监控在故障发生时能在 9:38 迅速发现并通知研测介入处理，37 分钟仅损失 523 单；而无监控则会导致故障在 11:50 升级为 P1 故障，且估算 133 分钟后影响将超过 2000 单，可见 P1 监控能有效避免故障升级并减少损失。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%98%B6%E6%A2%AF%E5%BC%8F%E9%98%B2%E6%8E%A7%E6%A1%88%E4%BE%8B.png"></p>
+<h3 id="需求上新监控"><a href="#需求上新监控" class="headerlink" title="需求上新监控"></a>需求上新监控</h3><p>    随着业务需求的不断变化，监控系统也需要与时俱进。需求上新监控是指根据最新的业务需求，对监控系统进行升级和优化。通过这种方式，监控系统能够更好地适应业务发展，提供更加精准的监控数据。<br>需求上新监控的整体流程如下：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%9C%80%E6%B1%82%E4%B8%8A%E6%96%B0%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B.png"><br><strong>1. 事前准备</strong></p>
+<ul>
+<li><strong>需求分析</strong>：收集和分析业务需求，明确监控系统需要满足的具体目标和功能。</li>
+<li><strong>风险评估</strong>：识别可能的风险点，并制定相应的风险应对措施。</li>
+<li><strong>方案确认</strong>：根据识别的风险点制定监控方案。</li>
+<li><strong>监控配置</strong>：将需要监控的内容进行日志平台或Prometheus方式进行监控。<br><strong>2. 事中监控</strong></li>
+<li><strong>联动监控</strong>：通过综合考虑多个维度的因素，对发布内容进行全面且细致的监控。</li>
+<li><strong>问题响应</strong>：对于监控过程中发现的问题，快速响应并采取措施进行回滚、修复或优化。<br><strong>3. 事后复盘</strong></li>
+<li><strong>效果评估</strong>：评估监控系统升级和优化的效果，与预期目标进行对比。</li>
+<li><strong>问题总结</strong>：总结在事中监控阶段遇到的问题和解决方案，分析问题产生的原因。</li>
+<li><strong>经验分享</strong>：将成功经验和教训分享给团队成员，提高团队的整体能力。</li>
+<li><strong>持续改进</strong>：根据复盘的结果，制定持续改进计划，为下一次的监控系统升级和优化做准备。</li>
+</ul>
+<h3 id="错误码分析"><a href="#错误码分析" class="headerlink" title="错误码分析"></a>错误码分析</h3><p>    ​将错误码划分成 “通用错误码”、“已出现错误码” 和 “未知错误码” 三大类进行相关处理，然后进行分析治理，判断问题有效性，进而推动治理、记录观察。<br>错误码整体处理流程如下：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B.png"><br>本部分通过柱状图展示了不同渠道的错误码数据，具体包括以下错误类型及其占比：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%90%84%E6%B8%A0%E9%81%93%E9%94%99%E8%AF%AF%E7%A0%81%E6%95%B0%E6%8D%AE.png"><br>通过问题类型和根因进行归类，方便后续进行排期优化：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%A0%B9%E5%9B%A0%E5%BD%92%E7%B1%BB.png"></p>
+<h2 id="总结与规划"><a href="#总结与规划" class="headerlink" title="总结与规划"></a>总结与规划</h2><p>    目前，开平服务的监控系统已取得一定成果，有效告警 180 个，有效率达 80.36%，发现 71 个问题，保障了系统正常运行。然而，当前监控系统侧重于系统功能监测，在业务指标监控等方面存在不足。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%96%B0%E8%90%BD%E5%9C%B0%E6%88%90%E6%9E%9C.png"><br>我们正朝着更加完善的方向稳步迈进，其最终目标是打造一个全方位、高效且智能化的监控体系，保障业务能够稳定、持续地发展为业务的优化和拓展提供有力的数据支持和决策依据。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A7%84%E5%88%92.png"></p>
+]]></content>
+      <tags>
+        <tag>监控体系</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo插件汇集</title>
+    <url>/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>gitee与github仓库数据同步</title>
+    <url>/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</url>
+    <content><![CDATA[<p>发现是防盗链限制的问题，需要解决referrer</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;40310014&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;invalid Referer header&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用gitee迁移github的方法</p>
+<p>你可以通过以下方式申请 GitHub 私人令牌：</p>
+<ol>
+<li><p>登录与 Gitee 绑定的 GitHub 帐号；</p>
+</li>
+<li><p>通过路径「用户头像」→「Settings」进入「Developer setting」；</p>
+</li>
+<li><p>选择「Personal access tokens」选项后点击「Generate new token」；</p>
+</li>
+<li><p>「Note」字段可以随意填写；例如，Gitee_Mirror；</p>
+</li>
+<li><p>「Select scopes」字段请根据你的需求进行勾选；<br> repo 字段为必选字段，请您直接勾选；<br> admin:repo_hook 字段为可选字段，用于自动生成 webhook；<br> 当您需要 Gitee 自动从 GitHub 同步仓库时，建议您勾选。</p>
+</li>
+<li><p>点击「Generate token」生成私人令牌；</p>
+</li>
+</ol>
+<p>7.复制私人令牌并妥善保管。</p>
+<p>私人令牌</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
+    <content><![CDATA[<p>建页面 配置后页面点击分类后会显示 Can not get &#x2F;tags&#x2F; （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
+<p>此时根目录的 &#x2F;source 目录下会分别出现两个文件夹 categories 和 tags ，里面都有一个 index.md 文件，点击进入后为其添加 type ：<br>title: categories<br>date: 2023-08-11 16:22:41<br>type: categories # 填写对应的页面类型</p>
+<p>此时重新编译运行即可。</p>
+<p>七、添加搜索功能<br>1、安装 hexo-generator-searchdb 插件<br>css 代码解读复制代码$ npm install hexo-generator-searchdb –save</p>
+<p>2、打开 站点配置文件 找到Extensions在下面添加<br>yaml 代码解读复制代码# 搜索<br>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p>
+<p>3、打开 主题配置文件 找到Local search，将enable设置为true</p>
+<ol start="7">
+<li>图片点击放大预览</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml"><a href="#找到文件-themes-next-config-yml" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="修改以下代码"><a href="#修改以下代码" class="headerlink" title="修改以下代码"></a>修改以下代码</h1><p>fancybox: true</p>
+<ol start="8">
+<li>图片懒加载</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml-1"><a href="#找到文件-themes-next-config-yml-1" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码"><a href="#增加以下代码" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>lazyload: true</p>
+<ol start="11">
+<li>添加字数统计及阅读时长</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>
+<ol start="12">
+<li>置顶文章<br>使用文章的top属性</li>
+</ol>
+<p>使用插件<br>安装插件：在 Hexo 项目根目录下，通过命令行执行npm install hexo-generator-index-pin-top –save命令，安装hexo-generator-index-pin-top插件，该插件可以帮助实现文章置顶功能。<br>配置插件：安装完成后，在 Hexo 的站点配置文件_config.yml中添加插件的配置信息。例如：<br>yaml<br>index_generator:<br>  path: ‘’<br>  per_page: 10<br>  order_by: ‘-date’<br>pin_top:<br>  order_by: ‘top’<br>  layout: ‘post’<br>这里配置了pin_top相关的排序规则，按照文章的top属性进行排序。<br>3. 设置文章置顶：在需要置顶的文章的 Front Matter 中添加top属性，如top: 100。然后执行hexo clean &amp;&amp; hexo g命令，重新生成静态页面，插件会根据配置和文章的top属性将文章置顶显示。<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用—包裹的部分）中添加top属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</p>
+<p>title: 置顶文章标题<br>date: 2025-01-07 12:00:00<br>top: 100</p>
+<ol start="13">
+<li>统计文章字数与阅读时长</li>
+</ol>
+<p>安装插件<br>npm install hexo-symbols-count-time –save</p>
+<p>根目录的_config.yml</p>
+<h1 id="设置文章字数统计"><a href="#设置文章字数统计" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h1><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
+<p>主题下设置_config.yml</p>
+<h1 id="设置文章字数统计-1"><a href="#设置文章字数统计-1" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h1><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
+<p>主题下的layout文件夹的post.swig文件添加代码：</p>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>hexo框架搭建个人博客</title>
+    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/docs/">hexo食用指南</a></p>
+<p>轻量、便携、静态、一键部署</p>
+<p>安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo框架</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化博客</span></span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">npm依赖安装</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hexo</span></span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+
+
+<p>基本操作：</p>
+<p> _config.yml 文件下进行修改hexo基本配置</p>
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE" alt="image-20250109144054648"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建文章，运行后在 <span class="built_in">source</span>/_posts/ 下生成 &#123;文章标题&#125;.md 文档</span></span><br><span class="line">hexo new &#x27;文章标题&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E9%85%8D%E7%BD%AE%E6%96%B0%E5%A2%9E%E4%BF%A1%E6%81%AF" alt="image-20250109144418134"></p>
+<p>部署：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理缓存、生产静态页面、远程部署</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+  </entry>
+  <entry>
+    <title>服务器安装docker</title>
+    <url>/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/</url>
+    <content><![CDATA[<h2 id="服务器安装docker"><a href="#服务器安装docker" class="headerlink" title="服务器安装docker"></a>服务器安装docker</h2><h4 id="连接服务器："><a href="#连接服务器：" class="headerlink" title="连接服务器："></a>连接服务器：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh test@192.168.216.210</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装docker："><a href="#安装docker：" class="headerlink" title="安装docker："></a>安装docker：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装后设置开机启动："><a href="#安装后设置开机启动：" class="headerlink" title="安装后设置开机启动："></a>安装后设置开机启动：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service docker start</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改docker镜像源："><a href="#修改docker镜像源：" class="headerlink" title="修改docker镜像源："></a>修改docker镜像源：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<p>内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;registry-mirrors&quot; : [&quot;https://almtd3fa.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启docker："><a href="#重启docker：" class="headerlink" title="重启docker："></a>重启docker：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如："><a href="#在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如：" class="headerlink" title="在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如："></a>在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /var/jenkins_node</span><br><span class="line">sudo chmod 777 /var/jenkins_node</span><br></pre></td></tr></table></figure>
+
+<h4 id="拉取jenkins镜像："><a href="#拉取jenkins镜像：" class="headerlink" title="拉取jenkins镜像："></a>拉取jenkins镜像：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建数据卷，用于持久化Jenkins容器的数据到宿主机"><a href="#创建数据卷，用于持久化Jenkins容器的数据到宿主机" class="headerlink" title="创建数据卷，用于持久化Jenkins容器的数据到宿主机"></a>创建数据卷，用于持久化Jenkins容器的数据到宿主机</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker volume create jenkins_data</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行jenkins-d为后台进行-–name为设置名称"><a href="#运行jenkins-d为后台进行-–name为设置名称" class="headerlink" title="运行jenkins -d为后台进行  –name为设置名称"></a>运行jenkins -d为后台进行  –name为设置名称</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run -d --name jenkins --restart always -p 5000:5000  -p 8080:8080 -p 50000:50000 -v /home/test/jenkins:/home/test/var/jenkins_home jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4.png" alt="image-20200709190541585"></p>
+<h4 id="查看容器进程："><a href="#查看容器进程：" class="headerlink" title="查看容器进程："></a>查看容器进程：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker ps -a</span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E8%BF%9B%E7%A8%8B.png" alt="image-20200709190638633"  />
+
+<h4 id="通过查看容器log进行查找jenkins初始密码：（xxxx-容器-为ID）"><a href="#通过查看容器log进行查找jenkins初始密码：（xxxx-容器-为ID）" class="headerlink" title="通过查看容器log进行查找jenkins初始密码：（xxxx 容器 为ID）"></a>通过查看容器log进行查找jenkins初始密码：（xxxx 容器 为ID）</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker logs XXXX</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8Blog.png" alt="image-20200709190807940"></p>
+<h4 id="通过内网访问服务器jenkins"><a href="#通过内网访问服务器jenkins" class="headerlink" title="通过内网访问服务器jenkins"></a>通过内网访问服务器jenkins</h4><p><a href="http://192.168.216.210:8080/">http://192.168.216.210:8080/</a></p>
+<h4 id="删除对应绑定网桥"><a href="#删除对应绑定网桥" class="headerlink" title="删除对应绑定网桥"></a>删除对应绑定网桥</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker network disconnect --force bridge jenkins</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除-jenkins容器，xxxx-容器-为ID"><a href="#删除-jenkins容器，xxxx-容器-为ID" class="headerlink" title="删除 jenkins容器，xxxx 容器 为ID"></a>删除 jenkins容器，xxxx 容器 为ID</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker rm -f XXXX</span><br></pre></td></tr></table></figure>
+
+<h4 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器:"></a>停止容器:</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker stop jenkins</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启容器："><a href="#重启容器：" class="headerlink" title="重启容器："></a>重启容器：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker restart &lt;container_id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="从宿主机客户进入容器"><a href="#从宿主机客户进入容器" class="headerlink" title="从宿主机客户进入容器"></a>从宿主机客户进入容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker exec -it -u root jenkins /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h4 id="进入容器后建立-ssh目录，创建密钥文件私钥id-rsa，公钥id-rsa-pub"><a href="#进入容器后建立-ssh目录，创建密钥文件私钥id-rsa，公钥id-rsa-pub" class="headerlink" title="进入容器后建立.ssh目录，创建密钥文件私钥id_rsa，公钥id_rsa.pub"></a>进入容器后建立.ssh目录，创建密钥文件私钥id_rsa，公钥id_rsa.pub</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir ~/.ssh &amp;&amp; cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa		# 一直回车即可</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新容器配置-修改为自动运行或停止自动运行"><a href="#更新容器配置-修改为自动运行或停止自动运行" class="headerlink" title="更新容器配置(修改为自动运行或停止自动运行)"></a>更新容器配置(修改为自动运行或停止自动运行)</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker update --restart always &lt;容器ID号或者容器别名&gt;</span><br><span class="line">docker update --restart no &lt;容器ID号或者容器别名&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改容器别名"><a href="#修改容器别名" class="headerlink" title="修改容器别名"></a>修改容器别名</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rename &lt;容器原来名&gt; &lt;要改为的名字&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取容器元挂载"><a href="#获取容器元挂载" class="headerlink" title="获取容器元挂载"></a>获取容器元挂载</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker inspect &lt;容器名&gt; | grep Mounts -A 20</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改已存在容器映射"><a href="#修改已存在容器映射" class="headerlink" title="修改已存在容器映射"></a>修改已存在容器映射</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service docker stop</span><br><span class="line">sudo docker inspect &lt;容器名&gt;</span><br><span class="line"># 查看id的hash值</span><br><span class="line">sudo vi /var/lib/docker/containers/&lt;hash_of_the_container&gt;/hostconfig.json</span><br><span class="line">sudo vi /var/lib/docker/containers/&lt;hash_of_the_container&gt;/config.v2.json</span><br><span class="line"># 在 hostconfig.json 里有 &quot;PortBindings&quot;:&#123;&#125; 这个配置项，可以改成 &quot;PortBindings&quot;:&#123;&quot;80/tcp&quot;:[&#123;&quot;HostIp&quot;:&quot;&quot;,&quot;HostPort&quot;:&quot;8080&quot;&#125;]&#125; 这里 80 是容器端口， 8080 是本地端口， 然后在 config.v2.json 里面添加一个配置项 &quot;ExposedPorts&quot;:&#123;&quot;80/tcp&quot;:&#123;&#125;&#125; , 将这个配置项添加到 &quot;Tty&quot;: true, 前面，我不知道添加到别的地方会不会有影响，因为经过对比正常的端口映射配置项是在这个位置，这个就是将容器内部端口暴露出来，如果不加这一句端口映射不会成功的，最后重启 docker的守护进程 service docker restart</span><br><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看映射端口"><a href="#查看映射端口" class="headerlink" title="查看映射端口"></a>查看映射端口</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker port CONTAINER_ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看容器的IP地址"><a href="#查看容器的IP地址" class="headerlink" title="查看容器的IP地址"></a>查看容器的IP地址</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker inspect --format=&#x27;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&#x27; ID/NAMES</span><br></pre></td></tr></table></figure>
+
+<h4 id="提交镜像（提交时会导致docker进程阻塞）"><a href="#提交镜像（提交时会导致docker进程阻塞）" class="headerlink" title="提交镜像（提交时会导致docker进程阻塞）"></a>提交镜像（提交时会导致docker进程阻塞）</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker commit -a &#x27;zhiquan.feng&#x27; -m &#x27;提交融合QA平台和接口自动化的jenkins项目&#x27; 87e71042d3b8 chuman/jenkins:v1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="安装vim"><a href="#安装vim" class="headerlink" title="### 安装vim"></a>### 安装vim</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="安装pipenv，因为网络的问题，要使用国内的镜像源来加速-全局安装，要不pipenv"><a href="#安装pipenv，因为网络的问题，要使用国内的镜像源来加速-全局安装，要不pipenv" class="headerlink" title="安装pipenv，因为网络的问题，要使用国内的镜像源来加速(全局安装，要不pipenv)"></a>安装pipenv，因为网络的问题，要使用国内的镜像源来加速(全局安装，要不pipenv)</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo -H pip3 install -U pipenv -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -name pipenv</span><br></pre></td></tr></table></figure>
+
+<p>创造软连接</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ln -s /var/jenkins_home/python3/bin/pipenv /usr/bin/pipenv</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解决pip加载慢"><a href="#解决pip加载慢" class="headerlink" title="解决pip加载慢"></a>解决pip加载慢</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解决allure安装问题"><a href="#解决allure安装问题" class="headerlink" title="解决allure安装问题"></a>解决allure安装问题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://nodejs.org/dist/v12.13.0/node-v12.13.0-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">export NODE_HOME=/&lt;nodejs路径&gt;</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$NODE_HOME/bin </span><br><span class="line"></span><br><span class="line">export NODE_PATH=$NODE_HOME/lib/node_modules</span><br><span class="line"></span><br><span class="line">npm install -g allure-commandline --save-dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="解决系统时间不同步的问题"><a href="#解决系统时间不同步的问题" class="headerlink" title="解决系统时间不同步的问题"></a>解决系统时间不同步的问题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 进入docker对应容器，删除/etc/localtime</span><br><span class="line">sudo docker exec -it -u root jenkins /bin/bash</span><br><span class="line">rm -rf /etc/localtime</span><br><span class="line">// 回到宿主机，复制本地系统时间文件夹到对应docker容器/etc/localtime中</span><br><span class="line">sudo docker cp /usr/share/zoneinfo/Asia/Shanghai &lt;CONTAINER_ID&gt;:/etc/localtime</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="同步docker两个容器的mysql数据"><a href="#同步docker两个容器的mysql数据" class="headerlink" title="同步docker两个容器的mysql数据"></a>同步docker两个容器的mysql数据</h3><h4 id="在宿主机安装crontab"><a href="#在宿主机安装crontab" class="headerlink" title="在宿主机安装crontab"></a>在宿主机安装crontab</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install vixie-cron crontabs</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看定时任务列表"><a href="#查看定时任务列表" class="headerlink" title="查看定时任务列表"></a>查看定时任务列表</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
+
+<h4 id="新建定时任务命令"><a href="#新建定时任务命令" class="headerlink" title="新建定时任务命令"></a>新建定时任务命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+
+<h4 id="宿主机执行定时任务"><a href="#宿主机执行定时任务" class="headerlink" title="宿主机执行定时任务"></a>宿主机执行定时任务</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">30 7 * * * bash /home/test/mysql-backup.sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="定时设置解释"><a href="#定时设置解释" class="headerlink" title="定时设置解释"></a>定时设置解释</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*    *    *    *    *</span><br><span class="line">-    -    -    -    -</span><br><span class="line">|    |    |    |    |</span><br><span class="line">|    |    |    |    +----- 星期中星期几 (0 - 7) (星期天 为0)</span><br><span class="line">|    |    |    +---------- 月份 (1 - 12) </span><br><span class="line">|    |    +--------------- 一个月中的第几天 (1 - 31)</span><br><span class="line">|    +-------------------- 小时 (0 - 23)</span><br><span class="line">+------------------------- 分钟 (0 - 59)</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动定时crond服务"><a href="#启动定时crond服务" class="headerlink" title="启动定时crond服务"></a>启动定时crond服务</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service crond start</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看crond服务状态"><a href="#查看crond服务状态" class="headerlink" title="查看crond服务状态"></a>查看crond服务状态</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service crond status</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除所有定时任务命令"><a href="#删除所有定时任务命令" class="headerlink" title="删除所有定时任务命令"></a>删除所有定时任务命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crontab -r</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据库备份与更新脚本-mysql-backup-sh"><a href="#数据库备份与更新脚本-mysql-backup-sh" class="headerlink" title="数据库备份与更新脚本 mysql-backup.sh"></a>数据库备份与更新脚本 mysql-backup.sh</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 设置mysql的登录用户名和密码(根据实际情况填写)</span><br><span class="line">mysql_user=&quot;root&quot;</span><br><span class="line">mysql_password=&quot;1z2x3c4v5b6n7m&quot;</span><br><span class="line">mysql_prod_id=&quot;51ea579affb7&quot;</span><br><span class="line">mysql_dev_id=&quot;34aa0aed191e&quot;</span><br><span class="line"></span><br><span class="line"># 设置需要备份的数据库</span><br><span class="line">db_chuman_qa_platform=&quot;chuman_qa_platform&quot;</span><br><span class="line">db_chuman523=&quot;chumanAndroid523&quot;</span><br><span class="line">db_chuman530=&quot;chumanAndroid530&quot;</span><br><span class="line">db_chuman542=&quot;chumanAndroid542&quot;</span><br><span class="line">db_chuman550=&quot;chumanAndroid550&quot;</span><br><span class="line"></span><br><span class="line"># 备份文件存放宿主机路径(根据实际情况填写)</span><br><span class="line">backup_location=/home/test/mysql-backup</span><br><span class="line"></span><br><span class="line">#如果文件夹不存在则创建</span><br><span class="line">if [ ! -d $backup_location ]; </span><br><span class="line">then </span><br><span class="line"> mkdir -p $backup_location; </span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 是否删除过期数据</span><br><span class="line">expire_backup_delete=&quot;ON&quot;</span><br><span class="line">expire_days=30</span><br><span class="line">backup_time=`date +%Y%m%d%H%M`</span><br><span class="line">backup_dir=$backup_location</span><br><span class="line">welcome_msg=&quot;Welcome to use MySQL backup tools!&quot;</span><br><span class="line"></span><br><span class="line"># 备份mysql-prod库中的chuman_qa_platform表数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_prod_id mysqldump -u$mysql_user -p$mysql_password $db_chuman_qa_platform device_transfer_record devices &gt; $backup_dir/$database-$backup_time.sql</span><br><span class="line"># 备份mysql-dev库中的chmanAndroid相关库数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman523 &gt; $backup_dir/$db_chuman523-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman530 &gt; $backup_dir/$db_chuman530-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman542 &gt; $backup_dir/$db_chuman542-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman550 &gt; $backup_dir/$db_chuman550-$backup_time.sql</span><br><span class="line">echo &quot;mysqldump success ok !&quot;</span><br><span class="line"></span><br><span class="line"># 更新导入数据到mysql-dev中</span><br><span class="line">sudo docker exec -i $mysql_dev_id mysql -u$mysql_user -p$mysql_password $db_chuman_qa_platform &lt; $backup_dir/$database-$backup_time.sql;</span><br><span class="line">echo &quot;update dev success ok !&quot;</span><br><span class="line"># 更新导入数据到mysql-prod中</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman523 &lt; $backup_dir/$db_chuman523-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman530 &lt; $backup_dir/$db_chuman530-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman542 &lt; $backup_dir/$db_chuman542-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman550 &lt; $backup_dir/$db_chuman550-$backup_time.sql;</span><br><span class="line">echo &quot;update prod success ok !&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
     <title>Docker基础教学</title>
     <url>/2025/01/04/Docker%E5%9F%BA%E7%A1%80%E6%95%99%E5%AD%A6/</url>
     <content><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Docker是一个平台，任何一台装有Docker的机器上你都可以建立、发布、运行你的应用程序。</p>
@@ -230,259 +483,6 @@
 
 <p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA1.png" alt="image-20201014154819459"></p>
 <p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA2.png" alt="image-20201014154846581"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>gitee与github仓库数据同步</title>
-    <url>/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</url>
-    <content><![CDATA[<p>发现是防盗链限制的问题，需要解决referrer</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;40310014&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;invalid Referer header&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>使用gitee迁移github的方法</p>
-<p>你可以通过以下方式申请 GitHub 私人令牌：</p>
-<ol>
-<li><p>登录与 Gitee 绑定的 GitHub 帐号；</p>
-</li>
-<li><p>通过路径「用户头像」→「Settings」进入「Developer setting」；</p>
-</li>
-<li><p>选择「Personal access tokens」选项后点击「Generate new token」；</p>
-</li>
-<li><p>「Note」字段可以随意填写；例如，Gitee_Mirror；</p>
-</li>
-<li><p>「Select scopes」字段请根据你的需求进行勾选；<br> repo 字段为必选字段，请您直接勾选；<br> admin:repo_hook 字段为可选字段，用于自动生成 webhook；<br> 当您需要 Gitee 自动从 GitHub 同步仓库时，建议您勾选。</p>
-</li>
-<li><p>点击「Generate token」生成私人令牌；</p>
-</li>
-</ol>
-<p>7.复制私人令牌并妥善保管。</p>
-<p>私人令牌</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2025/01/06/hexo%E4%B8%8Bnext%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
-    <content><![CDATA[<p>建页面 配置后页面点击分类后会显示 Can not get &#x2F;tags&#x2F; （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
-<p>此时根目录的 &#x2F;source 目录下会分别出现两个文件夹 categories 和 tags ，里面都有一个 index.md 文件，点击进入后为其添加 type ：<br>title: categories<br>date: 2023-08-11 16:22:41<br>type: categories # 填写对应的页面类型</p>
-<p>此时重新编译运行即可。</p>
-<p>七、添加搜索功能<br>1、安装 hexo-generator-searchdb 插件<br>css 代码解读复制代码$ npm install hexo-generator-searchdb –save</p>
-<p>2、打开 站点配置文件 找到Extensions在下面添加<br>yaml 代码解读复制代码# 搜索<br>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p>
-<p>3、打开 主题配置文件 找到Local search，将enable设置为true</p>
-<ol start="7">
-<li>图片点击放大预览</li>
-</ol>
-<h1 id="找到文件-themes-next-config-yml"><a href="#找到文件-themes-next-config-yml" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="修改以下代码"><a href="#修改以下代码" class="headerlink" title="修改以下代码"></a>修改以下代码</h1><p>fancybox: true</p>
-<ol start="8">
-<li>图片懒加载</li>
-</ol>
-<h1 id="找到文件-themes-next-config-yml-1"><a href="#找到文件-themes-next-config-yml-1" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码"><a href="#增加以下代码" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>lazyload: true</p>
-<ol start="11">
-<li>添加字数统计及阅读时长</li>
-</ol>
-<h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml"></a>找到文件 &#x2F;themes&#x2F;next&#x2F;_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>
-<ol start="12">
-<li>置顶文章<br>使用文章的top属性</li>
-</ol>
-<p>使用插件<br>安装插件：在 Hexo 项目根目录下，通过命令行执行npm install hexo-generator-index-pin-top –save命令，安装hexo-generator-index-pin-top插件，该插件可以帮助实现文章置顶功能。<br>配置插件：安装完成后，在 Hexo 的站点配置文件_config.yml中添加插件的配置信息。例如：<br>yaml<br>index_generator:<br>  path: ‘’<br>  per_page: 10<br>  order_by: ‘-date’<br>pin_top:<br>  order_by: ‘top’<br>  layout: ‘post’<br>这里配置了pin_top相关的排序规则，按照文章的top属性进行排序。<br>3. 设置文章置顶：在需要置顶的文章的 Front Matter 中添加top属性，如top: 100。然后执行hexo clean &amp;&amp; hexo g命令，重新生成静态页面，插件会根据配置和文章的top属性将文章置顶显示。<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用—包裹的部分）中添加top属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</p>
-<p>title: 置顶文章标题<br>date: 2025-01-07 12:00:00<br>top: 100</p>
-<ol start="13">
-<li>统计文章字数与阅读时长</li>
-</ol>
-<p>安装插件<br>npm install hexo-symbols-count-time –save</p>
-<p>根目录的_config.yml</p>
-<h1 id="设置文章字数统计"><a href="#设置文章字数统计" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h1><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
-<p>主题下设置_config.yml</p>
-<h1 id="设置文章字数统计-1"><a href="#设置文章字数统计-1" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h1><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
-<p>主题下的layout文件夹的post.swig文件添加代码：</p>
-
-]]></content>
-  </entry>
-  <entry>
-    <title>hexo插件汇集</title>
-    <url>/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>【高效防控】从零构建高效稳定的监控体系</title>
-    <url>/2025/01/04/%E3%80%90%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7%E3%80%91%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB/</url>
-    <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>    随着业务的不断拓展，开平对接的外部渠道越来越多，服务间的交互逻辑也变得更加复杂。但目前开平还没有一套有效的线上监控机制。为了确保业务能够顺利开展，我们需要构建一套监控体系，该体系能够快速定位问题根源，并在故障刚出现时就迅速做出响应，从而将线上问题的影响降至最低。</p>
-<h2 id="监控架构概述"><a href="#监控架构概述" class="headerlink" title="监控架构概述"></a>监控架构概述</h2><p>   为了满足从复杂业务环境中获取监控信息的有效性，我们采用了多维度监控矩阵全面覆盖，最终达成业务精准监控。这一设计矩阵是我们监控架构的核心，它确保了我们能够全面地处理和分析不同业务模块产生的大量监控数据。<br>监控架构如下图：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%9E%B6%E6%9E%84%E5%9B%BE.png"><br>本方案精心设计了多维度监控架构，旨在高效、全面地处理与分析监控数据。该监控框架主要由以下关键模块构成：监控指标、监控核心、监控目的、告警通知以及监控流程模块。<br><strong>监控指标模块</strong>：监控类型模块是整个架构的基础，负责列举和管理不同类型的监控内容，包括硬件、业务、接口等多方面的监控类型及其具体对象。<br><strong>监控核心与目标</strong>：监控核心模块的核心职责是通过监控目标、指标和核心要素的有机结合，形成监控的枢纽，确保对业务的全面感知。<br><strong>告警通知模块</strong>：告警通知模块对及时处理业务异常至关重要。以飞书和电话为载体，采用阶梯式处理与值班制度，可保障业务在异常时能迅速、准确且有序处理，确保业务稳定运行。<br><strong>监控流程模块</strong>：存储监控数据采集、存储、分析、展示、告警、跟进和治理等操作过程信息，确保整个监控流程的有序进行。</p>
-<h3 id="业务关键指标监控"><a href="#业务关键指标监控" class="headerlink" title="业务关键指标监控"></a>业务关键指标监控</h3><p>    主要涉及以下几个方面：渠道冒泡成功率、抢单成功率、成单量、成单率、GMV（商品交易总额）以及毛利等，这些指标对于评估业务运营状况具有重要意义。
-    </p>
-<h3 id="服务接口关键指标监控"><a href="#服务接口关键指标监控" class="headerlink" title="服务接口关键指标监控"></a>服务接口关键指标监控</h3><p>    针对开平主 询价 -&gt; 创单， 抢单 -&gt; 确认派单， 事件状态同步 -&gt; 支付状态同步 这三个场景进行重点关注，保障系统在各个业务环节的平稳运行，从而筑牢系统稳定的首道防线。</p>
-<h3 id="上下游服务一体化监控"><a href="#上下游服务一体化监控" class="headerlink" title="上下游服务一体化监控"></a>上下游服务一体化监控</h3><p>    开平的上下游涵盖计费、订单、派单和地图等关键业务环节，针对其间接口精细梳理，构建一体化监控体系。实时追踪接口响应时间、吞吐量、错误率等指标。一旦出现异常，能同时触发告警，快速定位问题根源，保障业务流程顺畅，提升系统稳定性，降低协同故障风险。</p>
-<h2 id="基于Prometheus的监控1-0建设"><a href="#基于Prometheus的监控1-0建设" class="headerlink" title="基于Prometheus的监控1.0建设"></a>基于Prometheus的监控1.0建设</h2><h3 id="监控面板配置"><a href="#监控面板配置" class="headerlink" title="监控面板配置"></a>监控面板配置</h3><p><strong>1.关键指标</strong><br>   锁定 “调用量”、“异常率”和“TP99” 三大关键指标。三者协同，精准判接口状态，筑牢系统平稳首道防线。PromQL 是 Prometheus 内置的数据查询语言，常用的语句如下：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E6%8C%87%E6%A0%87%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5.png"><br><strong>2.数据采集调试</strong><br>   对于监控指标，需要收集过去 30 天的数据，去除异常值和错误数据进行评估，根据个人经验进行评估锚定初定的告警阈值和持续时间，试运行期间观察系统的报警情况和实际状态。根据试运行的结果，对阈值进行调整和优化。如果发现报警过于频繁或存在漏报的情况，则需要重新分析数据，调整阈值的设定。<br>    <img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE.png"><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%85%8D%E7%BD%AE.png"><br><strong>3.告警通知</strong><br>     当 Prometheus Server 中的监控规则检测到告警情况时，会将告警信息（push alerts）推送至 AlertManager 中的 Receiver 模块。AlertManager 内部的 Router 模块负责对接收的告警进行处理和路由，随后通过 notify 操作将告警信息发送至飞书等外部通知渠道，实现告警的及时传达。<br>     <img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%80%9A%E7%9F%A5%E9%80%BB%E8%BE%91.png">以下展示了一个告警通知在飞书中呈现的样式：<br>     <img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%A3%9E%E4%B9%A6%E6%A0%B7%E5%BC%8F.png"></p>
-<h3 id="困境突围"><a href="#困境突围" class="headerlink" title="困境突围"></a>困境突围</h3><p>    在监控体系建设中会遇到诸多问题，在此，我将选取以下两个较为典型的案例进行剖析。</p>
-<h4 id="告警降噪"><a href="#告警降噪" class="headerlink" title="告警降噪"></a>告警降噪</h4><p>    监控发现，告警有效率低问题突出。因兼顾夜间低流量，阈值设得过低，正常时段难察异常。如某接口，为适配夜间，告警阈值设为 280 以下、持续 3 - 5 分钟。一旦高峰遇异常，调用量从 9000 + 骤降至 280 才告警，这极易引发 P0 事故。<br>随之而来的是重重隐患：</p>
-<ul>
-<li><strong>告警滞后</strong>：阈值低，告警延迟，错过处理良机，致问题恶化。</li>
-<li><strong>告警沉默</strong>：阈值钝化，告警不触发，隐患悄然滋生。</li>
-<li><strong>损失惨重</strong>：问题持续，客户体验受损、用户流失、经济受损。   </li>
-<li><strong>修复成本剧增</strong>：问题隐匿积累，察觉时修复难度极大。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E8%B0%83%E7%94%A8%E9%87%8F%E6%97%A5%E7%A8%8B%E5%B7%AE%E8%B7%9D.png"><br>  <strong>解决方案</strong>：经系列研究与试验，深入剖析 3 种方案后，发现【高峰期监控】方案最宜初期快速部署监控，收益最大（详见表格）。于是决定将监控策略重心转向关键时段。<img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94.png">PromQL 使用 and on() (hour(timestamp(time())) &gt;&#x3D; 8 and hour(timestamp(time())) &lt; 23) offset -8h  语句进行采集特定时段数据，可根据实际接口需要进行调整。<img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%AB%98%E5%B3%B0%E6%9C%9F%E9%85%8D%E7%BD%AE%E9%9D%A2%E6%9D%BF.png"><br>  <strong>落地成效显著</strong>：误报率大幅下降，从原先的 78.5% 锐减至 12.5%；与此同时，发现问题的能力显著提升，平均每月检出问题数量由 3 个跃升至 11 个以上。</li>
-</ul>
-<h4 id="精配统一告警"><a href="#精配统一告警" class="headerlink" title="精配统一告警"></a>精配统一告警</h4><p>    由于对接渠道较多，同一功能的接口路径截然不同，对接情况也大有不同，进行配置监控面板的告警规则的耗时就因人而异，导致监控配置耗时长，告警规则不统一。<br><strong>1.解决方案</strong>：</p>
-<ul>
-<li><strong>公式化配置</strong>：运用公式统一告警规则，提升配置效率。设定持续时间 2 分钟，增强监控敏感度，遇异常能快速响应，防问题扩大。</li>
-<li><strong>应对不稳定</strong>：当 30 天内最小值处于 0 - 9 区间且常掉 0 时，靠调整 “观察持续时间” 稳定规则。</li>
-<li><strong>动态阈值</strong>：采用阶梯式动态系数设告警阈值，取值更精准。即阈值 &#x3D; 1 分钟调用量 30 天内最小值（剔异常）× 系数，小数点四舍五入，减少误判。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%91%8A%E8%AD%A6%E9%98%88%E5%80%BC%E5%85%AC%E5%BC%8F%E5%8C%96.png"><br><strong>2. 公式化成效</strong>：配置效率飙升 73.3%，告警规则有效率高达 82%。</li>
-</ul>
-<h2 id="深化监控2-0建设"><a href="#深化监控2-0建设" class="headerlink" title="深化监控2.0建设"></a>深化监控2.0建设</h2><h3 id="阶梯式防控"><a href="#阶梯式防控" class="headerlink" title="阶梯式防控"></a>阶梯式防控</h3><p>    为了提高应急响应速度，缩短事故时间和合理地分配资源，采取阶梯式防控措施。通过划分 P0、P1、P2 阶段防控，能够对问题按照紧急程度和影响程度进行优先级排序。<br><strong>1. 策略方案</strong><br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%98%B6%E6%A2%AF%E5%BC%8F%E9%98%B2%E6%8E%A7%E6%96%B9%E6%A1%88.png"><br><strong>2. 案例成效剖析</strong><br>    有 P1 监控在故障发生时能在 9:38 迅速发现并通知研测介入处理，37 分钟仅损失 523 单；而无监控则会导致故障在 11:50 升级为 P1 故障，且估算 133 分钟后影响将超过 2000 单，可见 P1 监控能有效避免故障升级并减少损失。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%98%B6%E6%A2%AF%E5%BC%8F%E9%98%B2%E6%8E%A7%E6%A1%88%E4%BE%8B.png"></p>
-<h3 id="需求上新监控"><a href="#需求上新监控" class="headerlink" title="需求上新监控"></a>需求上新监控</h3><p>    随着业务需求的不断变化，监控系统也需要与时俱进。需求上新监控是指根据最新的业务需求，对监控系统进行升级和优化。通过这种方式，监控系统能够更好地适应业务发展，提供更加精准的监控数据。<br>需求上新监控的整体流程如下：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%9C%80%E6%B1%82%E4%B8%8A%E6%96%B0%E7%9B%91%E6%8E%A7%E6%B5%81%E7%A8%8B.png"><br><strong>1. 事前准备</strong></p>
-<ul>
-<li><strong>需求分析</strong>：收集和分析业务需求，明确监控系统需要满足的具体目标和功能。</li>
-<li><strong>风险评估</strong>：识别可能的风险点，并制定相应的风险应对措施。</li>
-<li><strong>方案确认</strong>：根据识别的风险点制定监控方案。</li>
-<li><strong>监控配置</strong>：将需要监控的内容进行日志平台或Prometheus方式进行监控。<br><strong>2. 事中监控</strong></li>
-<li><strong>联动监控</strong>：通过综合考虑多个维度的因素，对发布内容进行全面且细致的监控。</li>
-<li><strong>问题响应</strong>：对于监控过程中发现的问题，快速响应并采取措施进行回滚、修复或优化。<br><strong>3. 事后复盘</strong></li>
-<li><strong>效果评估</strong>：评估监控系统升级和优化的效果，与预期目标进行对比。</li>
-<li><strong>问题总结</strong>：总结在事中监控阶段遇到的问题和解决方案，分析问题产生的原因。</li>
-<li><strong>经验分享</strong>：将成功经验和教训分享给团队成员，提高团队的整体能力。</li>
-<li><strong>持续改进</strong>：根据复盘的结果，制定持续改进计划，为下一次的监控系统升级和优化做准备。</li>
-</ul>
-<h3 id="错误码分析"><a href="#错误码分析" class="headerlink" title="错误码分析"></a>错误码分析</h3><p>    ​将错误码划分成 “通用错误码”、“已出现错误码” 和 “未知错误码” 三大类进行相关处理，然后进行分析治理，判断问题有效性，进而推动治理、记录观察。<br>错误码整体处理流程如下：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B.png"><br>本部分通过柱状图展示了不同渠道的错误码数据，具体包括以下错误类型及其占比：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E5%90%84%E6%B8%A0%E9%81%93%E9%94%99%E8%AF%AF%E7%A0%81%E6%95%B0%E6%8D%AE.png"><br>通过问题类型和根因进行归类，方便后续进行排期优化：<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%A0%B9%E5%9B%A0%E5%BD%92%E7%B1%BB.png"></p>
-<h2 id="总结与规划"><a href="#总结与规划" class="headerlink" title="总结与规划"></a>总结与规划</h2><p>    目前，开平服务的监控系统已取得一定成果，有效告警 180 个，有效率达 80.36%，发现 71 个问题，保障了系统正常运行。然而，当前监控系统侧重于系统功能监测，在业务指标监控等方面存在不足。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E7%9B%91%E6%8E%A7%E6%96%B0%E8%90%BD%E5%9C%B0%E6%88%90%E6%9E%9C.png"><br>我们正朝着更加完善的方向稳步迈进，其最终目标是打造一个全方位、高效且智能化的监控体系，保障业务能够稳定、持续地发展为业务的优化和拓展提供有力的数据支持和决策依据。<br><img src="https://github.com/DamonKoy/images/raw/master/md/%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7/%E5%BC%80%E5%B9%B3%E6%9C%8D%E5%8A%A1-%E6%80%BB%E7%BB%93%E4%B8%8E%E8%A7%84%E5%88%92.png"></p>
-]]></content>
-      <tags>
-        <tag>监控体系</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo框架搭建个人博客</title>
-    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/docs/">hexo食用指南</a></p>
-<p>轻量、便携、静态、一键部署</p>
-<p>安装：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo框架</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化博客</span></span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">npm依赖安装</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hexo</span></span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-
-
-<p>基本操作：</p>
-<p> _config.yml 文件下进行修改hexo基本配置</p>
-<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE" alt="image-20250109144054648"></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建文章，运行后在 <span class="built_in">source</span>/_posts/ 下生成 &#123;文章标题&#125;.md 文档</span></span><br><span class="line">hexo new &#x27;文章标题&#x27;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E9%85%8D%E7%BD%AE%E6%96%B0%E5%A2%9E%E4%BF%A1%E6%81%AF" alt="image-20250109144418134"></p>
-<p>部署：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理缓存、生产静态页面、远程部署</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-  </entry>
-  <entry>
-    <title>服务器安装docker</title>
-    <url>/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/</url>
-    <content><![CDATA[<h2 id="服务器安装docker"><a href="#服务器安装docker" class="headerlink" title="服务器安装docker"></a>服务器安装docker</h2><h4 id="连接服务器："><a href="#连接服务器：" class="headerlink" title="连接服务器："></a>连接服务器：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh test@192.168.216.210</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装docker："><a href="#安装docker：" class="headerlink" title="安装docker："></a>安装docker：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install docker</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装后设置开机启动："><a href="#安装后设置开机启动：" class="headerlink" title="安装后设置开机启动："></a>安装后设置开机启动：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service docker start</span><br></pre></td></tr></table></figure>
-
-<h4 id="修改docker镜像源："><a href="#修改docker镜像源：" class="headerlink" title="修改docker镜像源："></a>修改docker镜像源：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
-
-<p>内容为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot;registry-mirrors&quot; : [&quot;https://almtd3fa.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="重启docker："><a href="#重启docker：" class="headerlink" title="重启docker："></a>重启docker：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
-
-<h4 id="在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如："><a href="#在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如：" class="headerlink" title="在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如："></a>在主机上创建目录，并添加读写权限以便jenkins应用运行时读写文件，如：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /var/jenkins_node</span><br><span class="line">sudo chmod 777 /var/jenkins_node</span><br></pre></td></tr></table></figure>
-
-<h4 id="拉取jenkins镜像："><a href="#拉取jenkins镜像：" class="headerlink" title="拉取jenkins镜像："></a>拉取jenkins镜像：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker pull jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
-
-<h4 id="创建数据卷，用于持久化Jenkins容器的数据到宿主机"><a href="#创建数据卷，用于持久化Jenkins容器的数据到宿主机" class="headerlink" title="创建数据卷，用于持久化Jenkins容器的数据到宿主机"></a>创建数据卷，用于持久化Jenkins容器的数据到宿主机</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker volume create jenkins_data</span><br></pre></td></tr></table></figure>
-
-<h4 id="运行jenkins-d为后台进行-–name为设置名称"><a href="#运行jenkins-d为后台进行-–name为设置名称" class="headerlink" title="运行jenkins -d为后台进行  –name为设置名称"></a>运行jenkins -d为后台进行  –name为设置名称</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run -d --name jenkins --restart always -p 5000:5000  -p 8080:8080 -p 50000:50000 -v /home/test/jenkins:/home/test/var/jenkins_home jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4.png" alt="image-20200709190541585"></p>
-<h4 id="查看容器进程："><a href="#查看容器进程：" class="headerlink" title="查看容器进程："></a>查看容器进程：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker ps -a</span><br></pre></td></tr></table></figure>
-
-<img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E8%BF%9B%E7%A8%8B.png" alt="image-20200709190638633"  />
-
-<h4 id="通过查看容器log进行查找jenkins初始密码：（xxxx-容器-为ID）"><a href="#通过查看容器log进行查找jenkins初始密码：（xxxx-容器-为ID）" class="headerlink" title="通过查看容器log进行查找jenkins初始密码：（xxxx 容器 为ID）"></a>通过查看容器log进行查找jenkins初始密码：（xxxx 容器 为ID）</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker logs XXXX</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/docker%E6%9F%A5%E7%9C%8Blog.png" alt="image-20200709190807940"></p>
-<h4 id="通过内网访问服务器jenkins"><a href="#通过内网访问服务器jenkins" class="headerlink" title="通过内网访问服务器jenkins"></a>通过内网访问服务器jenkins</h4><p><a href="http://192.168.216.210:8080/">http://192.168.216.210:8080/</a></p>
-<h4 id="删除对应绑定网桥"><a href="#删除对应绑定网桥" class="headerlink" title="删除对应绑定网桥"></a>删除对应绑定网桥</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker network disconnect --force bridge jenkins</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除-jenkins容器，xxxx-容器-为ID"><a href="#删除-jenkins容器，xxxx-容器-为ID" class="headerlink" title="删除 jenkins容器，xxxx 容器 为ID"></a>删除 jenkins容器，xxxx 容器 为ID</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker rm -f XXXX</span><br></pre></td></tr></table></figure>
-
-<h4 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器:"></a>停止容器:</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker stop jenkins</span><br></pre></td></tr></table></figure>
-
-<h4 id="重启容器："><a href="#重启容器：" class="headerlink" title="重启容器："></a>重启容器：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker restart &lt;container_id&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="从宿主机客户进入容器"><a href="#从宿主机客户进入容器" class="headerlink" title="从宿主机客户进入容器"></a>从宿主机客户进入容器</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker exec -it -u root jenkins /bin/bash</span><br></pre></td></tr></table></figure>
-
-<h4 id="进入容器后建立-ssh目录，创建密钥文件私钥id-rsa，公钥id-rsa-pub"><a href="#进入容器后建立-ssh目录，创建密钥文件私钥id-rsa，公钥id-rsa-pub" class="headerlink" title="进入容器后建立.ssh目录，创建密钥文件私钥id_rsa，公钥id_rsa.pub"></a>进入容器后建立.ssh目录，创建密钥文件私钥id_rsa，公钥id_rsa.pub</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir ~/.ssh &amp;&amp; cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa		# 一直回车即可</span><br></pre></td></tr></table></figure>
-
-<h4 id="更新容器配置-修改为自动运行或停止自动运行"><a href="#更新容器配置-修改为自动运行或停止自动运行" class="headerlink" title="更新容器配置(修改为自动运行或停止自动运行)"></a>更新容器配置(修改为自动运行或停止自动运行)</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker update --restart always &lt;容器ID号或者容器别名&gt;</span><br><span class="line">docker update --restart no &lt;容器ID号或者容器别名&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="修改容器别名"><a href="#修改容器别名" class="headerlink" title="修改容器别名"></a>修改容器别名</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rename &lt;容器原来名&gt; &lt;要改为的名字&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="获取容器元挂载"><a href="#获取容器元挂载" class="headerlink" title="获取容器元挂载"></a>获取容器元挂载</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker inspect &lt;容器名&gt; | grep Mounts -A 20</span><br></pre></td></tr></table></figure>
-
-<h4 id="修改已存在容器映射"><a href="#修改已存在容器映射" class="headerlink" title="修改已存在容器映射"></a>修改已存在容器映射</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo service docker stop</span><br><span class="line">sudo docker inspect &lt;容器名&gt;</span><br><span class="line"># 查看id的hash值</span><br><span class="line">sudo vi /var/lib/docker/containers/&lt;hash_of_the_container&gt;/hostconfig.json</span><br><span class="line">sudo vi /var/lib/docker/containers/&lt;hash_of_the_container&gt;/config.v2.json</span><br><span class="line"># 在 hostconfig.json 里有 &quot;PortBindings&quot;:&#123;&#125; 这个配置项，可以改成 &quot;PortBindings&quot;:&#123;&quot;80/tcp&quot;:[&#123;&quot;HostIp&quot;:&quot;&quot;,&quot;HostPort&quot;:&quot;8080&quot;&#125;]&#125; 这里 80 是容器端口， 8080 是本地端口， 然后在 config.v2.json 里面添加一个配置项 &quot;ExposedPorts&quot;:&#123;&quot;80/tcp&quot;:&#123;&#125;&#125; , 将这个配置项添加到 &quot;Tty&quot;: true, 前面，我不知道添加到别的地方会不会有影响，因为经过对比正常的端口映射配置项是在这个位置，这个就是将容器内部端口暴露出来，如果不加这一句端口映射不会成功的，最后重启 docker的守护进程 service docker restart</span><br><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看映射端口"><a href="#查看映射端口" class="headerlink" title="查看映射端口"></a>查看映射端口</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker port CONTAINER_ID</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看容器的IP地址"><a href="#查看容器的IP地址" class="headerlink" title="查看容器的IP地址"></a>查看容器的IP地址</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker inspect --format=&#x27;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&#x27; ID/NAMES</span><br></pre></td></tr></table></figure>
-
-<h4 id="提交镜像（提交时会导致docker进程阻塞）"><a href="#提交镜像（提交时会导致docker进程阻塞）" class="headerlink" title="提交镜像（提交时会导致docker进程阻塞）"></a>提交镜像（提交时会导致docker进程阻塞）</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker commit -a &#x27;zhiquan.feng&#x27; -m &#x27;提交融合QA平台和接口自动化的jenkins项目&#x27; 87e71042d3b8 chuman/jenkins:v1</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="安装vim"><a href="#安装vim" class="headerlink" title="### 安装vim"></a>### 安装vim</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="安装pipenv，因为网络的问题，要使用国内的镜像源来加速-全局安装，要不pipenv"><a href="#安装pipenv，因为网络的问题，要使用国内的镜像源来加速-全局安装，要不pipenv" class="headerlink" title="安装pipenv，因为网络的问题，要使用国内的镜像源来加速(全局安装，要不pipenv)"></a>安装pipenv，因为网络的问题，要使用国内的镜像源来加速(全局安装，要不pipenv)</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo -H pip3 install -U pipenv -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -name pipenv</span><br></pre></td></tr></table></figure>
-
-<p>创造软连接</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ln -s /var/jenkins_home/python3/bin/pipenv /usr/bin/pipenv</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="解决pip加载慢"><a href="#解决pip加载慢" class="headerlink" title="解决pip加载慢"></a>解决pip加载慢</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="解决allure安装问题"><a href="#解决allure安装问题" class="headerlink" title="解决allure安装问题"></a>解决allure安装问题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://nodejs.org/dist/v12.13.0/node-v12.13.0-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">export NODE_HOME=/&lt;nodejs路径&gt;</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$NODE_HOME/bin </span><br><span class="line"></span><br><span class="line">export NODE_PATH=$NODE_HOME/lib/node_modules</span><br><span class="line"></span><br><span class="line">npm install -g allure-commandline --save-dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="解决系统时间不同步的问题"><a href="#解决系统时间不同步的问题" class="headerlink" title="解决系统时间不同步的问题"></a>解决系统时间不同步的问题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 进入docker对应容器，删除/etc/localtime</span><br><span class="line">sudo docker exec -it -u root jenkins /bin/bash</span><br><span class="line">rm -rf /etc/localtime</span><br><span class="line">// 回到宿主机，复制本地系统时间文件夹到对应docker容器/etc/localtime中</span><br><span class="line">sudo docker cp /usr/share/zoneinfo/Asia/Shanghai &lt;CONTAINER_ID&gt;:/etc/localtime</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h3 id="同步docker两个容器的mysql数据"><a href="#同步docker两个容器的mysql数据" class="headerlink" title="同步docker两个容器的mysql数据"></a>同步docker两个容器的mysql数据</h3><h4 id="在宿主机安装crontab"><a href="#在宿主机安装crontab" class="headerlink" title="在宿主机安装crontab"></a>在宿主机安装crontab</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo yum install vixie-cron crontabs</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看定时任务列表"><a href="#查看定时任务列表" class="headerlink" title="查看定时任务列表"></a>查看定时任务列表</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
-
-<h4 id="新建定时任务命令"><a href="#新建定时任务命令" class="headerlink" title="新建定时任务命令"></a>新建定时任务命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
-
-<h4 id="宿主机执行定时任务"><a href="#宿主机执行定时任务" class="headerlink" title="宿主机执行定时任务"></a>宿主机执行定时任务</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">30 7 * * * bash /home/test/mysql-backup.sh</span><br></pre></td></tr></table></figure>
-
-<h4 id="定时设置解释"><a href="#定时设置解释" class="headerlink" title="定时设置解释"></a>定时设置解释</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*    *    *    *    *</span><br><span class="line">-    -    -    -    -</span><br><span class="line">|    |    |    |    |</span><br><span class="line">|    |    |    |    +----- 星期中星期几 (0 - 7) (星期天 为0)</span><br><span class="line">|    |    |    +---------- 月份 (1 - 12) </span><br><span class="line">|    |    +--------------- 一个月中的第几天 (1 - 31)</span><br><span class="line">|    +-------------------- 小时 (0 - 23)</span><br><span class="line">+------------------------- 分钟 (0 - 59)</span><br></pre></td></tr></table></figure>
-
-<h4 id="启动定时crond服务"><a href="#启动定时crond服务" class="headerlink" title="启动定时crond服务"></a>启动定时crond服务</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service crond start</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看crond服务状态"><a href="#查看crond服务状态" class="headerlink" title="查看crond服务状态"></a>查看crond服务状态</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service crond status</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除所有定时任务命令"><a href="#删除所有定时任务命令" class="headerlink" title="删除所有定时任务命令"></a>删除所有定时任务命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crontab -r</span><br></pre></td></tr></table></figure>
-
-<h4 id="数据库备份与更新脚本-mysql-backup-sh"><a href="#数据库备份与更新脚本-mysql-backup-sh" class="headerlink" title="数据库备份与更新脚本 mysql-backup.sh"></a>数据库备份与更新脚本 mysql-backup.sh</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 设置mysql的登录用户名和密码(根据实际情况填写)</span><br><span class="line">mysql_user=&quot;root&quot;</span><br><span class="line">mysql_password=&quot;1z2x3c4v5b6n7m&quot;</span><br><span class="line">mysql_prod_id=&quot;51ea579affb7&quot;</span><br><span class="line">mysql_dev_id=&quot;34aa0aed191e&quot;</span><br><span class="line"></span><br><span class="line"># 设置需要备份的数据库</span><br><span class="line">db_chuman_qa_platform=&quot;chuman_qa_platform&quot;</span><br><span class="line">db_chuman523=&quot;chumanAndroid523&quot;</span><br><span class="line">db_chuman530=&quot;chumanAndroid530&quot;</span><br><span class="line">db_chuman542=&quot;chumanAndroid542&quot;</span><br><span class="line">db_chuman550=&quot;chumanAndroid550&quot;</span><br><span class="line"></span><br><span class="line"># 备份文件存放宿主机路径(根据实际情况填写)</span><br><span class="line">backup_location=/home/test/mysql-backup</span><br><span class="line"></span><br><span class="line">#如果文件夹不存在则创建</span><br><span class="line">if [ ! -d $backup_location ]; </span><br><span class="line">then </span><br><span class="line"> mkdir -p $backup_location; </span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 是否删除过期数据</span><br><span class="line">expire_backup_delete=&quot;ON&quot;</span><br><span class="line">expire_days=30</span><br><span class="line">backup_time=`date +%Y%m%d%H%M`</span><br><span class="line">backup_dir=$backup_location</span><br><span class="line">welcome_msg=&quot;Welcome to use MySQL backup tools!&quot;</span><br><span class="line"></span><br><span class="line"># 备份mysql-prod库中的chuman_qa_platform表数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_prod_id mysqldump -u$mysql_user -p$mysql_password $db_chuman_qa_platform device_transfer_record devices &gt; $backup_dir/$database-$backup_time.sql</span><br><span class="line"># 备份mysql-dev库中的chmanAndroid相关库数据到宿主机目录下</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman523 &gt; $backup_dir/$db_chuman523-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman530 &gt; $backup_dir/$db_chuman530-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman542 &gt; $backup_dir/$db_chuman542-$backup_time.sql</span><br><span class="line">sudo docker exec $mysql_dev_id mysqldump -u$mysql_user -p$mysql_password $db_chuman550 &gt; $backup_dir/$db_chuman550-$backup_time.sql</span><br><span class="line">echo &quot;mysqldump success ok !&quot;</span><br><span class="line"></span><br><span class="line"># 更新导入数据到mysql-dev中</span><br><span class="line">sudo docker exec -i $mysql_dev_id mysql -u$mysql_user -p$mysql_password $db_chuman_qa_platform &lt; $backup_dir/$database-$backup_time.sql;</span><br><span class="line">echo &quot;update dev success ok !&quot;</span><br><span class="line"># 更新导入数据到mysql-prod中</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman523 &lt; $backup_dir/$db_chuman523-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman530 &lt; $backup_dir/$db_chuman530-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman542 &lt; $backup_dir/$db_chuman542-$backup_time.sql;</span><br><span class="line">sudo docker exec -i $mysql_prod_id mysql -u$mysql_user -p$mysql_password $db_chuman550 &lt; $backup_dir/$db_chuman550-$backup_time.sql;</span><br><span class="line">echo &quot;update prod success ok !&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 ]]></content>
   </entry>
 </search>
