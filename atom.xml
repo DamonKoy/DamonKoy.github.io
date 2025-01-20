@@ -561,9 +561,9 @@
     <category term="编程笔记" scheme="https://damonkoy.github.io/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="docker" scheme="https://damonkoy.github.io/tags/docker/"/>
-    
     <category term="jenkins" scheme="https://damonkoy.github.io/tags/jenkins/"/>
+    
+    <category term="docker" scheme="https://damonkoy.github.io/tags/docker/"/>
     
     <category term="服务器" scheme="https://damonkoy.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
