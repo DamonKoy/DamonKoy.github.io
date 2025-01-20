@@ -1,402 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>AnyDesk 远程控制</title>
-    <url>/2025/01/14/AnyDesk%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th align="left">工具 / 配置</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"> AnyDesk</td>
-<td align="left"> 远程控制</td>
-</tr>
-<tr>
-<td align="left">远程唤醒</td>
-<td align="left">防止设备睡眠无法进行远程访问</td>
-</tr>
-</tbody></table>
-<h2 id="远程唤醒"><a href="#远程唤醒" class="headerlink" title="远程唤醒"></a>远程唤醒</h2><h3 id="安装wakeonlan"><a href="#安装wakeonlan" class="headerlink" title="安装wakeonlan"></a>安装 wakeonlan</h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">brew install --build-from-source wakeonlan</span><br></pre></td></tr></tbody></table></figure>
-
-<p>运行 wakeonlan 172.27.3.1 提示 zsh: /usr/local/bin/wakeonlan: bad interpreter: /usr/bin/perl5.30: no such file or directory</p>
-<p><img src="https://github.com/DamonKoy/images/raw/master/md/wakeonlan%E8%BF%90%E8%A1%8C%E5%A4%B1%E8%B4%A5.png" alt="image-20250114103916776"></p>
-<p>查看 wakeonlan 路径</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">➜  ~ which wakeonlan</span><br><span class="line">/usr/local/bin/wakeonlan</span><br></pre></td></tr></tbody></table></figure>
-
-<p>修改 wakeonlan 文件，将第一行的 perl5.30 修改为 perl ，强制保存 wq!</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">➜  ~ sudo vi /usr/local/bin/wakeonlan</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%BF%AE%E6%94%B9wakeonlan.png" alt="image-20250114105129636"></p>
-<p>再次运行 wakeonlan</p>
-<p><img src="https://github.com/DamonKoy/images/raw/master/md/wakeonlan%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png" alt="image-20250114105402945"></p>
-<h3 id="Mac-电脑配置唤醒以供访问"><a href="#Mac-电脑配置唤醒以供访问" class="headerlink" title="Mac 电脑配置唤醒以供访问"></a>Mac 电脑配置唤醒以供访问</h3><p><img src="https://github.com/DamonKoy/images/raw/master/md/mac%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80%E5%94%A4%E9%86%92%E5%8A%9F%E8%83%BD.png" alt="image-20250114143420535"> </p>
-<h3 id="安装AnyDesk"><a href="#安装AnyDesk" class="headerlink" title="安装AnyDesk"></a>安装 AnyDesk</h3><p>1、<a href="https://anydesk.com.cn/zhs/downloads/mac-os">AnyDesk 安力桌</a>官网下载客户端</p>
-<p>2、进行无人值守访问配置，开启并设置访问密码</p>
-<p>3、两台设备安装配置好后，输入目标地址进行远程控制</p>
-<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/AnyDesk%E5%B7%A5%E4%BD%9C%E5%8F%B0%E7%95%8C%E9%9D%A2.png" alt="image-20250114144325013"></p>
-<p><img src="https://github.com/DamonKoy/images/raw/master/md/AnyDesk%E8%BF%9B%E8%A1%8C%E6%97%A0%E4%BA%BA%E5%80%BC%E5%AE%88%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE.png" alt="image-20250114143804966"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>互联</category>
-      </categories>
-      <tags>
-        <tag>远程控制</tag>
-        <tag>AnyDesk</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker 基础教学</title>
-    <url>/2025/01/04/Docker%E5%9F%BA%E7%A1%80%E6%95%99%E5%AD%A6/</url>
-    <content><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Docker 是一个平台，任何一台装有 Docker 的机器上你都可以建立、发布、运行你的应用程序。</p>
-<h3 id="为什么要使用？"><a href="#为什么要使用？" class="headerlink" title="为什么要使用？"></a>为什么要使用？</h3><ul>
-<li>最关键的一句话：使用 Docker 可以省事、省时、省钱。</li>
-<li>用来取代虚拟机；</li>
-<li>Docker 可以在几毫秒内为您提供一个沙盒环境。</li>
-<li>Docker 有助于将一个复杂系统分解为一系列可组合的部分，这使您能够以一种更加离散的方式对服务进行推理。</li>
-<li>Docker 在一台机器上起成百上千个独立的容器，有助于模拟网络，使网络建模成为一件轻而易举的事情。</li>
-<li>由于你可以将所有系统打包进你的 Docker 容器，所以可以移动工作，甚至脱网离线工作。</li>
-<li>减少调试开销</li>
-<li> Docker 强迫你记录软件依赖，方便你其他地方布局或者安装软件。</li>
-<li>实现持续交付</li>
-</ul>
-<h3 id="Docker的核心概念"><a href="#Docker的核心概念" class="headerlink" title="Docker的核心概念"></a>Docker 的核心概念</h3><p>容器：一个镜像的运行实例就是一个容器。</p>
-<h3 id="Docker的架构"><a href="#Docker的架构" class="headerlink" title="Docker的架构"></a>Docker 的架构</h3><p>熟悉 Docker 的结构是理解并使用好它的关键。Docker 使用客户端 - 服务器 (C/S) 架构模式，使用远程 API 来管理和创建 Docker 容器。Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。</p>
-<h3 id="试行"><a href="#试行" class="headerlink" title="试行"></a>试行</h3><ul>
-<li>打开命令行终端，通过运行简单的 Docker 映像 <a href="https://hub.docker.com/_/hello-world/">hello-world 来</a>测试安装是否正常 ：</li>
-</ul>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run hello-world</span></span><br></pre></td></tr></tbody></table></figure>
-
-<ul>
-<li>启动 Dockerized Web 服务器。像 <code>hello-world</code> 上面的图像一样，如果在本地找不到该图像，Docker 将其从 Docker Hub 中拉出。</li>
-</ul>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --detach --publish=80:80 --name=webserver nginx</span></span><br></pre></td></tr></tbody></table></figure>
-
-<ul>
-<li>在 Web 浏览器中，转到 <code>http://localhost/</code> 以查看 nginx 主页。由于我们指定了默认的 HTTP 端口，因此无需<code>:80</code> 在 URL 末尾附加 。</li>
-</ul>
-<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/image-20200709140904550.png" alt="image-20200709140904550"></p>
-<ul>
-<li>在 Web 服务器运行时（使用 <code>docker container ls</code> 或 <code>docker ps</code>）查看容器上的详细信息 ：</li>
-</ul>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line">CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                NAMES</span><br><span class="line">c88fe43672b0        docker/getting-started   "/docker-entrypoint.…"   11 minutes ago      Up 10 minutes       0.0.0.0:80-&gt;80/tcp   interesting_cohen</span><br></pre></td></tr></tbody></table></figure>
-
-<ul>
-<li>使用以下命令停止并删除容器和图像。使用 “全部” 标志（<code>--all</code> 或 <code>-a</code>）查看停止的容器。</li>
-</ul>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container stop webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span> -a</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">rm</span> webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">rm</span> nginx</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h3 id="首选项"><a href="#首选项" class="headerlink" title="首选项"></a>首选项</h3><p>从菜单栏中选择 Docker 菜单<img src="https://docs.docker.com/docker-for-mac/images/whale-x.png" alt="鲸鱼菜单">&gt; <strong>Preferences</strong>，然后配置下面描述的运行时选项。</p>
-<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs.png" alt="Docker上下文菜单"></p>
-<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs-general.png" alt="优先"></p>
-<p>在<strong>常规</strong>选项卡上，您可以配置何时启动和更新 Docker：</p>
-<ul>
-<li><p><strong>登录时启动 Docker Desktop</strong>：打开会话时自动启动 Docker Desktop。</p>
-</li>
-<li><p><strong>自动检查更新</strong>：默认情况下，Docker Desktop 自动检查更新并在更新可用时通知您。您可以随时通过从 Docker 主菜单中选择<strong>检查更新</strong>来手动检查更新。</p>
-</li>
-<li><p><strong>在 Time Machine 备份中包括 VM</strong>：选择此选项以备份 Docker Desktop 虚拟机。默认情况下禁用此选项。</p>
-</li>
-<li><p><strong>将 Docker 登录名安全地存储在 macOS 钥匙串中</strong>：默认情况下，Docker Desktop 将您的 Docker 登录凭据存储在 macOS 钥匙串中。</p>
-</li>
-<li><p><strong>发送使用情况统计信息</strong>：Docker Desktop 发送诊断，崩溃报告和使用情况数据。此信息可帮助 Docker 改善应用程序并进行故障排除。清除复选框以选择退出。</p>
-<p>单击 “ <strong>切换到 Edge 版本”</strong> 以了解有关 Docker Desktop Edge 版本的更多信息。</p>
-</li>
-</ul>
-<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>在<strong>资源</strong>选项卡允许您配置 CPU，内存，磁盘，代理，网络和其他资源。</p>
-<p>在 “高级” 选项卡上，您可以限制可用于 Docker 的资源。</p>
-<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs-advanced.png" alt="高级首选项设置-高级"></p>
-<p>高级设置为：</p>
-<p><strong>CPU</strong>：默认情况下，Docker Desktop 设置为使用主机上可用处理器数量的一半。要提高处理能力，请将其设置为更大的数字；减少，减少数字。</p>
-<p><strong>内存</strong>：默认情况下，Docker Desktop 设置为使用 <code>2</code>GB 运行时内存，该内存是从 Mac 上的总可用内存分配的。要增加 RAM，请将其设置为更大的数字。要减少它，请降低数字。</p>
-<p><strong>交换</strong>：根据需要配置交换文件的大小。默认值为 1 GB。</p>
-<p><strong>磁盘映像大小</strong>：指定<strong>磁盘映像的大小</strong>。</p>
-<p><strong>磁盘映像位置</strong>：指定 Linux 卷的容器和映像的存储位置。</p>
-<p>您也可以将磁盘映像移动到其他位置。如果尝试将磁盘映像移动到已有的映像，则会出现提示询问您是否要使用现有映像或替换现有映像。</p>
-<h4 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h4><p>使用文件共享可允许 Mac 上的本地目录与 Linux 容器共享。这对于在运行和测试容器中的代码时在主机上的 IDE 中编辑源代码特别有用。默认情况下 <code>/Users</code>，<code>/Volume</code>，<code>/private</code>，<code>/tmp</code> 和 <code>/var/folders</code> 目录共享。如果您的项目不在此目录中，则必须将其添加到列表中。否则，你可能会得到 <code>Mounts denied</code> 或 <code>cannot start service</code> 在运行时错误。</p>
-<p>文件共享设置为：</p>
-<ul>
-<li><p><strong>添加目录</strong>：单击 <code>+</code> 并导航到要添加的目录。</p>
-</li>
-<li><p><strong>Apply＆Restart</strong> 通过 Docker 的 bind mount（<code>-v</code>）功能使目录可用于容器。</p>
-<p>可以共享的目录有一些限制：</p>
-<ul>
-<li>该目录不得在 Docker 内部存在。</li>
-</ul>
-</li>
-</ul>
-<p>有关更多信息，请参见：</p>
-<ul>
-<li><a href="https://docs.docker.com/docker-for-mac/osxfs/">osxfs 文件系统共享</a>主题中的 <a href="https://docs.docker.com/docker-for-mac/osxfs/#namespaces">命名空间</a>。</li>
-<li><a href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">卷挂载要求共享文件 <code>/Users</code></a>。）<a href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">以外的任何项目目录</a></li>
-</ul>
-<h4 id="代理人"><a href="#代理人" class="headerlink" title="代理人"></a>代理人</h4><p>Docker Desktop 从 macOS 中检测 HTTP / HTTPS 代理设置，并将其自动传播到 Docker。例如，如果将代理设置设置为 <code>http://proxy.example.com</code>，则 Docker 在提取容器时会使用此代理。</p>
-<p>但是，您的代理设置不会传播到您启动的容器中。如果要为容器设置代理设置，则需要为其定义环境变量，就像在 Linux 上一样，例如：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine <span class="built_in">env</span></span></span><br><span class="line"></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=b7edf988b2b5</span><br><span class="line">TERM=xterm</span><br><span class="line">HOME=/root</span><br><span class="line">HTTP_PROXY=http://proxy.example.com:3128</span><br></pre></td></tr></tbody></table></figure>
-
-<p>有关设置用于运行容器的环境变量的更多信息，请参见<a href="https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file">设置环境变量</a>。</p>
-<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>您可以配置 Docker 桌面网络以在虚拟专用网络（VPN）上工作。指定网络地址转换（NAT）前缀和子网掩码以启用 Internet 连接。</p>
-<h3 id="Docker引擎"><a href="#Docker引擎" class="headerlink" title="Docker引擎"></a>Docker 引擎</h3><p>Docker Engine 页面允许您配置 Docker 守护程序以确定容器的运行方式。</p>
-<p>在框中输入 JSON 配置文件以配置守护程序设置。有关选项的完整列表，请参阅《 Docker Engine <a href="https://docs.docker.com/engine/reference/commandline/dockerd/">dockerd 命令行参考》</a>。</p>
-<p>单击 “ <strong>应用并重新启动”</strong> 以保存您的设置并重新启动 Docker Desktop。</p>
-<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>在 “命令行” 页面上，您可以指定是否启用实验功能。</p>
-<p>实验功能提供了对未来产品功能的早期访问。这些功能仅用于测试和反馈，因为它们可能在版本之间更改而不会发出警告，或者可以从将来的版本中完全删除。实验功能不得在生产环境中使用。Docker 不提供对实验功能的支持。</p>
-<blockquote>
-<p>要在 Docker CLI 中启用实验性功能，请编辑 <code>config.json</code> 文件并将其设置 <code>experimental</code> 为 enabled。</p>
-<p>要从 Docker Desktop 菜单启用实验功能，请单击 <strong>设置</strong>（在 macOS 上为 <strong>Preferences</strong>）&gt; <strong>命令行</strong>，然后打开 “ <strong>启用实验功能”</strong> 开关。单击 “ <strong>应用并重新启动”</strong>。</p>
-</blockquote>
-<p>有关 Docker CLI 中当前实验功能的列表，请参阅 <a href="https://github.com/docker/cli/blob/master/experimental/README.md">Docker CLI 实验功能</a>。</p>
-<p>在 Docker Desktop Edge 和 Stable 版本上，您都可以打开和关闭实验功能。如果您关闭实验性功能，则 Docker 桌面将使用当前普遍可用的 Docker Engine 版本。</p>
-<p>您可以在命令行上查看是否正在运行实验模式。如果 <code>Experimental</code> 为 <code>true</code>，则 Docker 将以实验模式运行，如下所示。（如果 <code>false</code>，则实验模式关闭。）</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ docker version</span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Version:           19.03.8</span><br><span class="line"> API version:       1.40</span><br><span class="line"> Go version:        go1.12.17</span><br><span class="line"> Git commit:        afacb8b</span><br><span class="line"> Built:             Wed Mar 11 01:21:11 2020</span><br><span class="line"> OS/Arch:           darwin/amd64</span><br><span class="line"> Experimental:      false</span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          19.03.8</span><br><span class="line">  API version:      1.40 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.12.17</span><br><span class="line">  Git commit:       afacb8b</span><br><span class="line">  Built:            Wed Mar 11 01:29:16 2020</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> containerd:</span><br><span class="line">  Version:          v1.2.13</span><br><span class="line">  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.0.0-rc10</span><br><span class="line">  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.18.0</span><br><span class="line">  GitCommit:        fec3683</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3><p>Docker Desktop 包含一个可在 Mac 上运行的独立 Kubernetes 服务器，因此您可以测试在 Kubernetes 上部署 Docker 工作负载。</p>
-<p>Kubernetes 客户端命令 <code>kubectl</code> 包括在内，并配置为连接到本地 Kubernetes 服务器。如果您 <code>kubectl</code> 已经安装并指向其他环境，例如 <code>minikube</code> 或 GKE 集群，请确保更改上下文，以便 <code>kubectl</code> 指向 <code>docker-desktop</code>：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl config get-contexts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl config use-context docker-desktop</span></span><br></pre></td></tr></tbody></table></figure>
-
-<p>如果您是 <code>kubectl</code> 用 Homebrew 或通过其他方法安装的，并且遇到冲突，请删除 <code>/usr/local/bin/kubectl</code>。</p>
-<ul>
-<li><p>要启用 Kubernetes 支持并安装作为 Docker 容器运行的 Kubernetes 独立实例，请选择 <strong>Enable Kubernetes</strong>。要将 Kubernetes 设置为 <a href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认协调器</a>，请<a href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认</a>选择将 <strong>Docker 堆栈部署到 Kubernetes</strong>。</p>
-<p>单击 “ <strong>应用并重新启动”</strong> 以保存设置。这将实例化将 Kubernetes 服务器作为容器运行所需的映像，并将 <code>/usr/local/bin/kubectl</code> 命令安装在 Mac 上。</p>
-<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/kube.png" alt="启用Kubernetes"></p>
-<p>启用并运行 Kubernetes 后，``Docker 桌面设置’’对话框的右下角将显示一个附加状态栏项目。</p>
-<p>Kubernetes 的状态显示在 Docker 菜单中，上下文指向 <code>docker-desktop</code>。</p>
-<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/kube-context.png" alt="带有Kubernetes的Docker菜单"></p>
-</li>
-<li><p>默认情况下，Kubernetes 容器对诸如之类的命令是隐藏的 <code>docker service ls</code>，因为不支持手动管理它们。要使其可见，请选择<strong>显示系统容器（高级）</strong>，然后单击<strong>应用并重新启动</strong>。大多数用户不需要此选项。</p>
-</li>
-<li><p>要随时禁用 Kubernetes 支持，请清除 “ <strong>启用 Kubernetes”</strong> 复选框。Kubernetes 容器将停止并删除，并且该 <code>/usr/local/bin/kubectl</code> 命令也将删除。</p>
-<p>有关将 Kubernetes 集成与 Docker Desktop 结合使用的更多信息，请 <a href="https://docs.docker.com/docker-for-mac/kubernetes/">参阅在 Kubernetes 上部署</a>。</p>
-</li>
-</ul>
-<h3 id="重设"><a href="#重设" class="headerlink" title="重设"></a>重设</h3><blockquote>
-<p>重置和重启选项</p>
-<p>在 Docker Desktop Mac 上，**<code>** **疑难解答''**菜单中提供了**</code> 重启 Docker 桌面’’<strong>，</strong>``** ** 重置为出厂默认值’’** 以及其他重置选项。</p>
-</blockquote>
-<p>有关重置选项的信息，请参阅<a href="https://docs.docker.com/docker-for-mac/troubleshoot/">日志和故障排除</a>。</p>
-<h2 id="仪表板"><a href="#仪表板" class="headerlink" title="仪表板"></a>仪表板</h2><p>Docker Desktop Dashboard 使您可以与容器和应用程序进行交互，并直接从计算机管理应用程序的生命周期。仪表板 UI 会显示所有正在运行，已停止和已启动的容器及其状态。它提供了一个直观的界面来执行常见的操作，以检查和管理容器以及现有的 Docker Compose 应用程序。有关更多信息，请参阅 <a href="https://docs.docker.com/desktop/dashboard/">Docker Desktop Dashboard</a>。</p>
-<h2 id="添加TLS证书"><a href="#添加TLS证书" class="headerlink" title="添加TLS证书"></a>添加 TLS 证书</h2><p>您可以将可信证书颁发机构（CA）（用于验证注册表服务器证书）和客户端证书（用于对注册表进行身份验证）添加到 Docker 守护程序。</p>
-<h3 id="添加自定义CA证书（服务器端）"><a href="#添加自定义CA证书（服务器端）" class="headerlink" title="添加自定义CA证书（服务器端）"></a>添加自定义 CA 证书（服务器端）</h3><p>支持所有受信任的 CA（根或中间 CA）。Docker Desktop 根据 Mac 密钥链创建所有用户信任的 CA 的证书捆绑包，并将其附加到 Moby 信任的证书。因此，如果主机上的用户信任企业 SSL 证书，则 Docker Desktop 会信任它。</p>
-<p>要手动添加自定义的自签名证书，请先将证书添加到 macOS 钥匙串中，然后由 Docker Desktop 获取。这是一个例子：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt</span><br></pre></td></tr></tbody></table></figure>
-
-<p>或者，如果您只想将证书添加到自己的本地钥匙串中（而不是对所有用户），请运行以下命令：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt</span><br></pre></td></tr></tbody></table></figure>
-
-<p>另请参阅<a href="https://docs.docker.com/docker-for-mac/#directory-structures-for-certificates">证书的目录结构</a>。</p>
-<blockquote>
-<p><strong>注意</strong>：您需要在对钥匙串或 <code>~/.docker/certs.d</code> 目录进行任何更改后重新启动 Docker Desktop ，以使更改生效。</p>
-</blockquote>
-<p>有关如何执行此操作的完整说明，请参阅博客文章 “ <a href="http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/">将自签名注册表证书添加到 Docker 和 Mac 的 Docker 桌面”</a>。</p>
-<h3 id="添加客户端证书"><a href="#添加客户端证书" class="headerlink" title="添加客户端证书"></a>添加客户端证书</h3><p>您可以将客户证书放在 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.cert</code> 和中 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.key</code>。</p>
-<p>Docker Desktop 应用程序启动时，它将 <code>~/.docker/certs.d</code> Mac 上的文件夹复制到 <code>/etc/docker/certs.d</code>Moby（Docker Desktop <code>xhyve</code> 虚拟机）上的目录。</p>
-<blockquote>
-<ul>
-<li>您需要在对钥匙串或 <code>~/.docker/certs.d</code> 目录进行任何更改后重新启动 Docker Desktop ，以使更改生效。</li>
-<li>该注册表不能被列为<em>不安全的注册表</em>（请参阅 <a href="https://docs.docker.com/docker-for-mac/#docker-engine">Docker</a> Engine。Docker Desktop 会忽略<em>不安全的注册表</em>下列出的证书，并且不发送客户端证书。<code>docker run</code> 此类尝试从注册表中提取的命令会在命令行上生成错误消息，以及在注册表上。</li>
-</ul>
-</blockquote>
-<h3 id="证书的目录结构"><a href="#证书的目录结构" class="headerlink" title="证书的目录结构"></a>证书的目录结构</h3><p>如果具有此目录结构，则无需手动将 CA 证书添加到 Mac OS 系统登录名：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">   ├── ca.crt</span><br><span class="line">   ├── client.cert</span><br><span class="line">   └── client.key</span><br></pre></td></tr></tbody></table></figure>
-
-<p>以下内容进一步说明和解释了使用自定义证书的配置：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">/etc/docker/certs.d/        &lt;-- Certificate directory</span><br><span class="line">└── localhost:5000          &lt;-- Hostname:port</span><br><span class="line">   ├── client.cert          &lt;-- Client certificate</span><br><span class="line">   ├── client.key           &lt;-- Client key</span><br><span class="line">   └── ca.crt               &lt;-- Certificate authority that signed</span><br><span class="line">                                the registry certificate</span><br></pre></td></tr></tbody></table></figure>
-
-<p>只要 CA 证书也在钥匙串中，您也可以具有此目录结构。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">    ├── client.cert</span><br><span class="line">    └── client.key</span><br></pre></td></tr></tbody></table></figure>
-
-<p>要了解有关如何为注册表安装 CA 根证书以及如何设置客户端 TLS 证书进行验证的更多信息，请参阅 Docker Engine 主题中的<a href="https://docs.docker.com/engine/security/certificates/">使用证书验证存储库客户端</a>。</p>
-<h2 id="安装外壳完成"><a href="#安装外壳完成" class="headerlink" title="安装外壳完成"></a>安装外壳完成</h2><p>Docker Desktop 随附脚本，用于启用 <code>docker</code> 和 <code>docker-compose</code> 命令的完成。补全脚本可以 <code>Docker.app</code> 在 <code>Contents/Resources/etc/</code> 目录中的内找到，并且可以安装在 Bash 和 Zsh 中。</p>
-<h3 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h3><p>Bash <a href="https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1">内置了对完成的支持</a>要激活 Docker 命令的完成，需要将这些文件复制或符号链接到您的 <code>bash_completion.d/</code> 目录。例如，如果您通过 <a href="http://brew.sh/">Homebrew</a> 安装了 bash ：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker</span><br><span class="line">ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose</span><br></pre></td></tr></tbody></table></figure>
-
-<p>将以下内容添加到您的 <code>~/.bash_profile</code>：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[ -f /usr/local/etc/bash_completion ] &amp;&amp; . /usr/local/etc/bash_completion</span><br></pre></td></tr></tbody></table></figure>
-
-<p>要么</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">if [ -f $(brew --prefix)/etc/bash_completion ]; then</span><br><span class="line">. $(brew --prefix)/etc/bash_completion</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h3><p>在 Zsh 中，<a href="http://zsh.sourceforge.net/Doc/Release/Completion-System.html">完成系统</a>负责处理事务。要激活 Docker 命令的完成功能，需要将这些文件复制或符号链接到您的 Zsh <code>site-functions/</code> 目录。例如，如果您通过 <a href="http://brew.sh/">Homebrew</a> 安装了 Zsh ：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker</span><br><span class="line">ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="Fish-Shell"><a href="#Fish-Shell" class="headerlink" title="Fish-Shell"></a>Fish-Shell</h3><h3 id="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。"><a href="#Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。" class="headerlink" title="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell completions/ 目录。"></a>Fish-Shell 还支持制表符<a href="https://fishshell.com/docs/current/#tab-completion">完成系统</a>。要激活 Docker 命令的完成功能，需要将这些文件复制或符号链接到 Fish-shell <code>completions/</code> 目录。</h3><p>创建 <code>completions</code> 目录：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">mkdir -p ~/.config/fish/completions</span><br></pre></td></tr></tbody></table></figure>
-
-<p>现在，从 docker 添加完成。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish</span><br><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="提供反馈并获得帮助"><a href="#提供反馈并获得帮助" class="headerlink" title="提供反馈并获得帮助"></a>提供反馈并获得帮助</h2><p>要获得社区的帮助，请查看当前用户主题，加入或开始讨论，登录到我们的 <a href="https://forums.docker.com/c/docker-for-mac">Docker Desktop for Mac 论坛</a>。</p>
-<p>要报告错误或问题，请<a href="https://github.com/docker/for-mac/issues">在 GitHub 上</a>登录 Docker Desktop <a href="https://github.com/docker/for-mac/issues">for Mac 问题</a>，您可以在其中查看社区报告的问题并提出新问题。有关更多详细信息，请参见 <a href="https://docs.docker.com/docker-for-mac/troubleshoot/">日志和故障排除</a>。</p>
-<p>有关提供有关文档反馈或自己进行更新的信息，请参阅 “ <a href="https://docs.docker.com/opensource/">贡献文档”</a>。</p>
-<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>从 Docker 桌面菜单中选择<strong>登录 / 创建 Docker ID</strong> 以访问您的 <a href="https://hub.docker.com/">Docker Hub</a> 帐户。登录后，您可以直接从 Docker Desktop 菜单访问 Docker Hub 存储库和组织。</p>
-<p>有关更多信息，请参考以下 <a href="https://docs.docker.com/docker-hub/">Docker Hub 主题</a>：</p>
-<ul>
-<li><a href="https://docs.docker.com/docker-hub/orgs/">Docker Hub 中的组织和团队</a></li>
-<li><a href="https://docs.docker.com/docker-hub/builds/">建物</a></li>
-</ul>
-<h3 id="两因素认证"><a href="#两因素认证" class="headerlink" title="两因素认证"></a>两因素认证</h3><p>Docker Desktop 使您可以使用两因素身份验证登录 Docker Hub。当访问您的 Docker Hub 帐户时，两要素身份验证提供了额外的安全层。</p>
-<p>您必须先在 Docker Hub 中启用双重身份验证，然后才能通过 Docker Desktop 登录到 Docker Hub 帐户。有关说明，请参阅<a href="https://docs.docker.com/docker-hub/2fa/">为 Docker Hub 启用两因素身份验证</a>。</p>
-<p>启用两因素身份验证后：</p>
-<ol>
-<li>转到 Docker Desktop 菜单，然后选择<strong>登录 / 创建 Docker ID</strong>。</li>
-<li>输入您的 Docker ID 和密码，然后单击<strong>登录</strong>。</li>
-<li>成功登录后，Docker Desktop 会提示您输入身份验证代码。输入手机的六位数代码，然后点击<strong>验证</strong>。</li>
-</ol>
-<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/desktop-mac-2fa.png" alt="Docker桌面2FA"></p>
-<p>成功通过身份验证后，您可以直接从 Docker Desktop 菜单访问您的组织和存储库。</p>
-<h3 id="将docker修改镜像源"><a href="#将docker修改镜像源" class="headerlink" title="将docker修改镜像源"></a>将 docker 修改镜像源</h3><blockquote>
-<p>在 <code>/etc/docker/daemon.json</code> 文件中添加下面参数</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">   "registry-mirrors" : ["https://almtd3fa.mirror.aliyuncs.com"]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>没有该文件则自行创建</p>
-</blockquote>
-<h3 id="最后重启docker服务"><a href="#最后重启docker服务" class="headerlink" title="最后重启docker服务"></a>最后重启 docker 服务</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>教学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jenkins 项目配置</title>
-    <url>/2020/01/06/Jenkins%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h3 id="Jenkins-项目chuman-qa-platform-server"><a href="#Jenkins-项目chuman-qa-platform-server" class="headerlink" title="Jenkins 项目chuman-qa-platform-server "></a>Jenkins 项目 <a href="http://192.168.216.210:8080/job/chuman-qa-platform-server/">chuman-qa-platform-server </a></h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行项目脚本</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ps -ef | grep gunicorn | grep -v grep | awk <span class="string">'{print $2}'</span>| xargs <span class="built_in">sudo</span> <span class="built_in">kill</span> -9</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">防止jenkins部署完毕自动删除进程</span></span><br><span class="line">BUILD_ID=DONTKILLME</span><br><span class="line"></span><br><span class="line">pid=`ps -ef | grep gunicorn | grep -v grep | awk '{print $2}'`</span><br><span class="line">echo $pid</span><br><span class="line">if [ -n "$pid" ]</span><br><span class="line">then</span><br><span class="line">  	kill -9 $pid</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">pip3 install -r requirements.txt </span><br><span class="line"></span><br><span class="line">source set_flask_env.sh prod </span><br><span class="line"></span><br><span class="line">export PATH=$PATH:/var/jenkins_home/python3/bin/</span><br><span class="line"></span><br><span class="line">gunicorn manage:app -c gunicorn.conf.py</span><br><span class="line"></span><br><span class="line">sleep 3</span><br><span class="line"></span><br><span class="line">pid_result=`ps -ef | grep gunicorn | grep -v grep | awk '{print $2}'`</span><br><span class="line"></span><br><span class="line">echo $pid_result</span><br><span class="line"></span><br><span class="line">if [ -n "$pid_result" ]</span><br><span class="line">then</span><br><span class="line">	exit 0</span><br><span class="line">else</span><br><span class="line">	exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h3 id="jenkins项目-chuman-api-test-new"><a href="#jenkins项目-chuman-api-test-new" class="headerlink" title="jenkins项目 chuman-api-test-new"></a>jenkins 项目 chuman-api-test-new</h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">source /etc/profile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取上游项目的执行环境，并设置接口测试对应的执行环境</span></span><br><span class="line">echo "hashversion=${hashversion}"</span><br><span class="line">echo "envir=${envir}"</span><br><span class="line">echo "debug_info=${debug_info}"</span><br><span class="line">echo "describe=${describe}"</span><br><span class="line">envir_tmp=${envir#*/}</span><br><span class="line">envir=${envir_tmp%.*}</span><br><span class="line"></span><br><span class="line">if [ $envir == 'demo-u-api' ];then</span><br><span class="line">  test_env='demo'</span><br><span class="line">    exec_file='testsuites/P0_demo_testsuite.yml'</span><br><span class="line">    config_file='env/demo.env'</span><br><span class="line">elif [ $envir == 'api2-u-api' ];then</span><br><span class="line">    test_env='api2'</span><br><span class="line">    exec_file='testsuites/P0_api2_testsuite.yml'</span><br><span class="line">    config_file='env/api2.env'</span><br><span class="line">elif [ $envir == 'demo-cf-api' ];then</span><br><span class="line">    test_env='demo-cf'</span><br><span class="line">    exec_file='testsuites/P0_demo_cf_testsuite.yml'</span><br><span class="line">    config_file='env/demo_cf.env'</span><br><span class="line">elif [ $envir == 'api2-cf-api' ];then</span><br><span class="line">    test_env='api2-cf'</span><br><span class="line">    exec_file='testsuites/P0_api2_cf_testsuite.yml'</span><br><span class="line">    config_file='env/api2_cf.env'</span><br><span class="line">else</span><br><span class="line">    test_env='none'</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">判断是否需要执行测试</span></span><br><span class="line">if [ $test_env == 'none' ];then</span><br><span class="line">  echo "构建环境是$envir，不需要执行接口测试"</span><br><span class="line">else</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">旧项目变量</span></span><br><span class="line">  project_name=chuman-api-test</span><br><span class="line">  report_html=reports/$BUILD_NUMBER.html</span><br><span class="line">  exec_file_tmp=${exec_file#*/}</span><br><span class="line">  report_json="logs/testsuites/${exec_file_tmp%.*}.summary.json"</span><br><span class="line">  log_url=$BUILD_URL/console</span><br><span class="line">  show_report_url="http://qa-report-dev.chumanapp.com/"</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">新项目变量</span></span><br><span class="line">  new_project_name=chuman-api-test-new</span><br><span class="line">  new_report_html=allure-report/$BUILD_NUMBER/index.html</span><br><span class="line">  new_report_dir=allure-report/$BUILD_NUMBER  </span><br><span class="line">  file_name='testcases'</span><br><span class="line">  prometheusData="allure-report/$BUILD_NUMBER/export/prometheusData.txt"</span><br><span class="line">  behaviors_json="allure-report/$BUILD_NUMBER/data/test-cases/behaviors.json"</span><br><span class="line">  status_json="allure-report/$BUILD_NUMBER/widgets/status-chart.json"</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">公共变量</span></span><br><span class="line">  test_time=$(date "+%Y-%m-%d %H:%M:%S")</span><br><span class="line">  ding_url='https://oapi.dingtalk.com/robot/send?access_token=83f04c75d4ec2a260b8bf7e959c98374cfaebd34b4973dac03a838d20c217287'</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行旧项目脚本</span></span><br><span class="line">  cd chuman-api-test</span><br><span class="line">  pipenv install --skip-lock</span><br><span class="line">  pipenv run hrun $exec_file --dot-env-path $config_file --log-level debug --save-tests --report-file $report_html</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行旧项目报告生产数据</span></span><br><span class="line">  if [ -f $report_html ];then</span><br><span class="line">    show_report_dir="/data/qa-report/"</span><br><span class="line">    show_report_name="${JOB_NAME}报告_$BUILD_NUMBER.html"</span><br><span class="line"></span><br><span class="line">    # 把生成的报告移动到展示的目录下</span><br><span class="line">    cp $report_html ${show_report_dir}${show_report_name}</span><br><span class="line"></span><br><span class="line">    report_url=$show_report_url$show_report_name</span><br><span class="line">        echo $report_url</span><br><span class="line">    case_total=$(cat $report_json | jq '.stat.testcases.total')</span><br><span class="line">    case_success=$(cat $report_json | jq '.stat.testcases.success')</span><br><span class="line">    case_fail=$(cat $report_json | jq '.stat.testcases.fail')</span><br><span class="line">    fail_module=''</span><br><span class="line">      if [ $case_fail != '0' ];then</span><br><span class="line">        for index in `seq 0 $case_total`</span><br><span class="line">        do</span><br><span class="line">          success=$(cat $report_json | jq -r ".details[$index].success")</span><br><span class="line">          if [ $success == 'false' ];then</span><br><span class="line">            name=$(cat $report_json | jq -r ".details[$index].name")</span><br><span class="line">            fail_module=$fail_module$'\n'$name</span><br><span class="line">          fi</span><br><span class="line">        done</span><br><span class="line">      else</span><br><span class="line">        fail_module='无'</span><br><span class="line">    fi</span><br><span class="line">  fi  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行新项目脚本</span></span><br><span class="line">  cd ..</span><br><span class="line">  cd chuman-api-test-new</span><br><span class="line">  pipenv install --skip-lock</span><br><span class="line">  pipenv run pytest $file_name --env=$test_env </span><br><span class="line">  allure generate reports -o allure-report/$BUILD_NUMBER --clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行新项目报告生产数据</span></span><br><span class="line">  if [ -f $new_report_html ];then</span><br><span class="line">    new_show_report_dir="/data/qa-report/"</span><br><span class="line">    new_show_report_name="qa-p1p2报告_allure_report_$BUILD_NUMBER"</span><br><span class="line"></span><br><span class="line">    # 把生成的报告移动到展示的目录下</span><br><span class="line">    cp -r $new_report_dir ${new_show_report_dir}${new_show_report_name}</span><br><span class="line">    new_report_url=$show_report_url$new_show_report_name</span><br><span class="line">    echo $new_report_url</span><br><span class="line"></span><br><span class="line">    run_num=`grep "launch_retries_run" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    passed_num=`grep "launch_status_passed" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    failed_num=`grep "launch_status_failed" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    broken_num=`grep "launch_status_broken" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    skipped_num=`grep "launch_status_skipped" $prometheusData|awk '{print $NF}'`</span><br><span class="line"></span><br><span class="line">    broken_module=''</span><br><span class="line">      if [ $broken_num != '0' ] || [ $failed_num != '0' ];then</span><br><span class="line">        for index in `seq 0 $run_num`</span><br><span class="line">        do</span><br><span class="line">          result=$(cat $status_json | jq ".[$index].status")</span><br><span class="line">          echo $result</span><br><span class="line">          if [[ $result == '"broken"' ]] || [[ $result == '"failed"' ]];then</span><br><span class="line">            broken_name=$(cat $status_json | jq ".[$index].name")</span><br><span class="line">            tmp="${broken_name%\"}"</span><br><span class="line">            broken_name="${tmp#\"}"</span><br><span class="line">            echo $broken_name</span><br><span class="line">            broken_module=$broken_module$'\n'$broken_name</span><br><span class="line">            echo $broken_module</span><br><span class="line">          fi</span><br><span class="line">        done</span><br><span class="line">      else</span><br><span class="line">        broken_module='无'</span><br><span class="line">    fi</span><br><span class="line">    # 统计所有项目执行数据</span><br><span class="line">    run_sum=$(($case_total+$run_num-$skipped_num))</span><br><span class="line">    success_sum=$(($case_success+$passed_num))</span><br><span class="line">    failed_sum=$(($failed_num+$broken_num+$case_fail))</span><br><span class="line">    if [[ $fail_module == '无' ]] &amp;&amp; [[ $broken_module == '无' ]];then</span><br><span class="line">    	failed_module='无'</span><br><span class="line">    elif [ $fail_module == '无' ];then</span><br><span class="line">    	failed_module=$broken_module</span><br><span class="line">    elif [ $broken_module == '无' ];then</span><br><span class="line">    	failed_module=$fail_module</span><br><span class="line">    else </span><br><span class="line">    	failed_module=$fail_module$'\n'$broken_module</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">	ding_message="后端${test_env}环境代码发布\n发布用户：${BUILD_USER}\n代码hash：${hashversion}\ndebug_info：${debug_info}\n发布描述：${describe}\n\n触漫接口自动化测试执行完毕，以下为执行结果：\n执行环境：${test_env}\n执行时间：${test_time}\n测试场景总数：${run_sum}\n成功场景数：${success_sum}\n失败场景数：${failed_sum}\n\n失败涉及模块：${failed_module}\n触漫P0接口测试报告：$report_url\n触漫P1~P2接口报告：$new_report_url"</span><br><span class="line">	curl $ding_url \</span><br><span class="line">   		-H 'Content-Type: application/json' \</span><br><span class="line">   		-d  '{"msgtype": "text",</span><br><span class="line">       			"text": {</span><br><span class="line">       		    		"content": "'"${ding_message}"'"</span><br><span class="line">       			}</span><br><span class="line">      		}'</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h3 id="jenkins-项目-chuman-ui-test"><a href="#jenkins-项目-chuman-ui-test" class="headerlink" title="jenkins 项目 chuman-ui-test"></a>jenkins 项目 chuman-ui-test</h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">if [ ${app_url} != '' ];then</span><br><span class="line">    echo ${app_url}</span><br><span class="line">	cd ${WORKSPACE}/app/</span><br><span class="line">	rm -rf *.apk</span><br><span class="line">    curl -O ${app_url}</span><br><span class="line">    if [ -e *.apk ];then</span><br><span class="line">    	adb install -r *.apk</span><br><span class="line">    else</span><br><span class="line">    	echo '安装包下载失败'</span><br><span class="line">    cd ${WORKSPACE}</span><br><span class="line">    fi</span><br><span class="line">else</span><br><span class="line">	echo '旧包执行'</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line">rm -rf ${WORKSPACE}/allure_results/</span><br><span class="line">rm -rf ${WORKSPACE}/allure_report/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">lsof -i:22471|sed -n '2p'|awk '{print $2}' | xargs kill -9 || True</span><br><span class="line">ps -ef |grep Nemu |grep -v grep |awk '{print $2}' |xargs kill -9 || True</span><br><span class="line">open /Applications/NemuPlayer.app</span><br><span class="line">sleep 15s</span><br><span class="line">res_adb=`adb devices`</span><br><span class="line">on='device'</span><br><span class="line">echo ${res_adb}</span><br><span class="line">if [[ ${res_adb} == *${on} ]];then</span><br><span class="line">    echo '------ keep running ------'</span><br><span class="line">else</span><br><span class="line">	echo '------ restart adb server ------'</span><br><span class="line">	adb kill-server</span><br><span class="line">	adb start-server</span><br><span class="line">	sleep 5s</span><br><span class="line">    res_adb=`adb devices`</span><br><span class="line">    echo ${res_adb}</span><br><span class="line">    if [[ ${res_adb} == *${on} ]];then</span><br><span class="line">        echo '------ keep running ------'</span><br><span class="line">    else</span><br><span class="line">    	echo '------ server not start ------'</span><br><span class="line">	fi</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">ps aux |grep appium |grep -v grep |awk '{print $2}' |xargs kill -9</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">bash adb_del_picture.sh</span><br><span class="line">rm -rf appium.log</span><br><span class="line">touch appium.log</span><br><span class="line">appium_log_content=`cat appium.log`</span><br><span class="line">test="started"</span><br><span class="line">result=""</span><br><span class="line">while [ "$result" == "" ]; do</span><br><span class="line">    echo "appium still not started!Try again!"</span><br><span class="line">    bash startAppium.sh</span><br><span class="line">    sleep 2</span><br><span class="line">    appium_log_content=`cat appium.log`</span><br><span class="line">    result=$(echo ${appium_log_content} | grep "${test}")</span><br><span class="line">done </span><br><span class="line">ps -ef |grep appium</span><br><span class="line">cat appium.log</span><br><span class="line">sleep 2</span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">pytest -v -s -m=${mark} ./testcases/${module}  --alluredir ${WORKSPACE}/allure_results</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA1.png" alt="image-20201014154819459"></p>
-<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA2.png" alt="image-20201014154846581"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>jenkins</tag>
-        <tag>pytest</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NAS 个人使用指南</title>
-    <url>/2025/01/13/NAS%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-  </entry>
-  <entry>
-    <title>hexo 主题及样式调整</title>
-    <url>/2025/01/04/hexo%E4%B8%BB%E9%A2%98%E5%8F%8A%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
-    <content><![CDATA[<p>主题推荐</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">1.Sakura 非常炫，缺点加载慢 https://github.com/honjun/hexo-theme-sakura</span><br><span class="line">2.Matery 预加载，强推 https://github.com/blinkfox/hexo-theme-matery</span><br><span class="line">3.3-hexo 三段式，适合博文多的 https://github.com/yelog/hexo-theme-3-hexo</span><br><span class="line">4.Butterfly 也是个好看的 https://github.com/jerryc127/hexo-theme-butterfly/tree/dev</span><br><span class="line">5.Next 功能集成多，简洁 https://github.com/theme-next/hexo-theme-next</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p>建页面 配置后页面点击分类后会显示 Can not get /tags/ （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
-<p>此时根目录的 /source 目录下会分别出现两个文件夹 categories 和 tags ，里面都有一个 index.md 文件，点击进入后为其添加 type ：<br>title: categories<br>date: 2023-08-11 16:22:41<br>type: categories # 填写对应的页面类型</p>
-<p>此时重新编译运行即可。</p>
-<p>七、添加搜索功能<br>1、安装&nbsp;hexo-generator-searchdb&nbsp;插件<br>css 代码解读复制代码 $ npm install hexo-generator-searchdb –save</p>
-<p>2、打开 站点配置文件 找到 Extensions 在下面添加<br>yaml 代码解读复制代码# 搜索<br>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p>
-<p>3、打开 主题配置文件 找到 Local search，将 enable 设置为 true</p>
-<ol start="7">
-<li>图片点击放大预览</li>
-</ol>
-<h1 id="找到文件-themes-next-config-yml"><a href="#找到文件-themes-next-config-yml" class="headerlink" title="找到文件 /themes/next/_config.yml"></a>找到文件 /themes/next/_config.yml</h1><h1 id="修改以下代码"><a href="#修改以下代码" class="headerlink" title="修改以下代码"></a>修改以下代码</h1><p>fancybox: true</p>
-<ol start="8">
-<li>图片懒加载</li>
-</ol>
-<h1 id="找到文件-themes-next-config-yml-1"><a href="#找到文件-themes-next-config-yml-1" class="headerlink" title="找到文件 /themes/next/_config.yml"></a>找到文件 /themes/next/_config.yml</h1><h1 id="增加以下代码"><a href="#增加以下代码" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>lazyload: true</p>
-<ol start="11">
-<li>添加字数统计及阅读时长</li>
-</ol>
-<h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 /themes/next/_config.yml"></a>找到文件 /themes/next/_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>
-<ol start="12">
-<li>置顶文章<br>使用文章的 top 属性</li>
-</ol>
-<p>使用插件<br>安装插件：在 Hexo 项目根目录下，通过命令行执行 npm install hexo-generator-index-pin-top –save 命令，安装 hexo-generator-index-pin-top 插件，该插件可以帮助实现文章置顶功能。<br>配置插件：安装完成后，在 Hexo 的站点配置文件_config.yml 中添加插件的配置信息。例如：<br>yaml<br>index_generator:<br>  path: ‘’<br>  per_page: 10<br>  order_by: ‘-date’<br>pin_top:<br>  order_by: ‘top’<br>  layout: ‘post’<br>这里配置了 pin_top 相关的排序规则，按照文章的 top 属性进行排序。</p>
-<ol start="3">
-<li>设置文章置顶：在需要置顶的文章的 Front Matter 中添加 top 属性，如 top: 100。然后执行 hexo clean &amp;&amp; hexo g 命令，重新生成静态页面，插件会根据配置和文章的 top 属性将文章置顶显示。<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用 — 包裹的部分）中添加 top 属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</li>
-</ol>
-<p>title: 置顶文章标题<br>date: 2025-01-07 12:00:00<br>top: 100</p>
-<ol start="13">
-<li>统计文章字数与阅读时长</li>
-</ol>
-<p>安装插件<br>npm install hexo-symbols-count-time –save</p>
-<p>根目录的_config.yml</p>
-<h2 id="设置文章字数统计"><a href="#设置文章字数统计" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h2><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
-<p>主题下设置_config.yml</p>
-<h2 id="设置文章字数统计-1"><a href="#设置文章字数统计-1" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h2><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
-<p>主题下的 layout 文件夹的 post.swig 文件添加代码：</p>
-
-
-
-
-
-<h2 id="优化中英混排问题"><a href="#优化中英混排问题" class="headerlink" title="优化中英混排问题"></a>优化中英混排问题</h2><p>可实现中英文自动加空格，能解决中英文混排时的格式问题，让文章排版更规范。</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-pangu</span><br><span class="line">hexo clean</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h2 id="滑动扰流板"><a href="#滑动扰流板" class="headerlink" title="滑动扰流板"></a>滑动扰流板</h2><p>可以在文章中添加隐藏内容区域，通过点击标题上的滚动箭头展开查看，适用于隐藏电影剧情解析、游戏攻略答案等敏感或需逐步揭示的信息，增强阅读互动性</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-sliding-spoiler --save</span><br></pre></td></tr></tbody></table></figure>
-
-<p>配置：修改根目录的 _config.yml 文件</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  hexo-sliding-spoiler</span><br></pre></td></tr></tbody></table></figure>
-
-<p>文章使用：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">{% spoiler title %}</span><br><span class="line">content</span><br><span class="line">{% endspoiler %}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h2 id="Hexo跨博客文章推荐插件"><a href="#Hexo跨博客文章推荐插件" class="headerlink" title="Hexo跨博客文章推荐插件"></a>Hexo 跨博客文章推荐插件</h2><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-recommended-posts --save</span><br></pre></td></tr></tbody></table></figure>
-
-<p>下载推荐文章列表</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">hexo recommend</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-
-
-
-<h2 id="优化SEO"><a href="#优化SEO" class="headerlink" title="优化SEO"></a>优化 SEO</h2><p><a href="https://github.com/ludoviclefevre/hexo-generator-seo-friendly-sitemap?tab=readme-ov-file">https://github.com/ludoviclefevre/hexo-generator-seo-friendly-sitemap?tab=readme-ov-file</a></p>
-<p>可生成对搜索引擎更友好的站点地图，帮助提升网站的 SEO 表现，通过自动生成详细的网站内容索引，让搜索引擎能更高效地索引博客文章</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-generator-seo-friendly-sitemap --save</span><br></pre></td></tr></tbody></table></figure>
-
-<p>配置：修改根目录的 _config.yml 文件</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sitemap:</span><br><span class="line">    path: sitemap.xml</span><br><span class="line">    tag: false</span><br><span class="line">    category: false</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h2 id="屏蔽文章修改时间"><a href="#屏蔽文章修改时间" class="headerlink" title="屏蔽文章修改时间"></a>屏蔽文章修改时间</h2><p>修改文档：/hexo 根目录 /themes/next/layout/_macro/post.swig</p>
-<p>用最便捷且简单的方法进行修改，方便需要时切换回去（删除红框内容即可）</p>
-<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B1%8F%E8%94%BD%E6%96%87%E7%AB%A0%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4%E7%9A%84%E5%B1%95%E7%A4%BA%E9%80%BB%E8%BE%91.png" alt="image-20250110151240652"></p>
-<p>效果如下：</p>
-<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%88%A0%E9%99%A4%E6%96%87%E7%AB%A0%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4%E6%95%88%E6%9E%9C%E5%9B%BE.png" alt="image-20250110151553760"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【高效防控】从零构建高效稳定的监控体系</title>
     <url>/2025/01/04/%E3%80%90%E9%AB%98%E6%95%88%E9%98%B2%E6%8E%A7%E3%80%91%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E9%AB%98%E6%95%88%E7%A8%B3%E5%AE%9A%E7%9A%84%E7%9B%91%E6%8E%A7%E4%BD%93%E7%B3%BB/</url>
     <content><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;随着业务的不断拓展，开平对接的外部渠道越来越多，服务间的交互逻辑也变得更加复杂。但目前开平还没有一套有效的线上监控机制。为了确保业务能够顺利开展，我们需要构建一套监控体系，该体系能够快速定位问题根源，并在故障刚出现时就迅速做出响应，从而将线上问题的影响降至最低。</p>
@@ -443,6 +47,54 @@
       <tags>
         <tag>监控</tag>
         <tag>防控</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>目标导向的复盘总结</title>
+    <url>/2025/01/10/%E7%9B%AE%E6%A0%87%E5%AF%BC%E5%90%91%E7%9A%84%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h3 id="一、值得学习的点"><a href="#一、值得学习的点" class="headerlink" title="一、值得学习的点"></a>一、值得学习的点</h3><ol>
+<li>结构化清晰<ul>
+<li><strong>内容板块分明</strong>：将复盘内容分为 24 年问题识别、治理思路、落地动作、25 年聚焦方向和目标量化等多个板块，逻辑连贯，层次清晰，便于读者快速抓住重点和整体脉络。例如，在问题识别部分，详细列出了生产质量、数据效能、基线建设、风险治理等不同维度的具体问题，让人一目了然。</li>
+<li><strong>条理有序</strong>：每个板块内部也有清晰的条理，如治理思路中针对不同问题提出相应的解决方向，落地动作则进一步细化了具体的执行步骤和时间节点，使整个复盘具有很强的系统性和连贯性。</li>
+</ul>
+</li>
+<li>数据与案例结合<ul>
+<li><strong>运用数据支撑</strong>：在阐述问题和成果时，大量使用数据，如 “生产问题对公 / 财务占比问题比例为 72%（45/62），其中需求 + 代码类缺陷占 40%（18/45）”，使内容更具说服力和客观性，能够精准反映实际情况，让读者对问题的严重程度和工作成果有更直观的认识。</li>
+<li><strong>辅以案例说明</strong>：虽然图片中未明确体现案例，但这种复盘方式可以借鉴在实际操作中加入具体案例，如在描述数据效能问题时，可举例说明某个具体项目因需求吞吐问题导致的加班情况及影响，使复盘内容更加生动具体，易于理解和共鸣。</li>
+</ul>
+</li>
+<li>目标导向明确<ul>
+<li><strong>聚焦未来方向</strong>：不仅总结过去的问题和经验，还明确提出了 25 年的聚焦方向和目标量化，如 “规风险防故障、保交付提效能、降 bug 提质量、推基线筑基座、予指导促成长” 等，并且每个方向都有相应的目标量化（虽然具体内容未展示，但这种思路很重要），为后续工作提供了清晰的指引和方向，有助于团队成员明确工作重点和努力目标。</li>
+<li><strong>行动与目标关联紧密</strong>：落地动作与目标紧密相连，如为了实现 “保交付提效能” 的目标，制定了 “项目沟通，A/B 角建设，过程把控” 等具体的落地动作，并且明确了时间节点，确保目标能够通过具体的行动得以实现，体现了从目标到行动的有效衔接。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、练习方法"><a href="#二、练习方法" class="headerlink" title="二、练习方法"></a>二、练习方法</h3><ol>
+<li>学习模板与框架<ul>
+<li><strong>收集优秀复盘案例</strong>：可以从公司内部的优秀复盘文档、行业报告、专业书籍或在线资源中收集类似这种结构化的复盘总结案例，仔细研究它们的框架和内容组织方式，分析每个板块的作用和相互关系。</li>
+<li><strong>拆解模板</strong>：将收集到的复盘模板进行拆解，明确各个部分的标题、内容要点和呈现形式。例如，问题识别部分可以包括问题分类、具体问题描述、影响范围等；治理思路可以从策略方向、方法选择等角度展开；落地动作要涵盖具体任务、责任人、时间节点等要素；未来方向和目标量化则要明确具体的目标指标和实现路径。</li>
+</ul>
+</li>
+<li>实践应用<ul>
+<li><strong>选择复盘主题</strong>：可以从日常工作、学习或生活中的某个项目、任务或阶段入手，如一次团队项目的完成、一门课程的学习、一次健身计划的执行等，确定要进行复盘的主题。</li>
+<li><strong>按照模板填充内容</strong>：依据之前学习的模板，逐步填充复盘内容。在问题识别阶段，认真回顾过程，全面梳理出现的问题，尽可能详细地记录下来，并尝试进行分类和分析；在治理思路部分，结合问题的本质和自身的经验，思考可能的解决方向和方法；落地动作要具体可操作，明确每一步该怎么做、谁来做、什么时候做；对于未来方向和目标量化，要根据复盘的结果和实际情况，制定合理的目标，并将其细化为可衡量的指标和具体的行动计划。</li>
+<li><strong>定期复盘练习</strong>：养成定期复盘的习惯，刚开始可以每周或每月对一些小的事项进行复盘，随着熟练度的提高，逐渐对更大的项目或更长的时间段进行复盘。通过不断的实践，逐渐掌握这种复盘总结的方法，并根据实际情况不断优化和调整。</li>
+</ul>
+</li>
+<li>反馈与改进<ul>
+<li><strong>寻求他人反馈</strong>：将自己完成的复盘总结分享给同事、上级、朋友或导师等，请他们从内容完整性、逻辑性、可读性等方面给出反馈和建议。例如，他们可能会指出某些问题分析不够深入、治理思路不够清晰、落地动作缺乏可行性等问题，认真听取这些意见，并思考如何改进。</li>
+<li><strong>自我反思与优化</strong>：在每次复盘后，自己也要进行反思，回顾整个复盘过程，思考哪些地方做得好，哪些地方还需要改进。比如，是否能够更准确地识别问题、治理思路是否能够更有效地解决问题、落地动作是否能够按时完成等。根据反思的结果，对下一次复盘进行优化，不断提高复盘总结的质量和效果。</li>
+</ul>
+</li>
+</ol>
+<p>通过以上学习和练习方法，你可以逐渐掌握这种复盘总结的方式，并将其应用到实际工作和生活中，不断提升自己的总结能力和问题解决能力。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>学习方法</category>
+      </categories>
+      <tags>
+        <tag>复盘</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -762,6 +414,233 @@
       </tags>
   </entry>
   <entry>
+    <title>AnyDesk 远程控制</title>
+    <url>/2025/01/14/AnyDesk%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th align="left">工具 / 配置</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"> AnyDesk</td>
+<td align="left"> 远程控制</td>
+</tr>
+<tr>
+<td align="left">远程唤醒</td>
+<td align="left">防止设备睡眠无法进行远程访问</td>
+</tr>
+</tbody></table>
+<h2 id="远程唤醒"><a href="#远程唤醒" class="headerlink" title="远程唤醒"></a>远程唤醒</h2><h3 id="安装wakeonlan"><a href="#安装wakeonlan" class="headerlink" title="安装wakeonlan"></a>安装 wakeonlan</h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">brew install --build-from-source wakeonlan</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行 wakeonlan 172.27.3.1 提示 zsh: /usr/local/bin/wakeonlan: bad interpreter: /usr/bin/perl5.30: no such file or directory</p>
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/wakeonlan%E8%BF%90%E8%A1%8C%E5%A4%B1%E8%B4%A5.png" alt="image-20250114103916776"></p>
+<p>查看 wakeonlan 路径</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">➜  ~ which wakeonlan</span><br><span class="line">/usr/local/bin/wakeonlan</span><br></pre></td></tr></tbody></table></figure>
+
+<p>修改 wakeonlan 文件，将第一行的 perl5.30 修改为 perl ，强制保存 wq!</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">➜  ~ sudo vi /usr/local/bin/wakeonlan</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%BF%AE%E6%94%B9wakeonlan.png" alt="image-20250114105129636"></p>
+<p>再次运行 wakeonlan</p>
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/wakeonlan%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png" alt="image-20250114105402945"></p>
+<h3 id="Mac-电脑配置唤醒以供访问"><a href="#Mac-电脑配置唤醒以供访问" class="headerlink" title="Mac 电脑配置唤醒以供访问"></a>Mac 电脑配置唤醒以供访问</h3><p><img src="https://github.com/DamonKoy/images/raw/master/md/mac%E7%B3%BB%E7%BB%9F%E6%89%93%E5%BC%80%E5%94%A4%E9%86%92%E5%8A%9F%E8%83%BD.png" alt="image-20250114143420535"> </p>
+<h3 id="安装AnyDesk"><a href="#安装AnyDesk" class="headerlink" title="安装AnyDesk"></a>安装 AnyDesk</h3><p>1、<a href="https://anydesk.com.cn/zhs/downloads/mac-os">AnyDesk 安力桌</a>官网下载客户端</p>
+<p>2、进行无人值守访问配置，开启并设置访问密码</p>
+<p>3、两台设备安装配置好后，输入目标地址进行远程控制</p>
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/AnyDesk%E5%B7%A5%E4%BD%9C%E5%8F%B0%E7%95%8C%E9%9D%A2.png" alt="image-20250114144325013"></p>
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/AnyDesk%E8%BF%9B%E8%A1%8C%E6%97%A0%E4%BA%BA%E5%80%BC%E5%AE%88%E8%AE%BF%E9%97%AE%E9%85%8D%E7%BD%AE.png" alt="image-20250114143804966"></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>互联</category>
+      </categories>
+      <tags>
+        <tag>远程控制</tag>
+        <tag>AnyDesk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NAS 个人使用指南</title>
+    <url>/2025/01/13/NAS%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+  </entry>
+  <entry>
+    <title>hexo 插件汇集</title>
+    <url>/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/</url>
+    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gitee 与 github 仓库数据同步</title>
+    <url>/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</url>
+    <content><![CDATA[<p>发现是防盗链限制的问题，需要解决 referrer</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  "code": "40310014",</span><br><span class="line">  "msg": "invalid Referer header"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>使用 gitee 迁移 github 的方法</p>
+<p>你可以通过以下方式申请 GitHub 私人令牌：</p>
+<ol>
+<li><p>登录与 Gitee 绑定的 GitHub 帐号；</p>
+</li>
+<li><p>通过路径「用户头像」→「Settings」进入「Developer setting」；</p>
+</li>
+<li><p>选择「Personal access tokens」选项后点击「Generate new token」；</p>
+</li>
+<li><p>「Note」字段可以随意填写；例如，Gitee_Mirror；</p>
+</li>
+<li><p>「Select scopes」字段请根据你的需求进行勾选；<br> repo 字段为必选字段，请您直接勾选；<br> admin:repo_hook 字段为可选字段，用于自动生成 webhook；<br> 当您需要 Gitee 自动从 GitHub 同步仓库时，建议您勾选。</p>
+</li>
+<li><p>点击「Generate token」生成私人令牌；</p>
+</li>
+</ol>
+<p>7. 复制私人令牌并妥善保管。</p>
+<p>私人令牌</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>gitee</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo 框架搭建个人博客</title>
+    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/docs/">hexo 食用指南</a></p>
+<p>轻量、便携、静态、一键部署</p>
+<p>安装：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo框架</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化博客</span></span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">npm依赖安装</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hexo</span></span><br><span class="line">hexo server</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>基本操作：</p>
+<p> _config.yml 文件下进行修改 hexo 基本配置</p>
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE" alt="image-20250109144054648"></p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建文章，运行后在 <span class="built_in">source</span>/_posts/ 下生成 {文章标题}.md 文档</span></span><br><span class="line">hexo new '文章标题'</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E9%85%8D%E7%BD%AE%E6%96%B0%E5%A2%9E%E4%BF%A1%E6%81%AF" alt="image-20250109144418134"></p>
+<p>部署：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理缓存、生产静态页面、远程部署</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo 主题及样式调整</title>
+    <url>/2025/01/04/hexo%E4%B8%BB%E9%A2%98%E5%8F%8A%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4/</url>
+    <content><![CDATA[<p>主题推荐</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">1.Sakura 非常炫，缺点加载慢 https://github.com/honjun/hexo-theme-sakura</span><br><span class="line">2.Matery 预加载，强推 https://github.com/blinkfox/hexo-theme-matery</span><br><span class="line">3.3-hexo 三段式，适合博文多的 https://github.com/yelog/hexo-theme-3-hexo</span><br><span class="line">4.Butterfly 也是个好看的 https://github.com/jerryc127/hexo-theme-butterfly/tree/dev</span><br><span class="line">5.Next 功能集成多，简洁 https://github.com/theme-next/hexo-theme-next</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>建页面 配置后页面点击分类后会显示 Can not get /tags/ （大概是这个报错）表示找不到页面，此时则需要进入 hexo 根目录，并执行下述命令创建页面：<br>hexo new page “categories”<br>hexo new page “tags”</p>
+<p>此时根目录的 /source 目录下会分别出现两个文件夹 categories 和 tags ，里面都有一个 index.md 文件，点击进入后为其添加 type ：<br>title: categories<br>date: 2023-08-11 16:22:41<br>type: categories # 填写对应的页面类型</p>
+<p>此时重新编译运行即可。</p>
+<p>七、添加搜索功能<br>1、安装&nbsp;hexo-generator-searchdb&nbsp;插件<br>css 代码解读复制代码 $ npm install hexo-generator-searchdb –save</p>
+<p>2、打开 站点配置文件 找到 Extensions 在下面添加<br>yaml 代码解读复制代码# 搜索<br>search:<br>  path: search.xml<br>  field: post<br>  format: html<br>  limit: 10000</p>
+<p>3、打开 主题配置文件 找到 Local search，将 enable 设置为 true</p>
+<ol start="7">
+<li>图片点击放大预览</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml"><a href="#找到文件-themes-next-config-yml" class="headerlink" title="找到文件 /themes/next/_config.yml"></a>找到文件 /themes/next/_config.yml</h1><h1 id="修改以下代码"><a href="#修改以下代码" class="headerlink" title="修改以下代码"></a>修改以下代码</h1><p>fancybox: true</p>
+<ol start="8">
+<li>图片懒加载</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml-1"><a href="#找到文件-themes-next-config-yml-1" class="headerlink" title="找到文件 /themes/next/_config.yml"></a>找到文件 /themes/next/_config.yml</h1><h1 id="增加以下代码"><a href="#增加以下代码" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>lazyload: true</p>
+<ol start="11">
+<li>添加字数统计及阅读时长</li>
+</ol>
+<h1 id="找到文件-themes-next-config-yml-2"><a href="#找到文件-themes-next-config-yml-2" class="headerlink" title="找到文件 /themes/next/_config.yml"></a>找到文件 /themes/next/_config.yml</h1><h1 id="增加以下代码-1"><a href="#增加以下代码-1" class="headerlink" title="增加以下代码"></a>增加以下代码</h1><p>readingtime:<br>  enable: true</p>
+<ol start="12">
+<li>置顶文章<br>使用文章的 top 属性</li>
+</ol>
+<p>使用插件<br>安装插件：在 Hexo 项目根目录下，通过命令行执行 npm install hexo-generator-index-pin-top –save 命令，安装 hexo-generator-index-pin-top 插件，该插件可以帮助实现文章置顶功能。<br>配置插件：安装完成后，在 Hexo 的站点配置文件_config.yml 中添加插件的配置信息。例如：<br>yaml<br>index_generator:<br>  path: ‘’<br>  per_page: 10<br>  order_by: ‘-date’<br>pin_top:<br>  order_by: ‘top’<br>  layout: ‘post’<br>这里配置了 pin_top 相关的排序规则，按照文章的 top 属性进行排序。</p>
+<ol start="3">
+<li>设置文章置顶：在需要置顶的文章的 Front Matter 中添加 top 属性，如 top: 100。然后执行 hexo clean &amp;&amp; hexo g 命令，重新生成静态页面，插件会根据配置和文章的 top 属性将文章置顶显示。<br>编辑文章的 Front Matter：打开需要置顶的文章的 Markdown 源文件，在文章的 Front Matter（即文章开头用 — 包裹的部分）中添加 top 属性，并为其指定一个数值。数值越大，文章的置顶优先级越高。例如：<br>yaml</li>
+</ol>
+<p>title: 置顶文章标题<br>date: 2025-01-07 12:00:00<br>top: 100</p>
+<ol start="13">
+<li>统计文章字数与阅读时长</li>
+</ol>
+<p>安装插件<br>npm install hexo-symbols-count-time –save</p>
+<p>根目录的_config.yml</p>
+<h2 id="设置文章字数统计"><a href="#设置文章字数统计" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h2><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
+<p>主题下设置_config.yml</p>
+<h2 id="设置文章字数统计-1"><a href="#设置文章字数统计-1" class="headerlink" title="设置文章字数统计"></a>设置文章字数统计</h2><p>symbols_count_time:<br>  symbols: true # 开启文章字数统计<br>  time: true # 开启文章阅读时长统计<br>  total_symbols: false # 关闭站点总字数统计<br>  total_time: false # 关闭站点总阅读时长统计<br>  exclude_codeblock: true # 排除代码块字数统计</p>
+<p>主题下的 layout 文件夹的 post.swig 文件添加代码：</p>
+
+
+
+
+
+<h2 id="优化中英混排问题"><a href="#优化中英混排问题" class="headerlink" title="优化中英混排问题"></a>优化中英混排问题</h2><p>可实现中英文自动加空格，能解决中英文混排时的格式问题，让文章排版更规范。</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-pangu</span><br><span class="line">hexo clean</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="滑动扰流板"><a href="#滑动扰流板" class="headerlink" title="滑动扰流板"></a>滑动扰流板</h2><p>可以在文章中添加隐藏内容区域，通过点击标题上的滚动箭头展开查看，适用于隐藏电影剧情解析、游戏攻略答案等敏感或需逐步揭示的信息，增强阅读互动性</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-sliding-spoiler --save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>配置：修改根目录的 _config.yml 文件</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  hexo-sliding-spoiler</span><br></pre></td></tr></tbody></table></figure>
+
+<p>文章使用：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">{% spoiler title %}</span><br><span class="line">content</span><br><span class="line">{% endspoiler %}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="Hexo跨博客文章推荐插件"><a href="#Hexo跨博客文章推荐插件" class="headerlink" title="Hexo跨博客文章推荐插件"></a>Hexo 跨博客文章推荐插件</h2><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-recommended-posts --save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>下载推荐文章列表</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">hexo recommend</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+
+
+<h2 id="优化SEO"><a href="#优化SEO" class="headerlink" title="优化SEO"></a>优化 SEO</h2><p><a href="https://github.com/ludoviclefevre/hexo-generator-seo-friendly-sitemap?tab=readme-ov-file">https://github.com/ludoviclefevre/hexo-generator-seo-friendly-sitemap?tab=readme-ov-file</a></p>
+<p>可生成对搜索引擎更友好的站点地图，帮助提升网站的 SEO 表现，通过自动生成详细的网站内容索引，让搜索引擎能更高效地索引博客文章</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-generator-seo-friendly-sitemap --save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>配置：修改根目录的 _config.yml 文件</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">sitemap:</span><br><span class="line">    path: sitemap.xml</span><br><span class="line">    tag: false</span><br><span class="line">    category: false</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="屏蔽文章修改时间"><a href="#屏蔽文章修改时间" class="headerlink" title="屏蔽文章修改时间"></a>屏蔽文章修改时间</h2><p>修改文档：/hexo 根目录 /themes/next/layout/_macro/post.swig</p>
+<p>用最便捷且简单的方法进行修改，方便需要时切换回去（删除红框内容即可）</p>
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B1%8F%E8%94%BD%E6%96%87%E7%AB%A0%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4%E7%9A%84%E5%B1%95%E7%A4%BA%E9%80%BB%E8%BE%91.png" alt="image-20250110151240652"></p>
+<p>效果如下：</p>
+<p><img src="https://github.com/DamonKoy/images/raw/master/md/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%88%A0%E9%99%A4%E6%96%87%E7%AB%A0%E4%BF%AE%E6%94%B9%E6%97%B6%E9%97%B4%E6%95%88%E6%9E%9C%E5%9B%BE.png" alt="image-20250110151553760"></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>服务器安装 docker</title>
     <url>/2025/01/04/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85docker/</url>
     <content><![CDATA[<h2 id="服务器安装docker"><a href="#服务器安装docker" class="headerlink" title="服务器安装docker"></a>服务器安装 docker</h2><h4 id="连接服务器："><a href="#连接服务器：" class="headerlink" title="连接服务器："></a>连接服务器：</h4><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ssh test@192.168.216.210</span><br></pre></td></tr></tbody></table></figure>
@@ -885,128 +764,249 @@
       </tags>
   </entry>
   <entry>
-    <title>目标导向的复盘总结</title>
-    <url>/2025/01/10/%E7%9B%AE%E6%A0%87%E5%AF%BC%E5%90%91%E7%9A%84%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h3 id="一、值得学习的点"><a href="#一、值得学习的点" class="headerlink" title="一、值得学习的点"></a>一、值得学习的点</h3><ol>
-<li>结构化清晰<ul>
-<li><strong>内容板块分明</strong>：将复盘内容分为 24 年问题识别、治理思路、落地动作、25 年聚焦方向和目标量化等多个板块，逻辑连贯，层次清晰，便于读者快速抓住重点和整体脉络。例如，在问题识别部分，详细列出了生产质量、数据效能、基线建设、风险治理等不同维度的具体问题，让人一目了然。</li>
-<li><strong>条理有序</strong>：每个板块内部也有清晰的条理，如治理思路中针对不同问题提出相应的解决方向，落地动作则进一步细化了具体的执行步骤和时间节点，使整个复盘具有很强的系统性和连贯性。</li>
+    <title>Docker 基础教学</title>
+    <url>/2025/01/04/Docker%E5%9F%BA%E7%A1%80%E6%95%99%E5%AD%A6/</url>
+    <content><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Docker 是一个平台，任何一台装有 Docker 的机器上你都可以建立、发布、运行你的应用程序。</p>
+<h3 id="为什么要使用？"><a href="#为什么要使用？" class="headerlink" title="为什么要使用？"></a>为什么要使用？</h3><ul>
+<li>最关键的一句话：使用 Docker 可以省事、省时、省钱。</li>
+<li>用来取代虚拟机；</li>
+<li>Docker 可以在几毫秒内为您提供一个沙盒环境。</li>
+<li>Docker 有助于将一个复杂系统分解为一系列可组合的部分，这使您能够以一种更加离散的方式对服务进行推理。</li>
+<li>Docker 在一台机器上起成百上千个独立的容器，有助于模拟网络，使网络建模成为一件轻而易举的事情。</li>
+<li>由于你可以将所有系统打包进你的 Docker 容器，所以可以移动工作，甚至脱网离线工作。</li>
+<li>减少调试开销</li>
+<li> Docker 强迫你记录软件依赖，方便你其他地方布局或者安装软件。</li>
+<li>实现持续交付</li>
+</ul>
+<h3 id="Docker的核心概念"><a href="#Docker的核心概念" class="headerlink" title="Docker的核心概念"></a>Docker 的核心概念</h3><p>容器：一个镜像的运行实例就是一个容器。</p>
+<h3 id="Docker的架构"><a href="#Docker的架构" class="headerlink" title="Docker的架构"></a>Docker 的架构</h3><p>熟悉 Docker 的结构是理解并使用好它的关键。Docker 使用客户端 - 服务器 (C/S) 架构模式，使用远程 API 来管理和创建 Docker 容器。Docker 容器通过 Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。</p>
+<h3 id="试行"><a href="#试行" class="headerlink" title="试行"></a>试行</h3><ul>
+<li>打开命令行终端，通过运行简单的 Docker 映像 <a href="https://hub.docker.com/_/hello-world/">hello-world 来</a>测试安装是否正常 ：</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run hello-world</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>启动 Dockerized Web 服务器。像 <code>hello-world</code> 上面的图像一样，如果在本地找不到该图像，Docker 将其从 Docker Hub 中拉出。</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --detach --publish=80:80 --name=webserver nginx</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>在 Web 浏览器中，转到 <code>http://localhost/</code> 以查看 nginx 主页。由于我们指定了默认的 HTTP 端口，因此无需<code>:80</code> 在 URL 末尾附加 。</li>
+</ul>
+<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/image-20200709140904550.png" alt="image-20200709140904550"></p>
+<ul>
+<li>在 Web 服务器运行时（使用 <code>docker container ls</code> 或 <code>docker ps</code>）查看容器上的详细信息 ：</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line">CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                NAMES</span><br><span class="line">c88fe43672b0        docker/getting-started   "/docker-entrypoint.…"   11 minutes ago      Up 10 minutes       0.0.0.0:80-&gt;80/tcp   interesting_cohen</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>使用以下命令停止并删除容器和图像。使用 “全部” 标志（<code>--all</code> 或 <code>-a</code>）查看停止的容器。</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container stop webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">ls</span> -a</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker container <span class="built_in">rm</span> webserver</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">ls</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker image <span class="built_in">rm</span> nginx</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="首选项"><a href="#首选项" class="headerlink" title="首选项"></a>首选项</h3><p>从菜单栏中选择 Docker 菜单<img src="https://docs.docker.com/docker-for-mac/images/whale-x.png" alt="鲸鱼菜单">&gt; <strong>Preferences</strong>，然后配置下面描述的运行时选项。</p>
+<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs.png" alt="Docker上下文菜单"></p>
+<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs-general.png" alt="优先"></p>
+<p>在<strong>常规</strong>选项卡上，您可以配置何时启动和更新 Docker：</p>
+<ul>
+<li><p><strong>登录时启动 Docker Desktop</strong>：打开会话时自动启动 Docker Desktop。</p>
+</li>
+<li><p><strong>自动检查更新</strong>：默认情况下，Docker Desktop 自动检查更新并在更新可用时通知您。您可以随时通过从 Docker 主菜单中选择<strong>检查更新</strong>来手动检查更新。</p>
+</li>
+<li><p><strong>在 Time Machine 备份中包括 VM</strong>：选择此选项以备份 Docker Desktop 虚拟机。默认情况下禁用此选项。</p>
+</li>
+<li><p><strong>将 Docker 登录名安全地存储在 macOS 钥匙串中</strong>：默认情况下，Docker Desktop 将您的 Docker 登录凭据存储在 macOS 钥匙串中。</p>
+</li>
+<li><p><strong>发送使用情况统计信息</strong>：Docker Desktop 发送诊断，崩溃报告和使用情况数据。此信息可帮助 Docker 改善应用程序并进行故障排除。清除复选框以选择退出。</p>
+<p>单击 “ <strong>切换到 Edge 版本”</strong> 以了解有关 Docker Desktop Edge 版本的更多信息。</p>
+</li>
+</ul>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>在<strong>资源</strong>选项卡允许您配置 CPU，内存，磁盘，代理，网络和其他资源。</p>
+<p>在 “高级” 选项卡上，您可以限制可用于 Docker 的资源。</p>
+<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/prefs-advanced.png" alt="高级首选项设置-高级"></p>
+<p>高级设置为：</p>
+<p><strong>CPU</strong>：默认情况下，Docker Desktop 设置为使用主机上可用处理器数量的一半。要提高处理能力，请将其设置为更大的数字；减少，减少数字。</p>
+<p><strong>内存</strong>：默认情况下，Docker Desktop 设置为使用 <code>2</code>GB 运行时内存，该内存是从 Mac 上的总可用内存分配的。要增加 RAM，请将其设置为更大的数字。要减少它，请降低数字。</p>
+<p><strong>交换</strong>：根据需要配置交换文件的大小。默认值为 1 GB。</p>
+<p><strong>磁盘映像大小</strong>：指定<strong>磁盘映像的大小</strong>。</p>
+<p><strong>磁盘映像位置</strong>：指定 Linux 卷的容器和映像的存储位置。</p>
+<p>您也可以将磁盘映像移动到其他位置。如果尝试将磁盘映像移动到已有的映像，则会出现提示询问您是否要使用现有映像或替换现有映像。</p>
+<h4 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h4><p>使用文件共享可允许 Mac 上的本地目录与 Linux 容器共享。这对于在运行和测试容器中的代码时在主机上的 IDE 中编辑源代码特别有用。默认情况下 <code>/Users</code>，<code>/Volume</code>，<code>/private</code>，<code>/tmp</code> 和 <code>/var/folders</code> 目录共享。如果您的项目不在此目录中，则必须将其添加到列表中。否则，你可能会得到 <code>Mounts denied</code> 或 <code>cannot start service</code> 在运行时错误。</p>
+<p>文件共享设置为：</p>
+<ul>
+<li><p><strong>添加目录</strong>：单击 <code>+</code> 并导航到要添加的目录。</p>
+</li>
+<li><p><strong>Apply＆Restart</strong> 通过 Docker 的 bind mount（<code>-v</code>）功能使目录可用于容器。</p>
+<p>可以共享的目录有一些限制：</p>
+<ul>
+<li>该目录不得在 Docker 内部存在。</li>
 </ul>
 </li>
-<li>数据与案例结合<ul>
-<li><strong>运用数据支撑</strong>：在阐述问题和成果时，大量使用数据，如 “生产问题对公 / 财务占比问题比例为 72%（45/62），其中需求 + 代码类缺陷占 40%（18/45）”，使内容更具说服力和客观性，能够精准反映实际情况，让读者对问题的严重程度和工作成果有更直观的认识。</li>
-<li><strong>辅以案例说明</strong>：虽然图片中未明确体现案例，但这种复盘方式可以借鉴在实际操作中加入具体案例，如在描述数据效能问题时，可举例说明某个具体项目因需求吞吐问题导致的加班情况及影响，使复盘内容更加生动具体，易于理解和共鸣。</li>
 </ul>
-</li>
-<li>目标导向明确<ul>
-<li><strong>聚焦未来方向</strong>：不仅总结过去的问题和经验，还明确提出了 25 年的聚焦方向和目标量化，如 “规风险防故障、保交付提效能、降 bug 提质量、推基线筑基座、予指导促成长” 等，并且每个方向都有相应的目标量化（虽然具体内容未展示，但这种思路很重要），为后续工作提供了清晰的指引和方向，有助于团队成员明确工作重点和努力目标。</li>
-<li><strong>行动与目标关联紧密</strong>：落地动作与目标紧密相连，如为了实现 “保交付提效能” 的目标，制定了 “项目沟通，A/B 角建设，过程把控” 等具体的落地动作，并且明确了时间节点，确保目标能够通过具体的行动得以实现，体现了从目标到行动的有效衔接。</li>
+<p>有关更多信息，请参见：</p>
+<ul>
+<li><a href="https://docs.docker.com/docker-for-mac/osxfs/">osxfs 文件系统共享</a>主题中的 <a href="https://docs.docker.com/docker-for-mac/osxfs/#namespaces">命名空间</a>。</li>
+<li><a href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">卷挂载要求共享文件 <code>/Users</code></a>。）<a href="https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users">以外的任何项目目录</a></li>
 </ul>
+<h4 id="代理人"><a href="#代理人" class="headerlink" title="代理人"></a>代理人</h4><p>Docker Desktop 从 macOS 中检测 HTTP / HTTPS 代理设置，并将其自动传播到 Docker。例如，如果将代理设置设置为 <code>http://proxy.example.com</code>，则 Docker 在提取容器时会使用此代理。</p>
+<p>但是，您的代理设置不会传播到您启动的容器中。如果要为容器设置代理设置，则需要为其定义环境变量，就像在 Linux 上一样，例如：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine <span class="built_in">env</span></span></span><br><span class="line"></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">HOSTNAME=b7edf988b2b5</span><br><span class="line">TERM=xterm</span><br><span class="line">HOME=/root</span><br><span class="line">HTTP_PROXY=http://proxy.example.com:3128</span><br></pre></td></tr></tbody></table></figure>
+
+<p>有关设置用于运行容器的环境变量的更多信息，请参见<a href="https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file">设置环境变量</a>。</p>
+<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>您可以配置 Docker 桌面网络以在虚拟专用网络（VPN）上工作。指定网络地址转换（NAT）前缀和子网掩码以启用 Internet 连接。</p>
+<h3 id="Docker引擎"><a href="#Docker引擎" class="headerlink" title="Docker引擎"></a>Docker 引擎</h3><p>Docker Engine 页面允许您配置 Docker 守护程序以确定容器的运行方式。</p>
+<p>在框中输入 JSON 配置文件以配置守护程序设置。有关选项的完整列表，请参阅《 Docker Engine <a href="https://docs.docker.com/engine/reference/commandline/dockerd/">dockerd 命令行参考》</a>。</p>
+<p>单击 “ <strong>应用并重新启动”</strong> 以保存您的设置并重新启动 Docker Desktop。</p>
+<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>在 “命令行” 页面上，您可以指定是否启用实验功能。</p>
+<p>实验功能提供了对未来产品功能的早期访问。这些功能仅用于测试和反馈，因为它们可能在版本之间更改而不会发出警告，或者可以从将来的版本中完全删除。实验功能不得在生产环境中使用。Docker 不提供对实验功能的支持。</p>
+<blockquote>
+<p>要在 Docker CLI 中启用实验性功能，请编辑 <code>config.json</code> 文件并将其设置 <code>experimental</code> 为 enabled。</p>
+<p>要从 Docker Desktop 菜单启用实验功能，请单击 <strong>设置</strong>（在 macOS 上为 <strong>Preferences</strong>）&gt; <strong>命令行</strong>，然后打开 “ <strong>启用实验功能”</strong> 开关。单击 “ <strong>应用并重新启动”</strong>。</p>
+</blockquote>
+<p>有关 Docker CLI 中当前实验功能的列表，请参阅 <a href="https://github.com/docker/cli/blob/master/experimental/README.md">Docker CLI 实验功能</a>。</p>
+<p>在 Docker Desktop Edge 和 Stable 版本上，您都可以打开和关闭实验功能。如果您关闭实验性功能，则 Docker 桌面将使用当前普遍可用的 Docker Engine 版本。</p>
+<p>您可以在命令行上查看是否正在运行实验模式。如果 <code>Experimental</code> 为 <code>true</code>，则 Docker 将以实验模式运行，如下所示。（如果 <code>false</code>，则实验模式关闭。）</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ docker version</span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Version:           19.03.8</span><br><span class="line"> API version:       1.40</span><br><span class="line"> Go version:        go1.12.17</span><br><span class="line"> Git commit:        afacb8b</span><br><span class="line"> Built:             Wed Mar 11 01:21:11 2020</span><br><span class="line"> OS/Arch:           darwin/amd64</span><br><span class="line"> Experimental:      false</span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          19.03.8</span><br><span class="line">  API version:      1.40 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.12.17</span><br><span class="line">  Git commit:       afacb8b</span><br><span class="line">  Built:            Wed Mar 11 01:29:16 2020</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> containerd:</span><br><span class="line">  Version:          v1.2.13</span><br><span class="line">  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.0.0-rc10</span><br><span class="line">  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.18.0</span><br><span class="line">  GitCommit:        fec3683</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3><p>Docker Desktop 包含一个可在 Mac 上运行的独立 Kubernetes 服务器，因此您可以测试在 Kubernetes 上部署 Docker 工作负载。</p>
+<p>Kubernetes 客户端命令 <code>kubectl</code> 包括在内，并配置为连接到本地 Kubernetes 服务器。如果您 <code>kubectl</code> 已经安装并指向其他环境，例如 <code>minikube</code> 或 GKE 集群，请确保更改上下文，以便 <code>kubectl</code> 指向 <code>docker-desktop</code>：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl config get-contexts</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl config use-context docker-desktop</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果您是 <code>kubectl</code> 用 Homebrew 或通过其他方法安装的，并且遇到冲突，请删除 <code>/usr/local/bin/kubectl</code>。</p>
+<ul>
+<li><p>要启用 Kubernetes 支持并安装作为 Docker 容器运行的 Kubernetes 独立实例，请选择 <strong>Enable Kubernetes</strong>。要将 Kubernetes 设置为 <a href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认协调器</a>，请<a href="https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator">默认</a>选择将 <strong>Docker 堆栈部署到 Kubernetes</strong>。</p>
+<p>单击 “ <strong>应用并重新启动”</strong> 以保存设置。这将实例化将 Kubernetes 服务器作为容器运行所需的映像，并将 <code>/usr/local/bin/kubectl</code> 命令安装在 Mac 上。</p>
+<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/kube.png" alt="启用Kubernetes"></p>
+<p>启用并运行 Kubernetes 后，``Docker 桌面设置’’对话框的右下角将显示一个附加状态栏项目。</p>
+<p>Kubernetes 的状态显示在 Docker 菜单中，上下文指向 <code>docker-desktop</code>。</p>
+<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/kube-context.png" alt="带有Kubernetes的Docker菜单"></p>
 </li>
-</ol>
-<h3 id="二、练习方法"><a href="#二、练习方法" class="headerlink" title="二、练习方法"></a>二、练习方法</h3><ol>
-<li>学习模板与框架<ul>
-<li><strong>收集优秀复盘案例</strong>：可以从公司内部的优秀复盘文档、行业报告、专业书籍或在线资源中收集类似这种结构化的复盘总结案例，仔细研究它们的框架和内容组织方式，分析每个板块的作用和相互关系。</li>
-<li><strong>拆解模板</strong>：将收集到的复盘模板进行拆解，明确各个部分的标题、内容要点和呈现形式。例如，问题识别部分可以包括问题分类、具体问题描述、影响范围等；治理思路可以从策略方向、方法选择等角度展开；落地动作要涵盖具体任务、责任人、时间节点等要素；未来方向和目标量化则要明确具体的目标指标和实现路径。</li>
+<li><p>默认情况下，Kubernetes 容器对诸如之类的命令是隐藏的 <code>docker service ls</code>，因为不支持手动管理它们。要使其可见，请选择<strong>显示系统容器（高级）</strong>，然后单击<strong>应用并重新启动</strong>。大多数用户不需要此选项。</p>
+</li>
+<li><p>要随时禁用 Kubernetes 支持，请清除 “ <strong>启用 Kubernetes”</strong> 复选框。Kubernetes 容器将停止并删除，并且该 <code>/usr/local/bin/kubectl</code> 命令也将删除。</p>
+<p>有关将 Kubernetes 集成与 Docker Desktop 结合使用的更多信息，请 <a href="https://docs.docker.com/docker-for-mac/kubernetes/">参阅在 Kubernetes 上部署</a>。</p>
+</li>
 </ul>
-</li>
-<li>实践应用<ul>
-<li><strong>选择复盘主题</strong>：可以从日常工作、学习或生活中的某个项目、任务或阶段入手，如一次团队项目的完成、一门课程的学习、一次健身计划的执行等，确定要进行复盘的主题。</li>
-<li><strong>按照模板填充内容</strong>：依据之前学习的模板，逐步填充复盘内容。在问题识别阶段，认真回顾过程，全面梳理出现的问题，尽可能详细地记录下来，并尝试进行分类和分析；在治理思路部分，结合问题的本质和自身的经验，思考可能的解决方向和方法；落地动作要具体可操作，明确每一步该怎么做、谁来做、什么时候做；对于未来方向和目标量化，要根据复盘的结果和实际情况，制定合理的目标，并将其细化为可衡量的指标和具体的行动计划。</li>
-<li><strong>定期复盘练习</strong>：养成定期复盘的习惯，刚开始可以每周或每月对一些小的事项进行复盘，随着熟练度的提高，逐渐对更大的项目或更长的时间段进行复盘。通过不断的实践，逐渐掌握这种复盘总结的方法，并根据实际情况不断优化和调整。</li>
+<h3 id="重设"><a href="#重设" class="headerlink" title="重设"></a>重设</h3><blockquote>
+<p>重置和重启选项</p>
+<p>在 Docker Desktop Mac 上，**<code>** **疑难解答''**菜单中提供了**</code> 重启 Docker 桌面’’<strong>，</strong>``** ** 重置为出厂默认值’’** 以及其他重置选项。</p>
+</blockquote>
+<p>有关重置选项的信息，请参阅<a href="https://docs.docker.com/docker-for-mac/troubleshoot/">日志和故障排除</a>。</p>
+<h2 id="仪表板"><a href="#仪表板" class="headerlink" title="仪表板"></a>仪表板</h2><p>Docker Desktop Dashboard 使您可以与容器和应用程序进行交互，并直接从计算机管理应用程序的生命周期。仪表板 UI 会显示所有正在运行，已停止和已启动的容器及其状态。它提供了一个直观的界面来执行常见的操作，以检查和管理容器以及现有的 Docker Compose 应用程序。有关更多信息，请参阅 <a href="https://docs.docker.com/desktop/dashboard/">Docker Desktop Dashboard</a>。</p>
+<h2 id="添加TLS证书"><a href="#添加TLS证书" class="headerlink" title="添加TLS证书"></a>添加 TLS 证书</h2><p>您可以将可信证书颁发机构（CA）（用于验证注册表服务器证书）和客户端证书（用于对注册表进行身份验证）添加到 Docker 守护程序。</p>
+<h3 id="添加自定义CA证书（服务器端）"><a href="#添加自定义CA证书（服务器端）" class="headerlink" title="添加自定义CA证书（服务器端）"></a>添加自定义 CA 证书（服务器端）</h3><p>支持所有受信任的 CA（根或中间 CA）。Docker Desktop 根据 Mac 密钥链创建所有用户信任的 CA 的证书捆绑包，并将其附加到 Moby 信任的证书。因此，如果主机上的用户信任企业 SSL 证书，则 Docker Desktop 会信任它。</p>
+<p>要手动添加自定义的自签名证书，请先将证书添加到 macOS 钥匙串中，然后由 Docker Desktop 获取。这是一个例子：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt</span><br></pre></td></tr></tbody></table></figure>
+
+<p>或者，如果您只想将证书添加到自己的本地钥匙串中（而不是对所有用户），请运行以下命令：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">$ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt</span><br></pre></td></tr></tbody></table></figure>
+
+<p>另请参阅<a href="https://docs.docker.com/docker-for-mac/#directory-structures-for-certificates">证书的目录结构</a>。</p>
+<blockquote>
+<p><strong>注意</strong>：您需要在对钥匙串或 <code>~/.docker/certs.d</code> 目录进行任何更改后重新启动 Docker Desktop ，以使更改生效。</p>
+</blockquote>
+<p>有关如何执行此操作的完整说明，请参阅博客文章 “ <a href="http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/">将自签名注册表证书添加到 Docker 和 Mac 的 Docker 桌面”</a>。</p>
+<h3 id="添加客户端证书"><a href="#添加客户端证书" class="headerlink" title="添加客户端证书"></a>添加客户端证书</h3><p>您可以将客户证书放在 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.cert</code> 和中 <code>~/.docker/certs.d/&lt;MyRegistry&gt;:&lt;Port&gt;/client.key</code>。</p>
+<p>Docker Desktop 应用程序启动时，它将 <code>~/.docker/certs.d</code> Mac 上的文件夹复制到 <code>/etc/docker/certs.d</code>Moby（Docker Desktop <code>xhyve</code> 虚拟机）上的目录。</p>
+<blockquote>
+<ul>
+<li>您需要在对钥匙串或 <code>~/.docker/certs.d</code> 目录进行任何更改后重新启动 Docker Desktop ，以使更改生效。</li>
+<li>该注册表不能被列为<em>不安全的注册表</em>（请参阅 <a href="https://docs.docker.com/docker-for-mac/#docker-engine">Docker</a> Engine。Docker Desktop 会忽略<em>不安全的注册表</em>下列出的证书，并且不发送客户端证书。<code>docker run</code> 此类尝试从注册表中提取的命令会在命令行上生成错误消息，以及在注册表上。</li>
 </ul>
-</li>
-<li>反馈与改进<ul>
-<li><strong>寻求他人反馈</strong>：将自己完成的复盘总结分享给同事、上级、朋友或导师等，请他们从内容完整性、逻辑性、可读性等方面给出反馈和建议。例如，他们可能会指出某些问题分析不够深入、治理思路不够清晰、落地动作缺乏可行性等问题，认真听取这些意见，并思考如何改进。</li>
-<li><strong>自我反思与优化</strong>：在每次复盘后，自己也要进行反思，回顾整个复盘过程，思考哪些地方做得好，哪些地方还需要改进。比如，是否能够更准确地识别问题、治理思路是否能够更有效地解决问题、落地动作是否能够按时完成等。根据反思的结果，对下一次复盘进行优化，不断提高复盘总结的质量和效果。</li>
+</blockquote>
+<h3 id="证书的目录结构"><a href="#证书的目录结构" class="headerlink" title="证书的目录结构"></a>证书的目录结构</h3><p>如果具有此目录结构，则无需手动将 CA 证书添加到 Mac OS 系统登录名：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">   ├── ca.crt</span><br><span class="line">   ├── client.cert</span><br><span class="line">   └── client.key</span><br></pre></td></tr></tbody></table></figure>
+
+<p>以下内容进一步说明和解释了使用自定义证书的配置：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">/etc/docker/certs.d/        &lt;-- Certificate directory</span><br><span class="line">└── localhost:5000          &lt;-- Hostname:port</span><br><span class="line">   ├── client.cert          &lt;-- Client certificate</span><br><span class="line">   ├── client.key           &lt;-- Client key</span><br><span class="line">   └── ca.crt               &lt;-- Certificate authority that signed</span><br><span class="line">                                the registry certificate</span><br></pre></td></tr></tbody></table></figure>
+
+<p>只要 CA 证书也在钥匙串中，您也可以具有此目录结构。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">/Users/&lt;user&gt;/.docker/certs.d/</span><br><span class="line">└── &lt;MyRegistry&gt;:&lt;Port&gt;</span><br><span class="line">    ├── client.cert</span><br><span class="line">    └── client.key</span><br></pre></td></tr></tbody></table></figure>
+
+<p>要了解有关如何为注册表安装 CA 根证书以及如何设置客户端 TLS 证书进行验证的更多信息，请参阅 Docker Engine 主题中的<a href="https://docs.docker.com/engine/security/certificates/">使用证书验证存储库客户端</a>。</p>
+<h2 id="安装外壳完成"><a href="#安装外壳完成" class="headerlink" title="安装外壳完成"></a>安装外壳完成</h2><p>Docker Desktop 随附脚本，用于启用 <code>docker</code> 和 <code>docker-compose</code> 命令的完成。补全脚本可以 <code>Docker.app</code> 在 <code>Contents/Resources/etc/</code> 目录中的内找到，并且可以安装在 Bash 和 Zsh 中。</p>
+<h3 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h3><p>Bash <a href="https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1">内置了对完成的支持</a>要激活 Docker 命令的完成，需要将这些文件复制或符号链接到您的 <code>bash_completion.d/</code> 目录。例如，如果您通过 <a href="http://brew.sh/">Homebrew</a> 安装了 bash ：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker</span><br><span class="line">ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose</span><br></pre></td></tr></tbody></table></figure>
+
+<p>将以下内容添加到您的 <code>~/.bash_profile</code>：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">[ -f /usr/local/etc/bash_completion ] &amp;&amp; . /usr/local/etc/bash_completion</span><br></pre></td></tr></tbody></table></figure>
+
+<p>要么</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">if [ -f $(brew --prefix)/etc/bash_completion ]; then</span><br><span class="line">. $(brew --prefix)/etc/bash_completion</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h3><p>在 Zsh 中，<a href="http://zsh.sourceforge.net/Doc/Release/Completion-System.html">完成系统</a>负责处理事务。要激活 Docker 命令的完成功能，需要将这些文件复制或符号链接到您的 Zsh <code>site-functions/</code> 目录。例如，如果您通过 <a href="http://brew.sh/">Homebrew</a> 安装了 Zsh ：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">etc=/Applications/Docker.app/Contents/Resources/etc</span><br><span class="line">ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker</span><br><span class="line">ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Fish-Shell"><a href="#Fish-Shell" class="headerlink" title="Fish-Shell"></a>Fish-Shell</h3><h3 id="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。"><a href="#Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell-completions-目录。" class="headerlink" title="Fish-Shell还支持制表符完成系统。要激活Docker命令的完成功能，需要将这些文件复制或符号链接到Fish-shell completions/ 目录。"></a>Fish-Shell 还支持制表符<a href="https://fishshell.com/docs/current/#tab-completion">完成系统</a>。要激活 Docker 命令的完成功能，需要将这些文件复制或符号链接到 Fish-shell <code>completions/</code> 目录。</h3><p>创建 <code>completions</code> 目录：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">mkdir -p ~/.config/fish/completions</span><br></pre></td></tr></tbody></table></figure>
+
+<p>现在，从 docker 添加完成。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish</span><br><span class="line">ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="提供反馈并获得帮助"><a href="#提供反馈并获得帮助" class="headerlink" title="提供反馈并获得帮助"></a>提供反馈并获得帮助</h2><p>要获得社区的帮助，请查看当前用户主题，加入或开始讨论，登录到我们的 <a href="https://forums.docker.com/c/docker-for-mac">Docker Desktop for Mac 论坛</a>。</p>
+<p>要报告错误或问题，请<a href="https://github.com/docker/for-mac/issues">在 GitHub 上</a>登录 Docker Desktop <a href="https://github.com/docker/for-mac/issues">for Mac 问题</a>，您可以在其中查看社区报告的问题并提出新问题。有关更多详细信息，请参见 <a href="https://docs.docker.com/docker-for-mac/troubleshoot/">日志和故障排除</a>。</p>
+<p>有关提供有关文档反馈或自己进行更新的信息，请参阅 “ <a href="https://docs.docker.com/opensource/">贡献文档”</a>。</p>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>从 Docker 桌面菜单中选择<strong>登录 / 创建 Docker ID</strong> 以访问您的 <a href="https://hub.docker.com/">Docker Hub</a> 帐户。登录后，您可以直接从 Docker Desktop 菜单访问 Docker Hub 存储库和组织。</p>
+<p>有关更多信息，请参考以下 <a href="https://docs.docker.com/docker-hub/">Docker Hub 主题</a>：</p>
+<ul>
+<li><a href="https://docs.docker.com/docker-hub/orgs/">Docker Hub 中的组织和团队</a></li>
+<li><a href="https://docs.docker.com/docker-hub/builds/">建物</a></li>
 </ul>
-</li>
-</ol>
-<p>通过以上学习和练习方法，你可以逐渐掌握这种复盘总结的方式，并将其应用到实际工作和生活中，不断提升自己的总结能力和问题解决能力。</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>学习方法</category>
-      </categories>
-      <tags>
-        <tag>复盘</tag>
-        <tag>总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo 框架搭建个人博客</title>
-    <url>/2025/01/06/hexo%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p><a href="https://hexo.io/zh-cn/docs/">hexo 食用指南</a></p>
-<p>轻量、便携、静态、一键部署</p>
-<p>安装：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装hexo框架</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化博客</span></span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">npm依赖安装</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行hexo</span></span><br><span class="line">hexo server</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p>基本操作：</p>
-<p> _config.yml 文件下进行修改 hexo 基本配置</p>
-<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE" alt="image-20250109144054648"></p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建文章，运行后在 <span class="built_in">source</span>/_posts/ 下生成 {文章标题}.md 文档</span></span><br><span class="line">hexo new '文章标题'</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/hexo%E7%9A%84config%E9%85%8D%E7%BD%AE%E6%96%B0%E5%A2%9E%E4%BF%A1%E6%81%AF" alt="image-20250109144418134"></p>
-<p>部署：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理缓存、生产静态页面、远程部署</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>gitee 与 github 仓库数据同步</title>
-    <url>/2025/01/08/gitee%E4%B8%8Egithub%E4%BB%93%E5%BA%93%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</url>
-    <content><![CDATA[<p>发现是防盗链限制的问题，需要解决 referrer</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  "code": "40310014",</span><br><span class="line">  "msg": "invalid Referer header"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p>使用 gitee 迁移 github 的方法</p>
-<p>你可以通过以下方式申请 GitHub 私人令牌：</p>
+<h3 id="两因素认证"><a href="#两因素认证" class="headerlink" title="两因素认证"></a>两因素认证</h3><p>Docker Desktop 使您可以使用两因素身份验证登录 Docker Hub。当访问您的 Docker Hub 帐户时，两要素身份验证提供了额外的安全层。</p>
+<p>您必须先在 Docker Hub 中启用双重身份验证，然后才能通过 Docker Desktop 登录到 Docker Hub 帐户。有关说明，请参阅<a href="https://docs.docker.com/docker-hub/2fa/">为 Docker Hub 启用两因素身份验证</a>。</p>
+<p>启用两因素身份验证后：</p>
 <ol>
-<li><p>登录与 Gitee 绑定的 GitHub 帐号；</p>
-</li>
-<li><p>通过路径「用户头像」→「Settings」进入「Developer setting」；</p>
-</li>
-<li><p>选择「Personal access tokens」选项后点击「Generate new token」；</p>
-</li>
-<li><p>「Note」字段可以随意填写；例如，Gitee_Mirror；</p>
-</li>
-<li><p>「Select scopes」字段请根据你的需求进行勾选；<br> repo 字段为必选字段，请您直接勾选；<br> admin:repo_hook 字段为可选字段，用于自动生成 webhook；<br> 当您需要 Gitee 自动从 GitHub 同步仓库时，建议您勾选。</p>
-</li>
-<li><p>点击「Generate token」生成私人令牌；</p>
-</li>
+<li>转到 Docker Desktop 菜单，然后选择<strong>登录 / 创建 Docker ID</strong>。</li>
+<li>输入您的 Docker ID 和密码，然后单击<strong>登录</strong>。</li>
+<li>成功登录后，Docker Desktop 会提示您输入身份验证代码。输入手机的六位数代码，然后点击<strong>验证</strong>。</li>
 </ol>
-<p>7. 复制私人令牌并妥善保管。</p>
-<p>私人令牌</p>
+<p><img src="/Users/damon/Dropbox/dreampix/docker/%E5%9B%BE%E7%89%87/desktop-mac-2fa.png" alt="Docker桌面2FA"></p>
+<p>成功通过身份验证后，您可以直接从 Docker Desktop 菜单访问您的组织和存储库。</p>
+<h3 id="将docker修改镜像源"><a href="#将docker修改镜像源" class="headerlink" title="将docker修改镜像源"></a>将 docker 修改镜像源</h3><blockquote>
+<p>在 <code>/etc/docker/daemon.json</code> 文件中添加下面参数</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">   "registry-mirrors" : ["https://almtd3fa.mirror.aliyuncs.com"]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>没有该文件则自行创建</p>
+</blockquote>
+<h3 id="最后重启docker服务"><a href="#最后重启docker服务" class="headerlink" title="最后重启docker服务"></a>最后重启 docker 服务</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>教学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jenkins 项目配置</title>
+    <url>/2020/01/06/Jenkins%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h3 id="Jenkins-项目chuman-qa-platform-server"><a href="#Jenkins-项目chuman-qa-platform-server" class="headerlink" title="Jenkins 项目chuman-qa-platform-server "></a>Jenkins 项目 <a href="http://192.168.216.210:8080/job/chuman-qa-platform-server/">chuman-qa-platform-server </a></h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行项目脚本</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ps -ef | grep gunicorn | grep -v grep | awk <span class="string">'{print $2}'</span>| xargs <span class="built_in">sudo</span> <span class="built_in">kill</span> -9</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">防止jenkins部署完毕自动删除进程</span></span><br><span class="line">BUILD_ID=DONTKILLME</span><br><span class="line"></span><br><span class="line">pid=`ps -ef | grep gunicorn | grep -v grep | awk '{print $2}'`</span><br><span class="line">echo $pid</span><br><span class="line">if [ -n "$pid" ]</span><br><span class="line">then</span><br><span class="line">  	kill -9 $pid</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">pip3 install -r requirements.txt </span><br><span class="line"></span><br><span class="line">source set_flask_env.sh prod </span><br><span class="line"></span><br><span class="line">export PATH=$PATH:/var/jenkins_home/python3/bin/</span><br><span class="line"></span><br><span class="line">gunicorn manage:app -c gunicorn.conf.py</span><br><span class="line"></span><br><span class="line">sleep 3</span><br><span class="line"></span><br><span class="line">pid_result=`ps -ef | grep gunicorn | grep -v grep | awk '{print $2}'`</span><br><span class="line"></span><br><span class="line">echo $pid_result</span><br><span class="line"></span><br><span class="line">if [ -n "$pid_result" ]</span><br><span class="line">then</span><br><span class="line">	exit 0</span><br><span class="line">else</span><br><span class="line">	exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="jenkins项目-chuman-api-test-new"><a href="#jenkins项目-chuman-api-test-new" class="headerlink" title="jenkins项目 chuman-api-test-new"></a>jenkins 项目 chuman-api-test-new</h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">source /etc/profile</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取上游项目的执行环境，并设置接口测试对应的执行环境</span></span><br><span class="line">echo "hashversion=${hashversion}"</span><br><span class="line">echo "envir=${envir}"</span><br><span class="line">echo "debug_info=${debug_info}"</span><br><span class="line">echo "describe=${describe}"</span><br><span class="line">envir_tmp=${envir#*/}</span><br><span class="line">envir=${envir_tmp%.*}</span><br><span class="line"></span><br><span class="line">if [ $envir == 'demo-u-api' ];then</span><br><span class="line">  test_env='demo'</span><br><span class="line">    exec_file='testsuites/P0_demo_testsuite.yml'</span><br><span class="line">    config_file='env/demo.env'</span><br><span class="line">elif [ $envir == 'api2-u-api' ];then</span><br><span class="line">    test_env='api2'</span><br><span class="line">    exec_file='testsuites/P0_api2_testsuite.yml'</span><br><span class="line">    config_file='env/api2.env'</span><br><span class="line">elif [ $envir == 'demo-cf-api' ];then</span><br><span class="line">    test_env='demo-cf'</span><br><span class="line">    exec_file='testsuites/P0_demo_cf_testsuite.yml'</span><br><span class="line">    config_file='env/demo_cf.env'</span><br><span class="line">elif [ $envir == 'api2-cf-api' ];then</span><br><span class="line">    test_env='api2-cf'</span><br><span class="line">    exec_file='testsuites/P0_api2_cf_testsuite.yml'</span><br><span class="line">    config_file='env/api2_cf.env'</span><br><span class="line">else</span><br><span class="line">    test_env='none'</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">判断是否需要执行测试</span></span><br><span class="line">if [ $test_env == 'none' ];then</span><br><span class="line">  echo "构建环境是$envir，不需要执行接口测试"</span><br><span class="line">else</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">旧项目变量</span></span><br><span class="line">  project_name=chuman-api-test</span><br><span class="line">  report_html=reports/$BUILD_NUMBER.html</span><br><span class="line">  exec_file_tmp=${exec_file#*/}</span><br><span class="line">  report_json="logs/testsuites/${exec_file_tmp%.*}.summary.json"</span><br><span class="line">  log_url=$BUILD_URL/console</span><br><span class="line">  show_report_url="http://qa-report-dev.chumanapp.com/"</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">新项目变量</span></span><br><span class="line">  new_project_name=chuman-api-test-new</span><br><span class="line">  new_report_html=allure-report/$BUILD_NUMBER/index.html</span><br><span class="line">  new_report_dir=allure-report/$BUILD_NUMBER  </span><br><span class="line">  file_name='testcases'</span><br><span class="line">  prometheusData="allure-report/$BUILD_NUMBER/export/prometheusData.txt"</span><br><span class="line">  behaviors_json="allure-report/$BUILD_NUMBER/data/test-cases/behaviors.json"</span><br><span class="line">  status_json="allure-report/$BUILD_NUMBER/widgets/status-chart.json"</span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">公共变量</span></span><br><span class="line">  test_time=$(date "+%Y-%m-%d %H:%M:%S")</span><br><span class="line">  ding_url='https://oapi.dingtalk.com/robot/send?access_token=83f04c75d4ec2a260b8bf7e959c98374cfaebd34b4973dac03a838d20c217287'</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行旧项目脚本</span></span><br><span class="line">  cd chuman-api-test</span><br><span class="line">  pipenv install --skip-lock</span><br><span class="line">  pipenv run hrun $exec_file --dot-env-path $config_file --log-level debug --save-tests --report-file $report_html</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行旧项目报告生产数据</span></span><br><span class="line">  if [ -f $report_html ];then</span><br><span class="line">    show_report_dir="/data/qa-report/"</span><br><span class="line">    show_report_name="${JOB_NAME}报告_$BUILD_NUMBER.html"</span><br><span class="line"></span><br><span class="line">    # 把生成的报告移动到展示的目录下</span><br><span class="line">    cp $report_html ${show_report_dir}${show_report_name}</span><br><span class="line"></span><br><span class="line">    report_url=$show_report_url$show_report_name</span><br><span class="line">        echo $report_url</span><br><span class="line">    case_total=$(cat $report_json | jq '.stat.testcases.total')</span><br><span class="line">    case_success=$(cat $report_json | jq '.stat.testcases.success')</span><br><span class="line">    case_fail=$(cat $report_json | jq '.stat.testcases.fail')</span><br><span class="line">    fail_module=''</span><br><span class="line">      if [ $case_fail != '0' ];then</span><br><span class="line">        for index in `seq 0 $case_total`</span><br><span class="line">        do</span><br><span class="line">          success=$(cat $report_json | jq -r ".details[$index].success")</span><br><span class="line">          if [ $success == 'false' ];then</span><br><span class="line">            name=$(cat $report_json | jq -r ".details[$index].name")</span><br><span class="line">            fail_module=$fail_module$'\n'$name</span><br><span class="line">          fi</span><br><span class="line">        done</span><br><span class="line">      else</span><br><span class="line">        fail_module='无'</span><br><span class="line">    fi</span><br><span class="line">  fi  </span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行新项目脚本</span></span><br><span class="line">  cd ..</span><br><span class="line">  cd chuman-api-test-new</span><br><span class="line">  pipenv install --skip-lock</span><br><span class="line">  pipenv run pytest $file_name --env=$test_env </span><br><span class="line">  allure generate reports -o allure-report/$BUILD_NUMBER --clean</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">执行新项目报告生产数据</span></span><br><span class="line">  if [ -f $new_report_html ];then</span><br><span class="line">    new_show_report_dir="/data/qa-report/"</span><br><span class="line">    new_show_report_name="qa-p1p2报告_allure_report_$BUILD_NUMBER"</span><br><span class="line"></span><br><span class="line">    # 把生成的报告移动到展示的目录下</span><br><span class="line">    cp -r $new_report_dir ${new_show_report_dir}${new_show_report_name}</span><br><span class="line">    new_report_url=$show_report_url$new_show_report_name</span><br><span class="line">    echo $new_report_url</span><br><span class="line"></span><br><span class="line">    run_num=`grep "launch_retries_run" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    passed_num=`grep "launch_status_passed" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    failed_num=`grep "launch_status_failed" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    broken_num=`grep "launch_status_broken" $prometheusData|awk '{print $NF}'`</span><br><span class="line">    skipped_num=`grep "launch_status_skipped" $prometheusData|awk '{print $NF}'`</span><br><span class="line"></span><br><span class="line">    broken_module=''</span><br><span class="line">      if [ $broken_num != '0' ] || [ $failed_num != '0' ];then</span><br><span class="line">        for index in `seq 0 $run_num`</span><br><span class="line">        do</span><br><span class="line">          result=$(cat $status_json | jq ".[$index].status")</span><br><span class="line">          echo $result</span><br><span class="line">          if [[ $result == '"broken"' ]] || [[ $result == '"failed"' ]];then</span><br><span class="line">            broken_name=$(cat $status_json | jq ".[$index].name")</span><br><span class="line">            tmp="${broken_name%\"}"</span><br><span class="line">            broken_name="${tmp#\"}"</span><br><span class="line">            echo $broken_name</span><br><span class="line">            broken_module=$broken_module$'\n'$broken_name</span><br><span class="line">            echo $broken_module</span><br><span class="line">          fi</span><br><span class="line">        done</span><br><span class="line">      else</span><br><span class="line">        broken_module='无'</span><br><span class="line">    fi</span><br><span class="line">    # 统计所有项目执行数据</span><br><span class="line">    run_sum=$(($case_total+$run_num-$skipped_num))</span><br><span class="line">    success_sum=$(($case_success+$passed_num))</span><br><span class="line">    failed_sum=$(($failed_num+$broken_num+$case_fail))</span><br><span class="line">    if [[ $fail_module == '无' ]] &amp;&amp; [[ $broken_module == '无' ]];then</span><br><span class="line">    	failed_module='无'</span><br><span class="line">    elif [ $fail_module == '无' ];then</span><br><span class="line">    	failed_module=$broken_module</span><br><span class="line">    elif [ $broken_module == '无' ];then</span><br><span class="line">    	failed_module=$fail_module</span><br><span class="line">    else </span><br><span class="line">    	failed_module=$fail_module$'\n'$broken_module</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">	ding_message="后端${test_env}环境代码发布\n发布用户：${BUILD_USER}\n代码hash：${hashversion}\ndebug_info：${debug_info}\n发布描述：${describe}\n\n触漫接口自动化测试执行完毕，以下为执行结果：\n执行环境：${test_env}\n执行时间：${test_time}\n测试场景总数：${run_sum}\n成功场景数：${success_sum}\n失败场景数：${failed_sum}\n\n失败涉及模块：${failed_module}\n触漫P0接口测试报告：$report_url\n触漫P1~P2接口报告：$new_report_url"</span><br><span class="line">	curl $ding_url \</span><br><span class="line">   		-H 'Content-Type: application/json' \</span><br><span class="line">   		-d  '{"msgtype": "text",</span><br><span class="line">       			"text": {</span><br><span class="line">       		    		"content": "'"${ding_message}"'"</span><br><span class="line">       			}</span><br><span class="line">      		}'</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="jenkins-项目-chuman-ui-test"><a href="#jenkins-项目-chuman-ui-test" class="headerlink" title="jenkins 项目 chuman-ui-test"></a>jenkins 项目 chuman-ui-test</h3><figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">if [ ${app_url} != '' ];then</span><br><span class="line">    echo ${app_url}</span><br><span class="line">	cd ${WORKSPACE}/app/</span><br><span class="line">	rm -rf *.apk</span><br><span class="line">    curl -O ${app_url}</span><br><span class="line">    if [ -e *.apk ];then</span><br><span class="line">    	adb install -r *.apk</span><br><span class="line">    else</span><br><span class="line">    	echo '安装包下载失败'</span><br><span class="line">    cd ${WORKSPACE}</span><br><span class="line">    fi</span><br><span class="line">else</span><br><span class="line">	echo '旧包执行'</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line">rm -rf ${WORKSPACE}/allure_results/</span><br><span class="line">rm -rf ${WORKSPACE}/allure_report/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">lsof -i:22471|sed -n '2p'|awk '{print $2}' | xargs kill -9 || True</span><br><span class="line">ps -ef |grep Nemu |grep -v grep |awk '{print $2}' |xargs kill -9 || True</span><br><span class="line">open /Applications/NemuPlayer.app</span><br><span class="line">sleep 15s</span><br><span class="line">res_adb=`adb devices`</span><br><span class="line">on='device'</span><br><span class="line">echo ${res_adb}</span><br><span class="line">if [[ ${res_adb} == *${on} ]];then</span><br><span class="line">    echo '------ keep running ------'</span><br><span class="line">else</span><br><span class="line">	echo '------ restart adb server ------'</span><br><span class="line">	adb kill-server</span><br><span class="line">	adb start-server</span><br><span class="line">	sleep 5s</span><br><span class="line">    res_adb=`adb devices`</span><br><span class="line">    echo ${res_adb}</span><br><span class="line">    if [[ ${res_adb} == *${on} ]];then</span><br><span class="line">        echo '------ keep running ------'</span><br><span class="line">    else</span><br><span class="line">    	echo '------ server not start ------'</span><br><span class="line">	fi</span><br><span class="line">fi</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">ps aux |grep appium |grep -v grep |awk '{print $2}' |xargs kill -9</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">bash adb_del_picture.sh</span><br><span class="line">rm -rf appium.log</span><br><span class="line">touch appium.log</span><br><span class="line">appium_log_content=`cat appium.log`</span><br><span class="line">test="started"</span><br><span class="line">result=""</span><br><span class="line">while [ "$result" == "" ]; do</span><br><span class="line">    echo "appium still not started!Try again!"</span><br><span class="line">    bash startAppium.sh</span><br><span class="line">    sleep 2</span><br><span class="line">    appium_log_content=`cat appium.log`</span><br><span class="line">    result=$(echo ${appium_log_content} | grep "${test}")</span><br><span class="line">done </span><br><span class="line">ps -ef |grep appium</span><br><span class="line">cat appium.log</span><br><span class="line">sleep 2</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line">pytest -v -s -m=${mark} ./testcases/${module}  --alluredir ${WORKSPACE}/allure_results</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA1.png" alt="image-20201014154819459"></p>
+<p><img src="https://raw.githubusercontent.com/DamonKoy/document/dev/images/jenkins%E6%9E%84%E5%BB%BA2.png" alt="image-20201014154846581"></p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
       <categories>
         <category>编程笔记</category>
       </categories>
       <tags>
-        <tag>gitee</tag>
-        <tag>github</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo 插件汇集</title>
-    <url>/2025/01/09/hexo%E6%8F%92%E4%BB%B6%E6%B1%87%E9%9B%86/</url>
-    <content><![CDATA[<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
-      <categories>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>blog</tag>
+        <tag>jenkins</tag>
+        <tag>pytest</tag>
       </tags>
   </entry>
 </search>
