@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"damonkoy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="背景与痛点 当前问题：中台配置变更对研发测试环节 “无感知”，导致多次服务异常，故障定位效率低，业务连续性受损。 核心诉求：构建实时监控机制，实现变更记录可追溯、异常快速定位，提升服务稳定性与故障恢复效率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中台业务配置监控策略">
+<meta property="og:url" content="https://damonkoy.github.io/2025/04/15/%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:site_name" content="DamonKoy | 追赶着">
+<meta property="og:description" content="背景与痛点 当前问题：中台配置变更对研发测试环节 “无感知”，导致多次服务异常，故障定位效率低，业务连续性受损。 核心诉求：构建实时监控机制，实现变更记录可追溯、异常快速定位，提升服务稳定性与故障恢复效率。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/Damon_Koy/images/raw/master/md/%E7%9B%91%E6%8E%A7-%E4%B8%AD%E5%8F%B0%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6.png">
+<meta property="og:image" content="https://gitee.com/Damon_Koy/images/raw/master/md/%E7%9B%91%E6%8E%A7-%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E6%95%88%E6%9E%9C%E6%95%B0%E6%8D%AE.png">
+<meta property="article:published_time" content="2025-04-15T09:34:56.000Z">
+<meta property="article:modified_time" content="2025-04-15T09:40:49.504Z">
+<meta property="article:author" content="DamonKoy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/Damon_Koy/images/raw/master/md/%E7%9B%91%E6%8E%A7-%E4%B8%AD%E5%8F%B0%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6.png">
+
+<link rel="canonical" href="https://damonkoy.github.io/2025/04/15/%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>中台业务配置监控策略 | DamonKoy | 追赶着</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="DamonKoy | 追赶着" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">DamonKoy | 追赶着</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://damonkoy.github.io/2025/04/15/%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DamonKoy">
+      <meta itemprop="description" content="小小博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DamonKoy | 追赶着">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          中台业务配置监控策略
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-04-15 17:34:56 / Modified: 17:40:49" itemprop="dateCreated datePublished" datetime="2025-04-15T17:34:56+08:00">2025-04-15</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>566</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="背景与痛点"><a href="#背景与痛点" class="headerlink" title="背景与痛点"></a>背景与痛点</h2><ul>
+<li><strong>当前问题</strong>：中台配置变更对研发测试环节 “无感知”，导致多次服务异常，故障定位效率低，业务连续性受损。</li>
+<li><strong>核心诉求</strong>：构建实时监控机制，实现变更记录可追溯、异常快速定位，提升服务稳定性与故障恢复效率。</li>
+</ul>
+<h2 id="策略对比"><a href="#策略对比" class="headerlink" title="策略对比"></a><strong>策略对比</strong></h2><table>
+<thead>
+<tr>
+<th>方案选择</th>
+<th>差异对比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td> grafana</td>
+<td>1. 开发埋点排期慢 2. 采集系统不稳定 3. 无法收集变更细节</td>
+</tr>
+<tr>
+<td>开发操作记录界面</td>
+<td> 1. 需要推送产品、开发排期 2. 需要生产中台权限 3. 开发周期长</td>
+</tr>
+<tr>
+<td>日志平台 + 飞书文档</td>
+<td> 1、现成，无需开发 2、文本分析能力强 3、扩展性强 4、能定制化</td>
+</tr>
+</tbody></table>
+<p><strong>最终决策</strong>：</p>
+<ul>
+<li><strong>落地</strong>：采用日志平台 + 飞书多维表格方案，快速实现配置变更记录与通知；</li>
+</ul>
+<h2 id="策略框架"><a href="#策略框架" class="headerlink" title="策略框架"></a>策略框架</h2><ul>
+<li><strong>业务</strong>：发起配置调整，触发日志记录。</li>
+<li><strong>日志系统</strong>：实时巡检，生成触发器事件。</li>
+<li><strong>飞书 **** 多维表格</strong>：推送通知，存储结构化变更信息，生成可分析报告。</li>
+<li><strong>测试</strong>：数据分析、分类、历史溯源。</li>
+</ul>
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/%E7%9B%91%E6%8E%A7-%E4%B8%AD%E5%8F%B0%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6.png" alt="img"></p>
+<h2 id="成果与价值"><a href="#成果与价值" class="headerlink" title="成果与价值"></a>成果与价值</h2><p><a target="_blank" rel="noopener" href="https://ruqimobility.feishu.cn/base/TF9pbGcuna8erCsy65VchrRjn3g?table=blkvy0WMZK0fAbSN">开平业务中台配置收集</a></p>
+<ul>
+<li><strong>成果</strong>：</li>
+</ul>
+<p>1、 配置变更记录 100% 可追溯（时间、操作人、业务类型）</p>
+<p>2、 中台配置变更的透明度和可控性将显著提升</p>
+<p>3、 告警通知后能快速定位配置问题 1 次</p>
+<ul>
+<li><strong>业务价值</strong>：<ul>
+<li>1、提升中台配置透明度，降低业务中断风险。</li>
+<li>2、减少故障排查人力成本，增强研发测试环节感知力。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/%E7%9B%91%E6%8E%A7-%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E6%95%88%E6%9E%9C%E6%95%B0%E6%8D%AE.png" alt="image-20250415173952294"></p>
+<p><a target="_blank" rel="noopener" href="https://ruqimobility.feishu.cn/share/base/dashboard/shrcnZP3vNYti5gOo5dL6zMLrch">https://ruqimobility.feishu.cn/share/base/dashboard/shrcnZP3vNYti5gOo5dL6zMLrch</a></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/14/grafana%E4%B8%AD%E9%80%9A%E8%BF%87%E5%8F%98%E9%87%8F%E6%8E%A7%E5%88%B6%E8%A7%86%E5%9B%BE%E6%9F%A5%E8%AF%A2%E7%BB%B4%E5%BA%A6/" rel="prev" title="grafana 中通过变量控制视图查询维度">
+      <i class="fa fa-chevron-left"></i> grafana 中通过变量控制视图查询维度
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/10/23/%E7%9B%91%E6%8E%A7%E7%B2%BE%E7%AE%80%E4%BC%98%E5%8C%96%E9%80%BB%E8%BE%91/" rel="next" title="监控精简优化逻辑">
+      监控精简优化逻辑 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E4%B8%8E%E7%97%9B%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">背景与痛点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">策略对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6"><span class="nav-number">3.</span> <span class="nav-text">策略框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E6%9E%9C%E4%B8%8E%E4%BB%B7%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">成果与价值</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DamonKoy</p>
+  <div class="site-description" itemprop="description">小小博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DamonKoy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>

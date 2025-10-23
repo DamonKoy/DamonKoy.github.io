@@ -6,7 +6,7 @@
   <link href="https://damonkoy.github.io/atom.xml" rel="self"/>
   
   <link href="https://damonkoy.github.io/"/>
-  <updated>2025-01-24T09:17:10.896Z</updated>
+  <updated>2025-10-23T03:17:15.430Z</updated>
   <id>https://damonkoy.github.io/</id>
   
   <author>
@@ -17,11 +17,154 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>监控精简优化逻辑</title>
+    <link href="https://damonkoy.github.io/2025/10/23/%E7%9B%91%E6%8E%A7%E7%B2%BE%E7%AE%80%E4%BC%98%E5%8C%96%E9%80%BB%E8%BE%91/"/>
+    <id>https://damonkoy.github.io/2025/10/23/%E7%9B%91%E6%8E%A7%E7%B2%BE%E7%AE%80%E4%BC%98%E5%8C%96%E9%80%BB%E8%BE%91/</id>
+    <published>2025-10-23T03:12:12.000Z</published>
+    <updated>2025-10-23T03:17:15.430Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th>判断步骤判断步骤</th><th>判断类型判断类型</th><th>触发条件与判断标准触发条件与判断标准</th><th align="left">执行方案与操作细则执行方案与操作细则</th></tr></thead><tbody><tr><td> 1、业务等级优化逻辑 1、业务等级优化逻辑</td><td>业务等级上升业务等级上升</td><td>定量：近 7 天日均成单量持续增长，超过原等级阈值 定性：被公司战略明确为核心业务或新增长点定量：近 7 天日均成单量持续增长，超过原等级阈值 定性：被公司战略明确为核心业务或新增长点</td><td align="left"> 1. 升级监控等级：将其核心接口 / 服务提升至 P0/P1 级别。 2. 补充多维度监控： - 黄金指标：补充或强化延迟、流量、错误率、饱和度的监控。 - 业务指标：增加关键业务流程（如询价、下单和抢单）的成功率与耗时监控。 - 依赖追踪：完善其下游依赖服务的监控覆盖，建立关联视图。 3. 收紧告警阈值：基于新流量模式，优化告警阈值与持续时间，提高灵敏度。1. 升级监控等级：将其核心接口 / 服务提升至 P0/P1 级别。 2. 补充多维度监控： - 黄金指标：补充或强化延迟、流量、错误率、饱和度的监控。 - 业务指标：增加关键业务流程（如询价、下单和抢单）的成功率与耗时监控。 - 依赖追踪：完善其下游依赖服务的监控覆盖，建立关联视图。 3. 收紧告警阈值：基于新流量模式，优化告警阈值与持续时间，提高灵敏度。</td></tr><tr><td>业务等级下降业务等级下降</td><td>定量：近 7 天日均成单量显著下滑，低于原等级阈值 定性：业务进入维护期或已被新业务替代定量：近 7 天日均成单量显著下滑，低于原等级阈值 定性：业务进入维护期或已被新业务替代</td><td> 1. 评估并降级：将非核心的 P0 监控降级为 P1，P1 监控降级为 P2 或更低。 2. 精简监控项：删除冗余的业务指标监控，保留技术可用性基础监控。 3. 放宽告警阈值：为避免噪音，适当放宽告警阈值与检测窗口（如错误率阈值从 0.1% 调整为 1%）。1. 评估并降级：将非核心的 P0 监控降级为 P1，P1 监控降级为 P2 或更低。 2. 精简监控项：删除冗余的业务指标监控，保留技术可用性基础监控。 3. 放宽告警阈值：为避免噪音，适当放宽告警阈值与检测窗口（如错误率阈值从 0.1% 调整为 1%）。</td><td align="left"></td></tr><tr><td>业务等级不变业务等级不变</td><td>业务量级与重要性保持稳定业务量级与重要性保持稳定</td><td> 1. 保留架构：维持现有监控等级与覆盖范围。 2. 持续优化：定期 Review 监控的有效性（如告警召回率、准确率），对阈值进行微调。1. 保留架构：维持现有监控等级与覆盖范围。 2. 持续优化：定期 Review 监控的有效性（如告警召回率、准确率），对阈值进行微调。</td><td align="left"></td></tr><tr><td>业务 / 渠道已下线业务 / 渠道已下线</td><td>业务或渠道已正式公告下线，且无任何流量业务或渠道已正式公告下线，且无任何流量</td><td> 1. 立即执行：直接下线与该业务 / 渠道相关的所有监控、仪表盘和告警规则。 2. 归档记录：对删除的监控配置进行归档，以备后续审计或复盘。1. 立即执行：直接下线与该业务 / 渠道相关的所有监控、仪表盘和告警规则。 2. 归档记录：对删除的监控配置进行归档，以备后续审计或复盘。</td><td align="left"></td></tr><tr><td>2、业务维度优化逻辑 2、业务维度优化逻辑</td><td>业务逻辑已废弃业务逻辑已废弃</td><td>产品需求确认某功能或代码路径已永久移除 线上日志分析显示该逻辑长期无调用产品需求确认某功能或代码路径已永久移除 线上日志分析显示该逻辑长期无调用</td><td align="left"> 1. 彻底清理：删除与废弃逻辑对应的所有监控项、指标和告警规则。 2. 关联检查：检查是否有其他监控依赖此逻辑，并进行相应更新。1. 彻底清理：删除与废弃逻辑对应的所有监控项、指标和告警规则。 2. 关联检查：检查是否有其他监控依赖此逻辑，并进行相应更新。</td></tr><tr><td>业务逻辑已更新业务逻辑已更新</td><td>新版本发布引入了新功能、新接口或改变了原有处理流程。 数据模型或关键算法发生变更新版本发布引入了新功能、新接口或改变了原有处理流程。 数据模型或关键算法发生变更</td><td> 1. 更新监控指标：根据新逻辑定义新的关键指标（如新的业务计数器、新的耗时节点）。 2. 重设告警阈值：基于测试或灰度数据，为新指标设定合理的基线告警阈值。 3. 验证监控有效性：在新逻辑上线后，通过模拟或真实流量验证新监控是否准确捕获业务状态。1. 更新监控指标：根据新逻辑定义新的关键指标（如新的业务计数器、新的耗时节点）。 2. 重设告警阈值：基于测试或灰度数据，为新指标设定合理的基线告警阈值。 3. 验证监控有效性：在新逻辑上线后，通过模拟或真实流量验证新监控是否准确捕获业务状态。</td><td align="left"></td></tr><tr><td>业务逻辑不变业务逻辑不变</td><td>核心业务流程未发生变更核心业务流程未发生变更</td><td> 1. 保留监控：维持现有业务监控点。 2. 优化与调校：分析历史告警数据，优化阈值以减少噪音，或增强告警的精准度（如增加条件判断）。1. 保留监控：维持现有业务监控点。 2. 优化与调校：分析历史告警数据，优化阈值以减少噪音，或增强告警的精准度（如增加条件判断）。</td><td align="left"></td></tr><tr><td>3、监控维度优化逻辑 3、监控维度优化逻辑</td><td>监控指标重复监控指标重复</td><td>发现两个或多个监控规则在检测目标、阈值、告警对象上高度重合发现两个或多个监控规则在检测目标、阈值、告警对象上高度重合</td><td align="left"> 1. 合并与删除：保留其中最准确、最有效的一条规则，删除其余重复项。 2. 统一告警渠道：确保合并后的告警通知到正确的负责人。1. 合并与删除：保留其中最准确、最有效的一条规则，删除其余重复项。 2. 统一告警渠道：确保合并后的告警通知到正确的负责人。</td></tr><tr><td>监控指标交叉监控指标交叉</td><td>多个监控规则从不同维度检测同一实体，导致单个故障触发大量关联告警多个监控规则从不同维度检测同一实体，导致单个故障触发大量关联告警</td><td> 1. 整合规则：创建更高级别的聚合告警规则（如：当服务 A 的错误率升高且其依赖数据库延迟增大时，才触发一条聚合告警）。 2. 建立根因分析：利用监控系统的依赖关系，实现告警压缩与根因推荐，避免告警风暴。1. 整合规则：创建更高级别的聚合告警规则（如：当服务 A 的错误率升高且其依赖数据库延迟增大时，才触发一条聚合告警）。 2. 建立根因分析：利用监控系统的依赖关系，实现告警压缩与根因推荐，避免告警风暴。</td><td align="left"></td></tr><tr><td>监控维度缺失监控维度缺失</td><td>故障复盘时发现，现有监控无法追溯到具体的问题模块、机房或用户类型。 新的技术组件上线缺乏监控故障复盘时发现，现有监控无法追溯到具体的问题模块、机房或用户类型。 新的技术组件上线缺乏监控</td><td> 1. 新增维度：在关键指标上添加标签（Tag），如 instance、idc、user_group、version 等。 2. 配置多维度告警：支持按特定维度（如某个机房）触发告警，实现精准定位。1. 新增维度：在关键指标上添加标签（Tag），如 instance、idc、user_group、version 等。 2. 配置多维度告警：支持按特定维度（如某个机房）触发告警，实现精准定位。</td><td align="left"></td></tr><tr><td>调用量流量偏低调用量流量偏低</td><td>近 30 天平均 QPS 低于某个阈值（如 10 RPS），表明服务处于低流量状态近 30 天平均 QPS 低于某个阈值（如 10 RPS），表明服务处于低流量状态</td><td> 1. 规则调整： - 阈值：将错误率等比例阈值调整为绝对值阈值（如：连续 5 分钟错误数 &gt; 5 而非 错误率 &gt; 1%）。 - 持续时间：延长告警检测的持续时间，避免因个别错误产生抖动告警。1. 规则调整： - 阈值：将错误率等比例阈值调整为绝对值阈值（如：连续 5 分钟错误数 &gt; 5 而非 错误率 &gt; 1%）。 - 持续时间：延长告警检测的持续时间，避免因个别错误产生抖动告警。</td><td align="left"></td></tr><tr><td>错误码缺失错误码缺失</td><td>线上出现了未定义告警的新错误码，导致问题未能及时发现线上出现了未定义告警的新错误码，导致问题未能及时发现</td><td> 1. 错误码标准化：推动业务方对错误码进行清晰分类（如：用户侧错误、系统内部错误、依赖第三方错误）。 2. 分级告警： - P0/P1：对所有 5xx 或代表系统不可用的错误码立即告警。 - P2：对 4xx 错误或可降级的错误，配置阈值告警或仅在仪表盘展示。1. 错误码标准化：推动业务方对错误码进行清晰分类（如：用户侧错误、系统内部错误、依赖第三方错误）。 2. 分级告警： - P0/P1：对所有 5xx 或代表系统不可用的错误码立即告警。 - P2：对 4xx 错误或可降级的错误，配置阈值告警或仅在仪表盘展示。</td><td align="left"></td></tr></tbody></table><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    
+    
+    <summary type="html">&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;判断步骤判断步骤&lt;/th&gt;
+&lt;th&gt;判断类型判断类型&lt;/th&gt;
+&lt;th&gt;触发条件与判断标准触发条件与判断标准&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;执行方案与操作细则执行方案与操作细则&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt; 1、业务等级优化逻辑 1、业务等级优化逻辑&lt;/td&gt;
+&lt;td&gt;业务等级上升业务等级上升&lt;/td&gt;
+&lt;td&gt;定量：近 7 天日均成单量持续增长，超过原等级阈值 定性：被公司战略明确为核心业务或新增长点定量：近 7 天日均成单量持续增长，超过原等级阈值 定性：被公司战略明确为核心业务或新增长点&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt; 1. 升级监控等级：将其核心接口 / 服务提升至 P0/P1 级别。 2. 补充多维度监控： - 黄金指标：补充或强化延迟、流量、错误率、饱和度的监控。 - 业务指标：增加关键业务流程（如询价、下单和抢单）的成功率与耗时监控。 - 依赖追踪：完善其下游依赖服务的监控覆盖，建立关联视图。 3. 收紧告警阈值：基于新流量模式，优化告警阈值与持续时间，提高灵敏度。1. 升级监控等级：将其核心接口 / 服务提升至 P0/P1 级别。 2. 补充多维度监控： - 黄金指标：补充或强化延迟、流量、错误率、饱和度的监控。 - 业务指标：增加关键业务流程（如询价、下单和抢单）的成功率与耗时监控。 - 依赖追踪：完善其下游依赖服务的监控覆盖，建立关联视图。 3. 收紧告警阈值：基于新流量模式，优化告警阈值与持续时间，提高灵敏度。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;业务等级下降业务等级下降&lt;/td&gt;
+&lt;td&gt;定量：近 7 天日均成单量显著下滑，低于原等级阈值 定性：业务进入维护期或已被新业务替代定量：近 7 天日均成单量显著下滑，低于原等级阈值 定性：业务进入维护期或已被新业务替代&lt;/td&gt;
+&lt;td&gt; 1. 评估并降级：将非核心的 P0 监控降级为 P1，P1 监控降级为 P2 或更低。 2. 精简监控项：删除冗余的业务指标监控，保留技术可用性基础监控。 3. 放宽告警阈值：为避免噪音，适当放宽告警阈值与检测窗口（如错误率阈值从 0.1% 调整为 1%）。1. 评估并降级：将非核心的 P0 监控降级为 P1，P1 监控降级为 P2 或更低。 2. 精简监控项：删除冗余的业务指标监控，保留技术可用性基础监控。 3. 放宽告警阈值：为避免噪音，适当放宽告警阈值与检测窗口（如错误率阈值从 0.1% 调整为 1%）。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;业务等级不变业务等级不变&lt;/td&gt;
+&lt;td&gt;业务量级与重要性保持稳定业务量级与重要性保持稳定&lt;/td&gt;
+&lt;td&gt; 1. 保留架构：维持现有监控等级与覆盖范围。 2. 持续优化：定期 Review 监控的有效性（如告警召回率、准确率），对阈值进行微调。1. 保留架构：维持现有监控等级与覆盖范围。 2. 持续优化：定期 Review 监控的有效性（如告警召回率、准确率），对阈值进行微调。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;业务 / 渠道已下线业务 / 渠道已下线&lt;/td&gt;
+&lt;td&gt;业务或渠道已正式公告下线，且无任何流量业务或渠道已正式公告下线，且无任何流量&lt;/td&gt;
+&lt;td&gt; 1. 立即执行：直接下线与该业务 / 渠道相关的所有监控、仪表盘和告警规则。 2. 归档记录：对删除的监控配置进行归档，以备后续审计或复盘。1. 立即执行：直接下线与该业务 / 渠道相关的所有监控、仪表盘和告警规则。 2. 归档记录：对删除的监控配置进行归档，以备后续审计或复盘。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2、业务维度优化逻辑 2、业务维度优化逻辑&lt;/td&gt;
+&lt;td&gt;业务逻辑已废弃业务逻辑已废弃&lt;/td&gt;
+&lt;td&gt;产品需求确认某功能或代码路径已永久移除 线上日志分析显示该逻辑长期无调用产品需求确认某功能或代码路径已永久移除 线上日志分析显示该逻辑长期无调用&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt; 1. 彻底清理：删除与废弃逻辑对应的所有监控项、指标和告警规则。 2. 关联检查：检查是否有其他监控依赖此逻辑，并进行相应更新。1. 彻底清理：删除与废弃逻辑对应的所有监控项、指标和告警规则。 2. 关联检查：检查是否有其他监控依赖此逻辑，并进行相应更新。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;业务逻辑已更新业务逻辑已更新&lt;/td&gt;
+&lt;td&gt;新版本发布引入了新功能、新接口或改变了原有处理流程。 数据模型或关键算法发生变更新版本发布引入了新功能、新接口或改变了原有处理流程。 数据模型或关键算法发生变更&lt;/td&gt;
+&lt;td&gt; 1. 更新监控指标：根据新逻辑定义新的关键指标（如新的业务计数器、新的耗时节点）。 2. 重设告警阈值：基于测试或灰度数据，为新指标设定合理的基线告警阈值。 3. 验证监控有效性：在新逻辑上线后，通过模拟或真实流量验证新监控是否准确捕获业务状态。1. 更新监控指标：根据新逻辑定义新的关键指标（如新的业务计数器、新的耗时节点）。 2. 重设告警阈值：基于测试或灰度数据，为新指标设定合理的基线告警阈值。 3. 验证监控有效性：在新逻辑上线后，通过模拟或真实流量验证新监控是否准确捕获业务状态。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;业务逻辑不变业务逻辑不变&lt;/td&gt;
+&lt;td&gt;核心业务流程未发生变更核心业务流程未发生变更&lt;/td&gt;
+&lt;td&gt; 1. 保留监控：维持现有业务监控点。 2. 优化与调校：分析历史告警数据，优化阈值以减少噪音，或增强告警的精准度（如增加条件判断）。1. 保留监控：维持现有业务监控点。 2. 优化与调校：分析历史告警数据，优化阈值以减少噪音，或增强告警的精准度（如增加条件判断）。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3、监控维度优化逻辑 3、监控维度优化逻辑&lt;/td&gt;
+&lt;td&gt;监控指标重复监控指标重复&lt;/td&gt;
+&lt;td&gt;发现两个或多个监控规则在检测目标、阈值、告警对象上高度重合发现两个或多个监控规则在检测目标、阈值、告警对象上高度重合&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt; 1. 合并与删除：保留其中最准确、最有效的一条规则，删除其余重复项。 2. 统一告警渠道：确保合并后的告警通知到正确的负责人。1. 合并与删除：保留其中最准确、最有效的一条规则，删除其余重复项。 2. 统一告警渠道：确保合并后的告警通知到正确的负责人。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;监控指标交叉监控指标交叉&lt;/td&gt;
+&lt;td&gt;多个监控规则从不同维度检测同一实体，导致单个故障触发大量关联告警多个监控规则从不同维度检测同一实体，导致单个故障触发大量关联告警&lt;/td&gt;
+&lt;td&gt; 1. 整合规则：创建更高级别的聚合告警规则（如：当服务 A 的错误率升高且其依赖数据库延迟增大时，才触发一条聚合告警）。 2. 建立根因分析：利用监控系统的依赖关系，实现告警压缩与根因推荐，避免告警风暴。1. 整合规则：创建更高级别的聚合告警规则（如：当服务 A 的错误率升高且其依赖数据库延迟增大时，才触发一条聚合告警）。 2. 建立根因分析：利用监控系统的依赖关系，实现告警压缩与根因推荐，避免告警风暴。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;监控维度缺失监控维度缺失&lt;/td&gt;
+&lt;td&gt;故障复盘时发现，现有监控无法追溯到具体的问题模块、机房或用户类型。 新的技术组件上线缺乏监控故障复盘时发现，现有监控无法追溯到具体的问题模块、机房或用户类型。 新的技术组件上线缺乏监控&lt;/td&gt;
+&lt;td&gt; 1. 新增维度：在关键指标上添加标签（Tag），如 instance、idc、user_group、version 等。 2. 配置多维度告警：支持按特定维度（如某个机房）触发告警，实现精准定位。1. 新增维度：在关键指标上添加标签（Tag），如 instance、idc、user_group、version 等。 2. 配置多维度告警：支持按特定维度（如某个机房）触发告警，实现精准定位。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;调用量流量偏低调用量流量偏低&lt;/td&gt;
+&lt;td&gt;近 30 天平均 QPS 低于某个阈值（如 10 RPS），表明服务处于低流量状态近 30 天平均 QPS 低于某个阈值（如 10 RPS），表明服务处于低流量状态&lt;/td&gt;
+&lt;td&gt; 1. 规则调整： - 阈值：将错误率等比例阈值调整为绝对值阈值（如：连续 5 分钟错误数 &amp;gt; 5 而非 错误率 &amp;gt; 1%）。 - 持续时间：延长告警检测的持续时间，避免因个别错误产生抖动告警。1. 规则调整： - 阈值：将错误率等比例阈值调整为绝对值阈值（如：连续 5 分钟错误数 &amp;gt; 5 而非 错误率 &amp;gt; 1%）。 - 持续时间：延长告警检测的持续时间，避免因个别错误产生抖动告警。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;错误码缺失错误码缺失&lt;/td&gt;
+&lt;td&gt;线上出现了未定义告警的新错误码，导致问题未能及时发现线上出现了未定义告警的新错误码，导致问题未能及时发现&lt;/td&gt;
+&lt;td&gt; 1. 错误码标准化：推动业务方对错误码进行清晰分类（如：用户侧错误、系统内部错误、依赖第三方错误）。 2. 分级告警： - P0/P1：对所有 5xx 或代表系统不可用的错误码立即告警。 - P2：对 4xx 错误或可降级的错误，配置阈值告警或仅在仪表盘展示。1. 错误码标准化：推动业务方对错误码进行清晰分类（如：用户侧错误、系统内部错误、依赖第三方错误）。 2. 分级告警： - P0/P1：对所有 5xx 或代表系统不可用的错误码立即告警。 - P2：对 4xx 错误或可降级的错误，配置阈值告警或仅在仪表盘展示。&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/spoiler.css&quot; type=&quot;text/css&quot;&gt;</summary>
+    
+    
+    
+    <category term="防控体系" scheme="https://damonkoy.github.io/categories/%E9%98%B2%E6%8E%A7%E4%BD%93%E7%B3%BB/"/>
+    
+    
+    <category term="监控" scheme="https://damonkoy.github.io/tags/%E7%9B%91%E6%8E%A7/"/>
+    
+    <category term="防控" scheme="https://damonkoy.github.io/tags/%E9%98%B2%E6%8E%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>中台业务配置监控策略</title>
+    <link href="https://damonkoy.github.io/2025/04/15/%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5/"/>
+    <id>https://damonkoy.github.io/2025/04/15/%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5/</id>
+    <published>2025-04-15T09:34:56.000Z</published>
+    <updated>2025-04-15T09:40:49.504Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景与痛点"><a href="#背景与痛点" class="headerlink" title="背景与痛点"></a>背景与痛点</h2><ul><li><strong>当前问题</strong>：中台配置变更对研发测试环节 “无感知”，导致多次服务异常，故障定位效率低，业务连续性受损。</li><li><strong>核心诉求</strong>：构建实时监控机制，实现变更记录可追溯、异常快速定位，提升服务稳定性与故障恢复效率。</li></ul><h2 id="策略对比"><a href="#策略对比" class="headerlink" title="策略对比"></a><strong>策略对比</strong></h2><table><thead><tr><th>方案选择</th><th>差异对比</th></tr></thead><tbody><tr><td> grafana</td><td>1. 开发埋点排期慢 2. 采集系统不稳定 3. 无法收集变更细节</td></tr><tr><td>开发操作记录界面</td><td> 1. 需要推送产品、开发排期 2. 需要生产中台权限 3. 开发周期长</td></tr><tr><td>日志平台 + 飞书文档</td><td> 1、现成，无需开发 2、文本分析能力强 3、扩展性强 4、能定制化</td></tr></tbody></table><p><strong>最终决策</strong>：</p><ul><li><strong>落地</strong>：采用日志平台 + 飞书多维表格方案，快速实现配置变更记录与通知；</li></ul><h2 id="策略框架"><a href="#策略框架" class="headerlink" title="策略框架"></a>策略框架</h2><ul><li><strong>业务</strong>：发起配置调整，触发日志记录。</li><li><strong>日志系统</strong>：实时巡检，生成触发器事件。</li><li><strong>飞书 **** 多维表格</strong>：推送通知，存储结构化变更信息，生成可分析报告。</li><li><strong>测试</strong>：数据分析、分类、历史溯源。</li></ul><p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/%E7%9B%91%E6%8E%A7-%E4%B8%AD%E5%8F%B0%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5%E6%A1%86%E6%9E%B6.png" alt="img"></p><h2 id="成果与价值"><a href="#成果与价值" class="headerlink" title="成果与价值"></a>成果与价值</h2><p><a href="https://ruqimobility.feishu.cn/base/TF9pbGcuna8erCsy65VchrRjn3g?table=blkvy0WMZK0fAbSN">开平业务中台配置收集</a></p><ul><li><strong>成果</strong>：</li></ul><p>1、 配置变更记录 100% 可追溯（时间、操作人、业务类型）</p><p>2、 中台配置变更的透明度和可控性将显著提升</p><p>3、 告警通知后能快速定位配置问题 1 次</p><ul><li><strong>业务价值</strong>：<ul><li>1、提升中台配置透明度，降低业务中断风险。</li><li>2、减少故障排查人力成本，增强研发测试环节感知力。</li></ul></li></ul><p><img src="https://gitee.com/Damon_Koy/images/raw/master/md/%E7%9B%91%E6%8E%A7-%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E6%95%88%E6%9E%9C%E6%95%B0%E6%8D%AE.png" alt="image-20250415173952294"></p><p><a href="https://ruqimobility.feishu.cn/share/base/dashboard/shrcnZP3vNYti5gOo5dL6zMLrch">https://ruqimobility.feishu.cn/share/base/dashboard/shrcnZP3vNYti5gOo5dL6zMLrch</a></p><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;背景与痛点&quot;&gt;&lt;a href=&quot;#背景与痛点&quot; class=&quot;headerlink&quot; title=&quot;背景与痛点&quot;&gt;&lt;/a&gt;背景与痛点&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;当前问题&lt;/strong&gt;：中台配置变更对研发测试环节 “无感知”，导致多次服务异常，故障定位效率低，业务连续性受损。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心诉求&lt;/strong&gt;：构建实时监控机制，实现变更记录可追溯、异常快速定位，提升服务稳定性与故障恢复效率。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>grafana 中通过变量控制视图查询维度</title>
+    <link href="https://damonkoy.github.io/2025/03/14/grafana%E4%B8%AD%E9%80%9A%E8%BF%87%E5%8F%98%E9%87%8F%E6%8E%A7%E5%88%B6%E8%A7%86%E5%9B%BE%E6%9F%A5%E8%AF%A2%E7%BB%B4%E5%BA%A6/"/>
+    <id>https://damonkoy.github.io/2025/03/14/grafana%E4%B8%AD%E9%80%9A%E8%BF%87%E5%8F%98%E9%87%8F%E6%8E%A7%E5%88%B6%E8%A7%86%E5%9B%BE%E6%9F%A5%E8%AF%A2%E7%BB%B4%E5%BA%A6/</id>
+    <published>2025-03-14T07:44:56.000Z</published>
+    <updated>2025-03-14T08:10:55.131Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 Grafana 中通过一个变量来切换时间粒度，这需要确保 SQL 查询能够与 Grafana 的变量传递机制兼容，例如通过模板变量（template variables）来动态替换时间粒度和时间范围。</p><p>总结下来，解决这个问题的步骤可能包括：</p><ol><li>在 SQL 中根据时间粒度变量动态生成分组键。</li><li>动态调整时间范围筛选条件，以适应不同的时间粒度。</li><li>确保时间格式化和分组的正确性。</li><li>处理可能的性能优化，如索引使用。</li><li>在 Grafana 中配置模板变量以传递时间粒度参数。</li></ol><p>现在需要将这些思考转化为具体的 SQL 实现，并验证其可行性。</p><h3 id="解决方案：通过时间粒度变量动态生成分组"><a href="#解决方案：通过时间粒度变量动态生成分组" class="headerlink" title="解决方案：通过时间粒度变量动态生成分组"></a><strong>解决方案：通过时间粒度变量动态生成分组</strong></h3><p>以下 SQL 通过引入一个时间粒度变量（如 <code>$time_granularity</code>），实现在同一查询中按 <strong>分钟级（如 10 分钟）、天、周</strong> 动态统计。<br><strong>支持场景</strong>：在 Grafana 中通过下拉框选择时间粒度，自动调整统计逻辑。</p><p>SQL 代码示例</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">WITH dynamic_time AS (</span><br><span class="line">  SELECT</span><br><span class="line">    -- 动态生成时间分组键</span><br><span class="line">    CASE </span><br><span class="line">      WHEN $time_granularity = '10m' THEN </span><br><span class="line">        STR_TO_DATE(</span><br><span class="line">          CONCAT(</span><br><span class="line">            DATE_FORMAT(create_time, '%Y-%m-%d %H:'), </span><br><span class="line">            FLOOR(DATE_FORMAT(create_time, '%i') / 10) * 10</span><br><span class="line">          ), </span><br><span class="line">          '%Y-%m-%d %H:%i'</span><br><span class="line">        )</span><br><span class="line">      WHEN $time_granularity = '1d' THEN </span><br><span class="line">        DATE(create_time)</span><br><span class="line">      WHEN $time_granularity = '1w' THEN </span><br><span class="line">        DATE_SUB(DATE(create_time), INTERVAL (WEEKDAY(create_time)) DAY) -- 按周起始日（周一）分组</span><br><span class="line">    END AS time_bucket,</span><br><span class="line"></span><br><span class="line">    -- 统计指标</span><br><span class="line">    COUNT(1) AS order_count</span><br><span class="line"></span><br><span class="line">  FROM ruqi_realtime.ods_gac_order_info_di</span><br><span class="line">  WHERE 1=1</span><br><span class="line">    -- 动态时间范围筛选（示例：最近7天）</span><br><span class="line">    AND create_time &gt;= </span><br><span class="line">      CASE $time_granularity</span><br><span class="line">        WHEN '10m' THEN DATE_SUB(NOW(), INTERVAL 24 HOUR)   -- 按10分钟分组，查最近24小时</span><br><span class="line">        WHEN '1d' THEN DATE_SUB(NOW(), INTERVAL 7 DAY)      -- 按天分组，查最近7天</span><br><span class="line">        WHEN '1w' THEN DATE_SUB(NOW(), INTERVAL 4 WEEK)     -- 按周分组，查最近4周</span><br><span class="line">      END</span><br><span class="line">    AND create_time &lt; NOW()</span><br><span class="line">    AND source IN ($traffic_channel)</span><br><span class="line">    AND start_city_name IN ($city_name)</span><br><span class="line">    AND supplier_id IN ($supplier_id)</span><br><span class="line">  GROUP BY time_bucket</span><br><span class="line">  ORDER BY time_bucket</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">-- 输出标准化时间戳和指标</span><br><span class="line">SELECT</span><br><span class="line">  UNIX_TIMESTAMP(time_bucket) AS time_sec,</span><br><span class="line">  order_count AS value,</span><br><span class="line">  $time_granularity AS metric</span><br><span class="line">FROM dynamic_time;</span><br></pre></td></tr></tbody></table></figure><h3 id="关键实现说明"><a href="#关键实现说明" class="headerlink" title="关键实现说明"></a><strong>关键实现说明</strong></h3><h4 id="1-动态时间分组逻辑"><a href="#1-动态时间分组逻辑" class="headerlink" title="1. 动态时间分组逻辑"></a><strong>1. 动态时间分组逻辑</strong></h4><ul><li><strong>10 分钟分组</strong>：<br>使用 <code>FLOOR(分钟数/10)*10</code> 将时间对齐到最近的 10 分钟（如 <code>09:23</code> → <code>09:20</code>）。</li><li><strong>按天分组</strong>：<br>直接取 <code>DATE(create_time)</code>。</li><li><strong>按周分组</strong>：<br>通过 <code>DATE_SUB(create_time, INTERVAL WEEKDAY(create_time) DAY)</code> 将日期对齐到周一的日期（假设周起始为周一）。</li></ul><h4 id="2-动态时间范围筛选"><a href="#2-动态时间范围筛选" class="headerlink" title="2. 动态时间范围筛选"></a><strong>2. 动态时间范围筛选</strong></h4><ul><li><strong>按 10 分钟</strong>：查询最近 24 小时数据，确保足够的时间段覆盖。</li><li><strong>按天 / 周</strong>：分别扩展时间范围至 7 天或 4 周，避免数据稀疏。</li><li><strong>Grafana 变量传递</strong>：变量 <code>$time_granularity</code> 的值为 <code>10m</code>、<code>1d</code>、<code>1w</code>，需在 Grafana 中配置下拉选项。</li></ul><h4 id="3-时间戳标准化输出"><a href="#3-时间戳标准化输出" class="headerlink" title="3. 时间戳标准化输出"></a><strong>3. 时间戳标准化输出</strong></h4><ul><li>使用 <code>UNIX_TIMESTAMP(time_bucket)</code> 将时间转换为 Unix 时间戳，确保 Grafana 能正确识别为时间序列。</li></ul><h4 id="4-索引优化建议"><a href="#4-索引优化建议" class="headerlink" title="4. 索引优化建议"></a><strong>4. 索引优化建议</strong></h4><ul><li>若数据量大，建议为 <code>create_time</code> 列创建索引，并联合索引 <code>(create_time, source, start_city_name, supplier_id)</code>。</li></ul><hr><h3 id="Grafana-配置步骤"><a href="#Grafana-配置步骤" class="headerlink" title="Grafana 配置步骤"></a><strong>Grafana 配置步骤</strong></h3><ol><li><strong>定义时间粒度变量</strong>：<ul><li>进入 Dashboard 设置 → Variables → New</li><li><strong>Name</strong>: <code>time_granularity</code></li><li><strong>Type</strong>: Query</li><li><strong>Query</strong>: <code>'10m' AS </code>10 分钟 <code>, '1d' AS </code>按天 <code>, '1w' AS </code>按周 `</li><li> 启用多选或单选，根据需求配置默认值。</li></ul></li><li><strong>配置 SQL 数据源</strong>：<ul><li>在 Panel 的 SQL 查询中，直接引用 <code>$time_granularity</code> 变量。</li><li>确保数据库连接支持变量替换（如 MySQL 需启用预处理语句）。</li></ul></li><li><strong>时间范围联动</strong>：<ul><li>在 Dashboard 的时间选择器中，根据 <code>$time_granularity</code> 自动调整时间范围（如选择 “按周” 时，默认展示最近 4 周）。</li></ul></li></ol><h3 id="常见问题处理"><a href="#常见问题处理" class="headerlink" title="常见问题处理"></a><strong>常见问题处理</strong></h3><ul><li><strong>时区问题</strong>：<br>确保数据库和 Grafana 时区设置一致，或在 SQL 中使用 <code>CONVERT_TZ</code> 函数转换时区。</li><li><strong>空数据填充</strong>：<br>若需补全无数据的时间段，可在 SQL 中使用日期生成表（如 <code>generate_series</code>）左连接业务数据。</li><li><strong>性能优化</strong>：<br>按周分组时，对大数据表可能较慢，建议定期预聚合统计到周粒度表中。</li></ul><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;在 Grafana 中通过一个变量来切换时间粒度，这需要确保 SQL 查询能够与 Grafana 的变量传递机制兼容，例如通过模板变量（template variables）来动态替换时间粒度和时间范围。&lt;/p&gt;
+&lt;p&gt;总结下来，解决这个问题的步骤可能包括：&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>旅行记</title>
     <link href="https://damonkoy.github.io/2025/01/24/%E6%97%85%E8%A1%8C%E8%AE%B0/"/>
     <id>https://damonkoy.github.io/2025/01/24/%E6%97%85%E8%A1%8C%E8%AE%B0/</id>
     <published>2025-01-24T07:52:55.000Z</published>
-    <updated>2025-01-24T09:17:10.896Z</updated>
+    <updated>2025-01-24T09:26:00.857Z</updated>
     
     <content type="html"><![CDATA[<h3 id="广州"><a href="#广州" class="headerlink" title="广州"></a><strong>广州</strong></h3><h4 id="公园"><a href="#公园" class="headerlink" title="公园"></a>公园</h4><ul><li><input checked="" disabled="" type="checkbox"> 越秀公园</li><li><input disabled="" type="checkbox"> 雕塑公园</li><li><input disabled="" type="checkbox"> 石门国家森林公园</li><li><input disabled="" type="checkbox"> 天河公园</li><li><input disabled="" type="checkbox"> 珠江公园</li><li><input checked="" disabled="" type="checkbox"> 广州海珠国家湿地公园</li><li><input disabled="" type="checkbox"> 天河大观湿地公园</li><li><input disabled="" type="checkbox"> 白云湖公园</li><li><input checked="" disabled="" type="checkbox"> 云台花园</li><li><input disabled="" type="checkbox"> 广州兰圃</li><li><input disabled="" type="checkbox"> 华南植物园</li><li><input disabled="" type="checkbox"> 大夫山森林公园</li></ul><h4 id="历史建筑"><a href="#历史建筑" class="headerlink" title="历史建筑"></a>历史建筑</h4><ul><li><input checked="" disabled="" type="checkbox"> 陈家祠</li><li><input checked="" disabled="" type="checkbox"> 南越王博物院</li><li><input checked="" disabled="" type="checkbox"> 沙面岛</li><li><input disabled="" type="checkbox"> 圣心大教堂</li><li><input disabled="" type="checkbox"> 太古仓</li><li><input checked="" disabled="" type="checkbox"> 永庆坊</li><li><input disabled="" type="checkbox"> 光孝寺</li><li><input disabled="" type="checkbox"> 六榕寺</li><li><input disabled="" type="checkbox"> 南海神庙</li><li><input disabled="" type="checkbox"> 宝墨园</li><li><input checked="" disabled="" type="checkbox"> 沙湾古镇</li><li><input checked="" disabled="" type="checkbox"> 黄埔古港古村</li><li><input disabled="" type="checkbox"> 小洲村</li></ul><h4 id="自然风光"><a href="#自然风光" class="headerlink" title="自然风光"></a>自然风光</h4><ul><li><input checked="" disabled="" type="checkbox"> 白云山</li><li><input checked="" disabled="" type="checkbox"> 莲花山</li><li><input checked="" disabled="" type="checkbox"> 广州塔</li><li><input checked="" disabled="" type="checkbox"> 海心沙</li><li><input checked="" disabled="" type="checkbox"> 二沙岛</li><li><input checked="" disabled="" type="checkbox"> 珠江夜游</li></ul><h4 id="商场"><a href="#商场" class="headerlink" title="商场"></a>商场</h4><ul><li><input checked="" disabled="" type="checkbox"> 太古汇</li><li><input checked="" disabled="" type="checkbox"> 北京路步行街</li><li><input disabled="" type="checkbox"> 天汇广场</li><li><input checked="" disabled="" type="checkbox"> 正佳广场</li><li><input checked="" disabled="" type="checkbox"> 天河城广场</li><li><input checked="" disabled="" type="checkbox"> 天环广场</li><li><input disabled="" type="checkbox"> 百信广场</li><li><input checked="" disabled="" type="checkbox"> 番禺山姆</li><li><input checked="" disabled="" type="checkbox"> 天河山姆</li><li><input checked="" disabled="" type="checkbox"> K11</li><li><input checked="" disabled="" type="checkbox"> 凯德乐峰广场</li><li><input disabled="" type="checkbox"> 保利广场</li><li><input disabled="" type="checkbox"> 8 号仓流溪河奥莱小镇</li><li><input disabled="" type="checkbox"> 动漫星城</li></ul><h4 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h4><ul><li><input checked="" disabled="" type="checkbox"> 长隆欢乐世界</li><li><input checked="" disabled="" type="checkbox"> 长隆水上乐园</li><li><input disabled="" type="checkbox"> 长隆飞鸟乐园</li><li><input disabled="" type="checkbox"> 长隆野生动物世界</li><li><input checked="" disabled="" type="checkbox"> 海鸥岛</li><li><input disabled="" type="checkbox"> 广州融创文旅城</li></ul><h3 id="佛山"><a href="#佛山" class="headerlink" title="佛山"></a>佛山</h3><p><strong>历史建筑</strong></p><ul><li><input disabled="" type="checkbox"> <strong>佛山祖庙</strong></li><li><input disabled="" type="checkbox"> <strong>清晖园</strong></li><li><input disabled="" type="checkbox"> <strong>南风古灶</strong></li><li><input disabled="" type="checkbox"> <strong>宝林寺</strong></li></ul><p><strong>自然风光</strong></p><ul><li><input disabled="" type="checkbox"> 西樵山风景名胜区</li><li><input disabled="" type="checkbox"> <strong>高明皂幕山</strong></li><li><input disabled="" type="checkbox"> <strong>三水荷花世界</strong></li><li><input disabled="" type="checkbox"> <strong>南国桃园</strong></li></ul><p><strong><strong>商场广场</strong></strong></p><ul><li><input disabled="" type="checkbox"> <strong>佛山环球港商场</strong></li><li><input disabled="" type="checkbox"> <strong>岭南天地</strong></li><li><input disabled="" type="checkbox"> ** <strong>南海万科广场</strong></li><li><input disabled="" type="checkbox"> <strong><strong>顺德大融城</strong></strong></li><li><input disabled="" type="checkbox"> <strong>映月湖环宇城</strong></li></ul><p><strong>娱乐玩耍</strong></p><ul><li><input disabled="" type="checkbox"> <strong>长鹿旅游休博园</strong></li><li><input disabled="" type="checkbox"> <strong>顺德欢乐海岸 PLUS</strong></li><li><input disabled="" type="checkbox"> <strong> 史努比缤纷世界</strong></li><li><input disabled="" type="checkbox"> <strong>美的鹭湖半山汤谷</strong></li></ul><p><strong><strong>公园</strong></strong></p><ul><li><input disabled="" type="checkbox"> <strong><strong>佛山公园</strong></strong></li><li><input disabled="" type="checkbox"> <strong>亚艺公园</strong></li><li><input disabled="" type="checkbox"> <strong>千灯湖公园</strong></li><li><input disabled="" type="checkbox"> <strong>顺峰山公园</strong></li></ul><p>​</p><h3 id="成都"><a href="#成都" class="headerlink" title="成都"></a>成都</h3><h3 id="珠海"><a href="#珠海" class="headerlink" title="珠海"></a>珠海</h3><ul><li><input disabled="" type="checkbox"> 珠海长隆海洋王国</li><li><input checked="" disabled="" type="checkbox"> 圆明新园</li><li><input disabled="" type="checkbox"> 东澳岛</li><li><input disabled="" type="checkbox"> 外伶仃岛<ul><li><input disabled="" type="checkbox"> <strong>石景公园</strong></li><li><input disabled="" type="checkbox"> <strong>拱桥渡水</strong></li><li><input disabled="" type="checkbox"> <strong>玉带环腰</strong></li></ul></li><li><input checked="" disabled="" type="checkbox"> 情侣路<ul><li><input disabled="" type="checkbox"> 香炉湾沙滩</li><li><input disabled="" type="checkbox"> 珠海渔女</li><li><input disabled="" type="checkbox"> 野狸岛</li></ul></li><li><input disabled="" type="checkbox"> 唐家湾古镇</li><li><input checked="" disabled="" type="checkbox"> 珠海大剧院</li><li><input disabled="" type="checkbox"> 横琴</li></ul><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
     

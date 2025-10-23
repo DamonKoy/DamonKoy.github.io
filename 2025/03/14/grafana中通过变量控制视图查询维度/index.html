@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"damonkoy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在 Grafana 中通过一个变量来切换时间粒度，这需要确保 SQL 查询能够与 Grafana 的变量传递机制兼容，例如通过模板变量（template variables）来动态替换时间粒度和时间范围。 总结下来，解决这个问题的步骤可能包括：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grafana 中通过变量控制视图查询维度">
+<meta property="og:url" content="https://damonkoy.github.io/2025/03/14/grafana%E4%B8%AD%E9%80%9A%E8%BF%87%E5%8F%98%E9%87%8F%E6%8E%A7%E5%88%B6%E8%A7%86%E5%9B%BE%E6%9F%A5%E8%AF%A2%E7%BB%B4%E5%BA%A6/index.html">
+<meta property="og:site_name" content="DamonKoy | 追赶着">
+<meta property="og:description" content="在 Grafana 中通过一个变量来切换时间粒度，这需要确保 SQL 查询能够与 Grafana 的变量传递机制兼容，例如通过模板变量（template variables）来动态替换时间粒度和时间范围。 总结下来，解决这个问题的步骤可能包括：">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-14T07:44:56.000Z">
+<meta property="article:modified_time" content="2025-03-14T08:10:55.131Z">
+<meta property="article:author" content="DamonKoy">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://damonkoy.github.io/2025/03/14/grafana%E4%B8%AD%E9%80%9A%E8%BF%87%E5%8F%98%E9%87%8F%E6%8E%A7%E5%88%B6%E8%A7%86%E5%9B%BE%E6%9F%A5%E8%AF%A2%E7%BB%B4%E5%BA%A6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>grafana 中通过变量控制视图查询维度 | DamonKoy | 追赶着</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="DamonKoy | 追赶着" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">DamonKoy | 追赶着</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://damonkoy.github.io/2025/03/14/grafana%E4%B8%AD%E9%80%9A%E8%BF%87%E5%8F%98%E9%87%8F%E6%8E%A7%E5%88%B6%E8%A7%86%E5%9B%BE%E6%9F%A5%E8%AF%A2%E7%BB%B4%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="DamonKoy">
+      <meta itemprop="description" content="小小博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DamonKoy | 追赶着">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          grafana 中通过变量控制视图查询维度
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2025-03-14 15:44:56 / Modified: 16:10:55" itemprop="dateCreated datePublished" datetime="2025-03-14T15:44:56+08:00">2025-03-14</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在 Grafana 中通过一个变量来切换时间粒度，这需要确保 SQL 查询能够与 Grafana 的变量传递机制兼容，例如通过模板变量（template variables）来动态替换时间粒度和时间范围。</p>
+<p>总结下来，解决这个问题的步骤可能包括：</p>
+<ol>
+<li>在 SQL 中根据时间粒度变量动态生成分组键。</li>
+<li>动态调整时间范围筛选条件，以适应不同的时间粒度。</li>
+<li>确保时间格式化和分组的正确性。</li>
+<li>处理可能的性能优化，如索引使用。</li>
+<li>在 Grafana 中配置模板变量以传递时间粒度参数。</li>
+</ol>
+<p>现在需要将这些思考转化为具体的 SQL 实现，并验证其可行性。</p>
+<h3 id="解决方案：通过时间粒度变量动态生成分组"><a href="#解决方案：通过时间粒度变量动态生成分组" class="headerlink" title="解决方案：通过时间粒度变量动态生成分组"></a><strong>解决方案：通过时间粒度变量动态生成分组</strong></h3><p>以下 SQL 通过引入一个时间粒度变量（如 <code>$time_granularity</code>），实现在同一查询中按 <strong>分钟级（如 10 分钟）、天、周</strong> 动态统计。<br><strong>支持场景</strong>：在 Grafana 中通过下拉框选择时间粒度，自动调整统计逻辑。</p>
+<p>SQL 代码示例</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">WITH dynamic_time AS (</span><br><span class="line">  SELECT</span><br><span class="line">    -- 动态生成时间分组键</span><br><span class="line">    CASE </span><br><span class="line">      WHEN $time_granularity = '10m' THEN </span><br><span class="line">        STR_TO_DATE(</span><br><span class="line">          CONCAT(</span><br><span class="line">            DATE_FORMAT(create_time, '%Y-%m-%d %H:'), </span><br><span class="line">            FLOOR(DATE_FORMAT(create_time, '%i') / 10) * 10</span><br><span class="line">          ), </span><br><span class="line">          '%Y-%m-%d %H:%i'</span><br><span class="line">        )</span><br><span class="line">      WHEN $time_granularity = '1d' THEN </span><br><span class="line">        DATE(create_time)</span><br><span class="line">      WHEN $time_granularity = '1w' THEN </span><br><span class="line">        DATE_SUB(DATE(create_time), INTERVAL (WEEKDAY(create_time)) DAY) -- 按周起始日（周一）分组</span><br><span class="line">    END AS time_bucket,</span><br><span class="line"></span><br><span class="line">    -- 统计指标</span><br><span class="line">    COUNT(1) AS order_count</span><br><span class="line"></span><br><span class="line">  FROM ruqi_realtime.ods_gac_order_info_di</span><br><span class="line">  WHERE 1=1</span><br><span class="line">    -- 动态时间范围筛选（示例：最近7天）</span><br><span class="line">    AND create_time &gt;= </span><br><span class="line">      CASE $time_granularity</span><br><span class="line">        WHEN '10m' THEN DATE_SUB(NOW(), INTERVAL 24 HOUR)   -- 按10分钟分组，查最近24小时</span><br><span class="line">        WHEN '1d' THEN DATE_SUB(NOW(), INTERVAL 7 DAY)      -- 按天分组，查最近7天</span><br><span class="line">        WHEN '1w' THEN DATE_SUB(NOW(), INTERVAL 4 WEEK)     -- 按周分组，查最近4周</span><br><span class="line">      END</span><br><span class="line">    AND create_time &lt; NOW()</span><br><span class="line">    AND source IN ($traffic_channel)</span><br><span class="line">    AND start_city_name IN ($city_name)</span><br><span class="line">    AND supplier_id IN ($supplier_id)</span><br><span class="line">  GROUP BY time_bucket</span><br><span class="line">  ORDER BY time_bucket</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">-- 输出标准化时间戳和指标</span><br><span class="line">SELECT</span><br><span class="line">  UNIX_TIMESTAMP(time_bucket) AS time_sec,</span><br><span class="line">  order_count AS value,</span><br><span class="line">  $time_granularity AS metric</span><br><span class="line">FROM dynamic_time;</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="关键实现说明"><a href="#关键实现说明" class="headerlink" title="关键实现说明"></a><strong>关键实现说明</strong></h3><h4 id="1-动态时间分组逻辑"><a href="#1-动态时间分组逻辑" class="headerlink" title="1. 动态时间分组逻辑"></a><strong>1. 动态时间分组逻辑</strong></h4><ul>
+<li><strong>10 分钟分组</strong>：<br>使用 <code>FLOOR(分钟数/10)*10</code> 将时间对齐到最近的 10 分钟（如 <code>09:23</code> → <code>09:20</code>）。</li>
+<li><strong>按天分组</strong>：<br>直接取 <code>DATE(create_time)</code>。</li>
+<li><strong>按周分组</strong>：<br>通过 <code>DATE_SUB(create_time, INTERVAL WEEKDAY(create_time) DAY)</code> 将日期对齐到周一的日期（假设周起始为周一）。</li>
+</ul>
+<h4 id="2-动态时间范围筛选"><a href="#2-动态时间范围筛选" class="headerlink" title="2. 动态时间范围筛选"></a><strong>2. 动态时间范围筛选</strong></h4><ul>
+<li><strong>按 10 分钟</strong>：查询最近 24 小时数据，确保足够的时间段覆盖。</li>
+<li><strong>按天 / 周</strong>：分别扩展时间范围至 7 天或 4 周，避免数据稀疏。</li>
+<li><strong>Grafana 变量传递</strong>：变量 <code>$time_granularity</code> 的值为 <code>10m</code>、<code>1d</code>、<code>1w</code>，需在 Grafana 中配置下拉选项。</li>
+</ul>
+<h4 id="3-时间戳标准化输出"><a href="#3-时间戳标准化输出" class="headerlink" title="3. 时间戳标准化输出"></a><strong>3. 时间戳标准化输出</strong></h4><ul>
+<li>使用 <code>UNIX_TIMESTAMP(time_bucket)</code> 将时间转换为 Unix 时间戳，确保 Grafana 能正确识别为时间序列。</li>
+</ul>
+<h4 id="4-索引优化建议"><a href="#4-索引优化建议" class="headerlink" title="4. 索引优化建议"></a><strong>4. 索引优化建议</strong></h4><ul>
+<li>若数据量大，建议为 <code>create_time</code> 列创建索引，并联合索引 <code>(create_time, source, start_city_name, supplier_id)</code>。</li>
+</ul>
+<hr>
+<h3 id="Grafana-配置步骤"><a href="#Grafana-配置步骤" class="headerlink" title="Grafana 配置步骤"></a><strong>Grafana 配置步骤</strong></h3><ol>
+<li><strong>定义时间粒度变量</strong>：<ul>
+<li>进入 Dashboard 设置 → Variables → New</li>
+<li><strong>Name</strong>: <code>time_granularity</code></li>
+<li><strong>Type</strong>: Query</li>
+<li><strong>Query</strong>: <code>'10m' AS </code>10 分钟 <code>, '1d' AS </code>按天 <code>, '1w' AS </code>按周 `</li>
+<li> 启用多选或单选，根据需求配置默认值。</li>
+</ul>
+</li>
+<li><strong>配置 SQL 数据源</strong>：<ul>
+<li>在 Panel 的 SQL 查询中，直接引用 <code>$time_granularity</code> 变量。</li>
+<li>确保数据库连接支持变量替换（如 MySQL 需启用预处理语句）。</li>
+</ul>
+</li>
+<li><strong>时间范围联动</strong>：<ul>
+<li>在 Dashboard 的时间选择器中，根据 <code>$time_granularity</code> 自动调整时间范围（如选择 “按周” 时，默认展示最近 4 周）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="常见问题处理"><a href="#常见问题处理" class="headerlink" title="常见问题处理"></a><strong>常见问题处理</strong></h3><ul>
+<li><strong>时区问题</strong>：<br>确保数据库和 Grafana 时区设置一致，或在 SQL 中使用 <code>CONVERT_TZ</code> 函数转换时区。</li>
+<li><strong>空数据填充</strong>：<br>若需补全无数据的时间段，可在 SQL 中使用日期生成表（如 <code>generate_series</code>）左连接业务数据。</li>
+<li><strong>性能优化</strong>：<br>按周分组时，对大数据表可能较慢，建议定期预聚合统计到周粒度表中。</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/01/24/%E6%97%85%E8%A1%8C%E8%AE%B0/" rel="prev" title="旅行记">
+      <i class="fa fa-chevron-left"></i> 旅行记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/15/%E4%B8%AD%E5%8F%B0%E4%B8%9A%E5%8A%A1%E9%85%8D%E7%BD%AE%E7%9B%91%E6%8E%A7%E7%AD%96%E7%95%A5/" rel="next" title="中台业务配置监控策略">
+      中台业务配置监控策略 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A%E9%80%9A%E8%BF%87%E6%97%B6%E9%97%B4%E7%B2%92%E5%BA%A6%E5%8F%98%E9%87%8F%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E5%88%86%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">解决方案：通过时间粒度变量动态生成分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9E%E7%8E%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">关键实现说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8A%A8%E6%80%81%E6%97%B6%E9%97%B4%E5%88%86%E7%BB%84%E9%80%BB%E8%BE%91"><span class="nav-number">2.1.</span> <span class="nav-text">1. 动态时间分组逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%8A%A8%E6%80%81%E6%97%B6%E9%97%B4%E8%8C%83%E5%9B%B4%E7%AD%9B%E9%80%89"><span class="nav-number">2.2.</span> <span class="nav-text">2. 动态时间范围筛选</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%97%B6%E9%97%B4%E6%88%B3%E6%A0%87%E5%87%86%E5%8C%96%E8%BE%93%E5%87%BA"><span class="nav-number">2.3.</span> <span class="nav-text">3. 时间戳标准化输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="nav-number">2.4.</span> <span class="nav-text">4. 索引优化建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grafana-%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">Grafana 配置步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">常见问题处理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">DamonKoy</p>
+  <div class="site-description" itemprop="description">小小博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DamonKoy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>
